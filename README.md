@@ -34,6 +34,29 @@ gem 'nem-ruby'
 
 ## Usage
 
+```ruby
+require 'pp'
+require 'nem'
+
+node = Nem::Node.new(host: '104.128.226.60')
+account_endpoint = Nem::Endpoint::Account.new(node)
+
+pp account_endpoint.find('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')
+# => #<Nem::Model::Account:0x007fe95b35f560
+#  @address="TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4",
+#  @balance=68000000,
+#  @cosignatories=[],
+#  @cosignatory_of=[],
+#  @harvested_blocks=1,
+#  @importance=0.0,
+#  @label=nil,
+#  @public_key=
+#   "e59ef184a612d4c3c4d89b5950eb57262c69862b2f96e59c5043bf41765c482f",
+#  @remote_status="INACTIVE",
+#  @status="LOCKED",
+#  @vested_balance=62145647>
+```
+
 ### Examples
 
 More specific example codes are in **[examples/](examples/)** directory.
