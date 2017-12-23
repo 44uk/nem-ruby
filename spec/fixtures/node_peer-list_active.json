@@ -1,0 +1,112 @@
+{
+  "data": [
+    {
+      "metaData": {
+        "features": 1,
+        "application": null,
+        "networkId": -104,
+        "version": "0.6.93-BETA",
+        "platform": "Oracle Corporation (1.8.0_144) on Linux"
+      },
+      "endpoint": {
+        "protocol": "http",
+        "port": 7890,
+        "host": "37.120.188.83"
+      },
+      "identity": {
+        "name": "Pretestnet1",
+        "public-key": "147eb3e4fccb655c03f4b6b12fc145f6a740c9334a8f3c59131dffd1fd42a996"
+      }
+    },
+    {
+      "metaData": {
+        "features": 1,
+        "application": null,
+        "networkId": -104,
+        "version": "0.6.93-BETA",
+        "platform": "Oracle Corporation (1.8.0_144) on Linux"
+      },
+      "endpoint": {
+        "protocol": "http",
+        "port": 7890,
+        "host": "188.68.50.161"
+      },
+      "identity": {
+        "name": "Pretestnet2",
+        "public-key": "e927d00de512e9de70097b31752a65b54deab3fff51b891a1efedb8af0320525"
+      }
+    },
+    {
+      "metaData": {
+        "features": 1,
+        "application": null,
+        "networkId": -104,
+        "version": "0.6.93-BETA",
+        "platform": "Oracle Corporation (1.8.0_144) on Linux"
+      },
+      "endpoint": {
+        "protocol": "http",
+        "port": 7890,
+        "host": "82.196.9.187"
+      },
+      "identity": {
+        "name": "NEMventory",
+        "public-key": "086269512c8d9ecc4c838c50c51e2a815d46198aa343e7fc4b1899f3cf947e59"
+      }
+    },
+    {
+      "metaData": {
+        "features": 1,
+        "application": null,
+        "networkId": -104,
+        "version": "0.6.93-BETA",
+        "platform": "Oracle Corporation (1.8.0_151) on Linux"
+      },
+      "endpoint": {
+        "protocol": "http",
+        "port": 7890,
+        "host": "39.106.24.183"
+      },
+      "identity": {
+        "name": "TCJBIKMAOZJ3HBZY42QGIIYQBKVEGPBTX3JWXDSS",
+        "public-key": "85041e8a40b90f9c370997001452242dab2295857a00f3d4047e10e87871770a"
+      }
+    },
+    {
+      "metaData": {
+        "features": 1,
+        "application": null,
+        "networkId": -104,
+        "version": "0.6.93-BETA",
+        "platform": "Oracle Corporation (1.8.0_151) on Linux"
+      },
+      "endpoint": {
+        "protocol": "http",
+        "port": 7890,
+        "host": "45.77.47.227"
+      },
+      "identity": {
+        "name": "TA2GJNKDRISJVXLRWVHYEXLRTRNE2VDVBT4LZJ7Z",
+        "public-key": "68a49d71b1651e8060699c9f2e487091966caa44e168eb5a4a98a8d5a759cf3a"
+      }
+    },
+    {
+      "metaData": {
+        "features": 1,
+        "application": null,
+        "networkId": -104,
+        "version": "0.6.93-BETA",
+        "platform": "Oracle Corporation (1.8.0_66) on Linux"
+      },
+      "endpoint": {
+        "protocol": "http",
+        "port": 7890,
+        "host": "23.228.67.85"
+      },
+      "identity": {
+        "name": "Hi, I am MedAlice2",
+        "public-key": "0d57583239ee7bcbd649524332e0bac6b7e82bf48676c73ae6c4dd01d70ec1af"
+      }
+    }
+  ]
+}

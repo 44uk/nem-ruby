@@ -1,0 +1,147 @@
+{
+  "data": [
+    {
+      "creator": "43637c03a21c90f1a72c3b718e1a6985a815860412fa14c7fbed6c5e1a5f6206",
+      "description": "levy test",
+      "id": {
+        "namespaceId": "tpico",
+        "name": "levy"
+      },
+      "properties": [
+        {
+          "name": "divisibility",
+          "value": "3"
+        },
+        {
+          "name": "initialSupply",
+          "value": "530000"
+        },
+        {
+          "name": "supplyMutable",
+          "value": "true"
+        },
+        {
+          "name": "transferable",
+          "value": "true"
+        }
+      ],
+      "levy": {
+        "fee": 1,
+        "recipient": "TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR",
+        "type": 1,
+        "mosaicId": {
+          "namespaceId": "nem",
+          "name": "xem"
+        }
+      }
+    },
+    {
+      "creator": "43637c03a21c90f1a72c3b718e1a6985a815860412fa14c7fbed6c5e1a5f6206",
+      "description": "maximum supply(9000000000) and divisibility(6)",
+      "id": {
+        "namespaceId": "tpico",
+        "name": "maxsupdiv"
+      },
+      "properties": [
+        {
+          "name": "divisibility",
+          "value": "6"
+        },
+        {
+          "name": "initialSupply",
+          "value": "9000000000"
+        },
+        {
+          "name": "supplyMutable",
+          "value": "true"
+        },
+        {
+          "name": "transferable",
+          "value": "true"
+        }
+      ],
+      "levy": {}
+    },
+    {
+      "creator": "43637c03a21c90f1a72c3b718e1a6985a815860412fa14c7fbed6c5e1a5f6206",
+      "description": "not small business mosaic test",
+      "id": {
+        "namespaceId": "tpico",
+        "name": "notsbm"
+      },
+      "properties": [
+        {
+          "name": "divisibility",
+          "value": "0"
+        },
+        {
+          "name": "initialSupply",
+          "value": "10001"
+        },
+        {
+          "name": "supplyMutable",
+          "value": "false"
+        },
+        {
+          "name": "transferable",
+          "value": "false"
+        }
+      ],
+      "levy": {}
+    },
+    {
+      "creator": "43637c03a21c90f1a72c3b718e1a6985a815860412fa14c7fbed6c5e1a5f6206",
+      "description": "small business mosaic test",
+      "id": {
+      "namespaceId": "tpico",
+      "name": "sbm"
+      },
+      "properties": [
+        {
+          "name": "divisibility",
+          "value": "0"
+        },
+        {
+          "name": "initialSupply",
+          "value": "10000"
+        },
+        {
+          "name": "supplyMutable",
+          "value": "false"
+        },
+        {
+          "name": "transferable",
+          "value": "false"
+        }
+      ],
+      "levy": {}
+    },
+    {
+      "creator": "43637c03a21c90f1a72c3b718e1a6985a815860412fa14c7fbed6c5e1a5f6206",
+      "description": "nem-petit-icoテスト用モザイクです。 https://github.com/44uk/nem-petit-ico",
+      "id": {
+        "namespaceId": "tpico",
+        "name": "test"
+      },
+      "properties": [
+        {
+          "name": "divisibility",
+          "value": "0"
+        },
+        {
+          "name": "initialSupply",
+          "value": "10000"
+        },
+        {
+          "name": "supplyMutable",
+          "value": "true"
+        },
+        {
+          "name": "transferable",
+          "value": "false"
+        }
+      ],
+      "levy": {}
+    }
+  ]
+}

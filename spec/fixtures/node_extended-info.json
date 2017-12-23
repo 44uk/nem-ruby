@@ -1,0 +1,27 @@
+{
+  "node": {
+    "metaData": {
+      "features": 3,
+      "application": null,
+      "networkId": 104,
+      "version": "0.6.93-BETA",
+      "platform": "Oracle Corporation (1.8.0_131) on Linux"
+    },
+    "endpoint": {
+      "protocol": "http",
+      "port": 7890,
+      "host": "88.99.192.82"
+    },
+    "identity": {
+      "name": "Hi, I am Huge Alice",
+      "public-key": "35ee63ac6c4bbf1cb56eeaf5ce4edc591ab0c27e1598672d7915af2333224ece"
+    }
+  },
+  "nisInfo": {
+    "currentTime": 84190656,
+    "application": "NEM Deploy",
+    "startTime": 73906117,
+    "version": "0.6.93-BETA",
+    "signer": null
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "cosignatories": [
+    {
+      "address": "TDPP2C4XQLMESBMCYGWN4NRAJAKZEYRV75KGYSOB",
+      "harvestedBlocks": 0,
+      "balance": 9975800000,
+      "importance": 0,
+      "vestedBalance": 9918674405,
+      "publicKey": "be2ba9cb15a547110d511a4d43c0482fbb584d78781abac01fb053d18f4a0033",
+      "label": null,
+      "multisigInfo": {}
+    }
+  ],
+  "cosignatoryOf": [],
+  "status": "LOCKED",
+  "remoteStatus": "INACTIVE"
+}
