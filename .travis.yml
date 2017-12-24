@@ -1,12 +1,13 @@
-sudo: false
 language: ruby
 cache: bundler
-bundler_args: --without development
 
 rvm:
   - ruby-head
+  - 2.4.3
   - 2.4.0
+  - 2.3.6
   - 2.3.0
+  - 2.2.9
   - 2.2.6
 
 branches:
@@ -14,10 +15,5 @@ branches:
     - master
     - development
 
-matrix:
-  fast_finish: true
-
 before_install:
-  # Bundler on Travis may be too out of date
-  # Update bundler to a recent version.
   - gem install bundler
