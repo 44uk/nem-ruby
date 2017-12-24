@@ -4,17 +4,17 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'nem/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'nem-ruby'
-  spec.version       = Nem::VERSION
-  spec.authors       = ['Yoshiyuki Ieyama']
-  spec.email         = ['yukku0423@gmail.com']
+  spec.name    = 'nem-ruby'
+  spec.version = Nem::VERSION
+  spec.authors = ['Yoshiyuki Ieyama']
+  spec.email   = ['yukku0423@gmail.com']
 
   spec.summary     = 'Ruby gem for communicating with the nem'
   spec.description = 'Ruby gem for communicating with the nem'
   spec.homepage    = 'https://github.com/44uk/nem-ruby'
-  spec.license = 'MIT'
+  spec.license     = 'MIT'
 
-  spec.required_ruby_version = '>= 2.2'
+  spec.required_ruby_version = '>= 2.2.6'
   spec.metadata['yard.run'] = 'yri'
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
@@ -23,11 +23,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.post_install_message = '
-  <nis-ruby>
-  Please see https://gitter.im/44uk/nis-ruby for the latest information.
+  <# nem-ruby #>
+  Please see https://gitter.im/44uk/nem-ruby for the latest information.
   The gem is under development. Incompatible changes can be made.
   Feel free to ask and give feedback to https://twitter.com/44uk_i3
-  Good luck! NEM application development!
+  Good luck! NEM application development with Ruby!
   '
 
   spec.add_development_dependency 'bundler', '~> 1.15'
@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~> 0.47'
   spec.add_development_dependency 'timecop', '~> 0.8'
   spec.add_development_dependency 'webmock', '~> 2.3'
-  spec.add_development_dependency 'pry', '~> 0.10'
+  spec.add_development_dependency 'pry-byebug', '~> 3'
 
   spec.add_dependency 'digest-sha3', '~> 1.1'
   spec.add_dependency 'base32', '~> 0.3'

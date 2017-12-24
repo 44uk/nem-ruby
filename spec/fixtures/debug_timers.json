@@ -1,0 +1,125 @@
+{
+  "data": [
+    {
+      "last-delay-time": 1000,
+      "executions": 20734,
+      "failures": 1,
+      "successes": 20733,
+      "last-operation-start-time": 85586159,
+      "is-executing": 0,
+      "name": "FORAGING",
+      "average-operation-time": 0,
+      "last-operation-time": 0
+    },
+    {
+      "last-delay-time": 208619,
+      "executions": 149,
+      "failures": 0,
+      "successes": 149,
+      "last-operation-start-time": 85586013,
+      "is-executing": 0,
+      "name": "REFRESH",
+      "average-operation-time": 6,
+      "last-operation-time": 2
+    },
+    {
+      "last-delay-time": 300000,
+      "executions": 70,
+      "failures": 6,
+      "successes": 64,
+      "last-operation-start-time": 85586151,
+      "is-executing": 0,
+      "name": "BROADCAST",
+      "average-operation-time": 2,
+      "last-operation-time": 3
+    },
+    {
+      "last-delay-time": 3000,
+      "executions": 3120,
+      "failures": 54,
+      "successes": 3065,
+      "last-operation-start-time": 85586143,
+      "is-executing": 1,
+      "name": "SYNC",
+      "average-operation-time": 3,
+      "last-operation-time": 8
+    },
+    {
+      "last-delay-time": 3600000,
+      "executions": 6,
+      "failures": 0,
+      "successes": 6,
+      "last-operation-start-time": 85583288,
+      "is-executing": 0,
+      "name": "PRUNING INACTIVE NODES",
+      "average-operation-time": 0,
+      "last-operation-time": 0
+    },
+    {
+      "last-delay-time": 30000,
+      "executions": 663,
+      "failures": 0,
+      "successes": 663,
+      "last-operation-start-time": 85586131,
+      "is-executing": 0,
+      "name": "CHECKING CHAIN SYNCHRONIZATION",
+      "average-operation-time": 1,
+      "last-operation-time": 0
+    },
+    {
+      "last-delay-time": 1000,
+      "executions": 20633,
+      "failures": 2,
+      "successes": 20631,
+      "last-operation-start-time": 85586159,
+      "is-executing": 0,
+      "name": "BROADCAST BUFFERED ENTITIES",
+      "average-operation-time": 0,
+      "last-operation-time": 0
+    },
+    {
+      "last-delay-time": 7220000,
+      "executions": 65,
+      "failures": 1,
+      "successes": 64,
+      "last-operation-start-time": 85579919,
+      "is-executing": 0,
+      "name": "UPDATE NODE EXPERIENCES",
+      "average-operation-time": 0,
+      "last-operation-time": 0
+    },
+    {
+      "last-delay-time": 21600000,
+      "executions": 1,
+      "failures": 0,
+      "successes": 1,
+      "last-operation-start-time": 85565289,
+      "is-executing": 0,
+      "name": "PRUNE NODE EXPERIENCES",
+      "average-operation-time": 0,
+      "last-operation-time": 0
+    },
+    {
+      "last-delay-time": 10800000,
+      "executions": 20,
+      "failures": 4,
+      "successes": 16,
+      "last-operation-start-time": 85582606,
+      "is-executing": 0,
+      "name": "TIME SYNCHRONIZATION",
+      "average-operation-time": 3,
+      "last-operation-time": 4
+    },
+    {
+      "last-delay-time": 300000,
+      "executions": 70,
+      "failures": 0,
+      "successes": 70,
+      "last-operation-start-time": 85585990,
+      "is-executing": 0,
+      "name": "AUTO IP DETECTION",
+      "average-operation-time": 0,
+      "last-operation-time": 0
+    }
+  ]
+}

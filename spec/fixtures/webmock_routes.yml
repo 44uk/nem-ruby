@@ -1,0 +1,235 @@
+heartbeat:
+  method: get
+
+status:
+  method: get
+
+account/generate:
+  method: get
+
+account/get:
+  method: get
+  params:
+    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+
+account/get/from-public-key:
+  method: get
+  stub: account/get
+  params:
+    publicKey: a11a1a6c17a24252e674d151713cdf51991ad101751e4af02a20c61b59f1fe1a
+
+account/get/forwarded:
+  method: get
+  stub: account/get
+  params:
+    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+
+account/get/forwarded/from-public-key:
+  method: get
+  stub: account/get
+  params:
+    publicKey: f9bd190dd0c364261f5c8a74870cc7f7374e631352293c62ecc437657e5de2cd
+
+account/status:
+  method: get
+  params:
+    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+
+account/transfers/incoming:
+  method: get
+  params:
+    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+
+account/transfers/outgoing:
+  method: get
+  params:
+    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+
+account/transfers/all:
+  method: get
+  stub: account/transfers/incoming
+  params:
+    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+
+account/unconfirmedTransactions:
+  method: get
+  params:
+    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+
+account/harvests:
+  method: get
+  params:
+    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+
+account/importances:
+  method: get
+
+account/namespace/page:
+  method: get
+  params:
+    address: TD3RXTHBLK6J3UD2BH2PXSOFLPWZOTR34WCG4HXH
+    parent: makoto.metal
+
+account/mosaic/definition/page:
+  method: get
+  params:
+    address: TD3RXTHBLK6J3UD2BH2PXSOFLPWZOTR34WCG4HXH
+    parent: makoto.metal.coins
+
+account/mosaic/owned:
+  method: get
+  params:
+    address: TD3RXTHBLK6J3UD2BH2PXSOFLPWZOTR34WCG4HXH
+
+account/unlock:
+  method: post
+  params:
+    privateKey: 00983bb01d05edecfaef55df9486c111abb6299c754a002069b1d0ef4537441bda
+
+account/lock:
+  method: post
+  params:
+    privateKey: 00983bb01d05edecfaef55df9486c111abb6299c754a002069b1d0ef4537441bda
+
+account/unlocked/info:
+  method: post
+
+account/historical/get:
+  method: get
+  params:
+    address: NALICELGU3IVY4DPJKHYLSSVYFFWYS5QPLYEZDJJ
+    startHeight: 17592
+    endHeight: 17592
+    increment: 1
+
+chain/height:
+  method: get
+
+chain/score:
+  method: get
+
+chain/last-block:
+  method: get
+
+block/get:
+  method: get
+  params:
+    blockHash: 58efa578aea719b644e8d7c731852bb26d8505257e03a897c8102e8c894a99d6
+
+block/at/public:
+  method: post
+  params:
+    height: 2649
+
+local/chain/blocks-after:
+  method: post
+  params:
+    height: 2649
+
+local/account/transfers/incoming:
+  method: post
+  params:
+    value: 68e4f79f886927de698df4f857de2aada41ccca6617e56bb0d61623b35b08cc0
+    hash: 44e4968e5aa35fe182d4def5958e23cf941c4bf809364afb4431ebbf6a18c039
+    id: 12345
+
+local/account/transfers/outgoing:
+  method: post
+  params:
+    value: 68e4f79f886927de698df4f857de2aada41ccca6617e56bb0d61623b35b08cc0
+    hash: 44e4968e5aa35fe182d4def5958e23cf941c4bf809364afb4431ebbf6a18c039
+    id: 12345
+
+local/account/transfers/all:
+  method: post
+  params:
+    value: 68e4f79f886927de698df4f857de2aada41ccca6617e56bb0d61623b35b08cc0
+    hash: 44e4968e5aa35fe182d4def5958e23cf941c4bf809364afb4431ebbf6a18c039
+    id: 12345
+
+node/info:
+  method: get
+
+node/extended-info:
+  method: get
+
+node/peer-list/all:
+  method: get
+
+node/peer-list/reachable:
+  method: get
+
+node/peer-list/active:
+  method: get
+
+node/active-peers/max-chain-height:
+  method: get
+
+node/experiences:
+  method: get
+
+node/boot:
+  method: post
+  params:
+    metaData:
+      application: NIS
+    endpoint:
+      protocol: http
+      port: 7890
+      host: localhost
+    identity:
+      private-key: a6cbd01d04edecfaef51df9486c111abb6299c764a00206eb1d01f4587491b3f
+      name: Alice
+
+time-sync/network-time:
+  method: get
+
+namespace/root/page:
+  method: get
+  params:
+    id: 26754
+    pageSize: 35
+
+namespace:
+  method: get
+  params:
+    namespace: makoto.metal.coins
+
+namespace/mosaic/definition/page:
+  method: get
+  params:
+    namespace: makoto.metal.coins
+
+transaction/get:
+  method: get
+  params:
+    hash: 37c34ead4c3fe6af42d994135798262f785ba2d807c02ac3608bc10da12e5f87
+
+transaction/prepare-announce:
+  method: post
+  params:
+    requestPrepareAnnounce: null
+
+transaction/announce:
+  method: post
+  params:
+    requestAnnounce: null
+
+debug/time-synchronization:
+  method: get
+
+debug/connections/incoming:
+  method: get
+
+debug/connections/outgoing:
+  method: get
+
+debug/timers:
+  method: get
+
+account/get?address=ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890:
+  method: get
+  stub: error
+
+shutdown:
+  method: get
