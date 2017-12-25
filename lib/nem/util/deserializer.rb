@@ -38,7 +38,7 @@ module Nem
           # s[60, 4] # length of payload
           tx[:message] = {
             type: deserialize_int(s[56, 4]),
-            payload: deserialize_hex(s[64, s.size])
+            payload: Nem::Util::Convert.hex_to_utf8(deserialize_hex(s[64, s.size]))
           }
         else
           tx[:message] = { type: 1, payload: '' }

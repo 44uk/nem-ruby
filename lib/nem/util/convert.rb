@@ -49,6 +49,13 @@ module Nem
         rstr2utf8(str).bytes.inject('') { |memo, b| memo << b.to_s(16) }
       end
 
+      # Convert hex to UTF-8
+      # @param [string] str
+      # @return [string]
+      def self.hex_to_utf8(hex_str)
+        [hex_str].pack('H*').force_encoding('UTF-8')
+      end
+
       # Convert an Array to hex
       # @param [Array] ua - An Uint8Array
       # @return [string]
@@ -86,8 +93,6 @@ module Nem
         end
       end
 
-      # Converts a raw javascript string into a string of single byte characters using utf8 encoding.
-      # This makes it easier to perform other encoding operations on the string.
       # @param [String] str
       # @return [String]
       def self.rstr2utf8(str)
@@ -101,11 +106,6 @@ module Nem
                     (c >> 12 | 224).chr + (c >> 6 & 63 | 128).chr + (c & 63 | 128).chr
           end
         end
-      end
-
-      # Does the reverse of rstr2utf8.
-      def utf82rstr(input)
-        raise 'Not implemented.'
       end
     end
   end
