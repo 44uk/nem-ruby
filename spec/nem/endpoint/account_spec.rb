@@ -7,6 +7,15 @@ describe Nem::Endpoint::Account do
 
   subject { endpoint }
 
+  describe '#historical' do
+    subject { endpoint.historical('NALICELGU3IVY4DPJKHYLSSVYFFWYS5QPLYEZDJJ',
+      start_height: 17592,
+      end_height: 17592,
+      increment: 1
+    ) }
+    it { is_expected.to be_a Array }
+  end
+
   describe '#generate' do
     subject { endpoint.generate }
     it { is_expected.to be_a Nem::Model::Keypair }
