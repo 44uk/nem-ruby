@@ -7,6 +7,7 @@ describe Nem::Endpoint::Local::Chain do
 
   subject { endpoint }
 
-  describe '#' do
+  describe '#blocks_after' do
+    it { expect(subject.blocks_after(2649)).to be_a Array }
   end
 end

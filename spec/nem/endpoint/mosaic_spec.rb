@@ -7,6 +7,7 @@ describe Nem::Endpoint::Mosaic do
 
   subject { endpoint }
 
-  describe '#' do
+  describe '#supply' do
+    it { expect(subject.supply('nembar:vip')).to be_a Nem::Model::MosaicSupply }
   end
 end

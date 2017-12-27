@@ -1,6 +1,7 @@
 module Nem
   module Endpoint
     class Transaction < Nem::Endpoint::Base
+      # @return [Nem::Model::Transaction]
       def find(hash)
         request!(:get,
           '/transaction/get',
