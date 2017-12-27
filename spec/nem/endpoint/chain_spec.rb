@@ -7,6 +7,15 @@ describe Nem::Endpoint::Chain do
 
   subject { endpoint }
 
-  describe '#' do
+  describe '#last_block' do
+    it { expect(subject.last_block).to be_a Nem::Model::Block }
+  end
+
+  describe '#height' do
+    it { expect(subject.height).to be_a Numeric }
+  end
+
+  describe '#score' do
+    it { expect(subject.score).to be_a String }
   end
 end

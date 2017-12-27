@@ -1,7 +1,7 @@
 module Nem
   module Endpoint
     class Mosaic < Nem::Endpoint::Base
-      # @return <Nem::Model::Namespace>
+      # @return [Nem::Model::MosaicSupply]
       # @see https://nemproject.github.io/#
       def supply(mosaic_id)
         request!(:get, '/mosaic/supply', mosaicId: mosaic_id) do |res|

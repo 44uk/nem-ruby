@@ -13,7 +13,7 @@ module Nem
         Nem::Model::Node.new_from_node request!(:get, '/node/info')
       end
 
-      # @return [Nem::Model::Node]
+      # @return [Nem::Model::NisNodeInfo]
       # @see https://nemproject.github.io/#extended-node-information
       def extended_info
         Nem::Model::NisNodeInfo.new_from_nis_node_info request!(:get, '/node/extended-info')
@@ -39,7 +39,7 @@ module Nem
         end
       end
 
-      # @return [Struct Array <Nem::Model::Node>]
+      # @return [Struct]
       # @see https://nemproject.github.io/#complete-neighborhood
       PeerlistAll = Struct.new(:inactive, :failure, :busy, :active)
       def peerlist_all
@@ -63,6 +63,7 @@ module Nem
         end
       end
 
+      # @param type [Symbol]
       # @return [Array <Nem::Model::Node>]
       def peerlist(type = :all)
         case type.to_s

@@ -7,6 +7,7 @@ describe Nem::Endpoint::Timesync do
 
   subject { endpoint }
 
-  describe '#' do
+  describe '#network_time' do
+    it { expect(subject.network_time).to be_a Nem::Model::NetworkTime }
   end
 end
