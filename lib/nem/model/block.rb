@@ -16,7 +16,6 @@ module Nem
         txes = hash[:transactions].map do |tx|
           Transaction.new_from_account_transaction(tx)
         end
-
         new(
           timestamp: hash[:timeStamp],
           signature: hash[:signature],
