@@ -1,6 +1,7 @@
 module Nem
   module Endpoint
     class Transaction < Nem::Endpoint::Base
+      # @return [Nem::Model::Transaction]
       def find(hash)
         request!(:get,
           '/transaction/get',
@@ -15,7 +16,7 @@ module Nem
       def announce(req)
         request!(:post,
           '/transaction/announce',
-          req.to_entity
+          req.respond_to?(:to_entity) ? req.to_entity : req.to_hash
         ) do |res|
           Nem::Model::NemAnnounceResult.new_from_nem_announce_result(res)
         end

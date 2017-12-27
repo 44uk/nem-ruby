@@ -7,7 +7,10 @@ module Nem
 
       def self.new_from_explorer_block(hash)
         txes = hash[:txes].map do |tx|
-          Transaction.new_from_transaction(tx)
+          Transaction.new_from_account_transaction_meta_data_pair(
+            meta: { hash: { data: tx[:hash] } },
+            transaction: tx[:tx]
+          )
         end
         new(
           difficulty: hash[:difficulty],

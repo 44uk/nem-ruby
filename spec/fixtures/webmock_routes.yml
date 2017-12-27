@@ -184,6 +184,11 @@ node/boot:
 time-sync/network-time:
   method: get
 
+mosaic/supply:
+  method: get
+  params:
+    mosaicId: nembar:vip
+
 namespace/root/page:
   method: get
   params:

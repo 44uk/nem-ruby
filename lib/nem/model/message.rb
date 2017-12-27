@@ -59,7 +59,7 @@ module Nem
 
       # @return [Boolean]
       def valid?
-        bytesize <= 512
+        bytesize <= 1024
       end
 
       # @return [Hash]
@@ -77,6 +77,7 @@ module Nem
         @value == other.value
       end
 
+      # @return [String]
       def payload
         (value =~ /\Afe/ || encrypted?) ? value : value.unpack('H*').first
       end

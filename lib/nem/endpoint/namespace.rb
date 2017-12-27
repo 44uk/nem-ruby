@@ -1,7 +1,7 @@
 module Nem
   module Endpoint
     class Namespace < Nem::Endpoint::Base
-      # @return <Nem::Model::Namespace>
+      # @return [Nem::Model::Namespace]
       # @see https://nemproject.github.io/#retrieving-a-specific-namespace
       def find(namespace)
         request!(:get, '/namespace', namespace: namespace) do |res|

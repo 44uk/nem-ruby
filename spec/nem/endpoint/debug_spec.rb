@@ -7,6 +7,23 @@ describe Nem::Endpoint::Debug do
 
   subject { endpoint }
 
-  describe '#' do
+  describe '#time_syncronization' do
+    it { expect(subject.time_syncronization).to be_a Array }
+  end
+
+  describe '#timers' do
+    it { expect(subject.timers).to be_a Array }
+  end
+
+  describe '#connections_incoming' do
+    it { expect(subject.connections_incoming).to be_a Struct }
+  end
+
+  describe '#connections_outgoing' do
+    it { expect(subject.connections_outgoing).to be_a Struct }
+  end
+
+  describe '#connections' do
+    it { expect(subject.connections(:in)).to be_a Struct }
   end
 end

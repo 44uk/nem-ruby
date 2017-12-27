@@ -17,8 +17,14 @@ module Nem
         :remote_status
 
       def self.new_from_account_meta_data_pair(hash)
-        meta = hash[:meta]
         account = hash[:account]
+        meta = hash[:meta]
+        cosignatory_of = meta[:cosignatoryOf].map do |a|
+          Account.new_from_account_data(a)
+        end
+        cosignatories = meta[:cosignatories].map do |a|
+          Account.new_from_account_data(a)
+        end
         new(
           address: account[:address],
           balance: account[:balance],
@@ -27,8 +33,8 @@ module Nem
           public_key: account[:publicKey],
           label: account[:label],
           harvested_blocks: account[:harvestedBlocks],
-          cosignatory_of: meta[:cosignatoryOf],
-          cosignatories: meta[:cosignatories],
+          cosignatory_of: cosignatory_of,
+          cosignatories: cosignatories,
           status: meta[:status],
           remote_status: meta[:remoteStatus]
         )
