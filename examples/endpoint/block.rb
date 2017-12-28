@@ -3,7 +3,7 @@ require 'nem'
 
 Nem.logger.level = Logger::DEBUG
 
-node = Nem::Node.new(host: '104.128.226.60')
+node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 
 # new Block Endpoint Object
 block_endpoint = Nem::Endpoint::Block.new(node)

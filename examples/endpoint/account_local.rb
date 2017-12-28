@@ -4,7 +4,7 @@ require 'nem'
 Nem.logger.level = Logger::DEBUG
 
 # single node
-# node = Nem::Node.new(host: '104.128.226.60')
+# node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 
 # --- allow only local node
 account_endpoint = Nem::Endpoint::Account.new(Nem::Node.new)
