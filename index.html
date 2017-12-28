@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ruby client library for the NEM Infrastructure Server API">
+  
+  <link rel="shortcut icon" href="./img/favicon.ico">
+  <title>Home - nem-ruby</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+  <link href="./custom.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Home";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> nem-ruby</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href=".">Home</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#introduction">Introduction</a></li>
+    
+
+    <li class="toctree-l2"><a href="#installation">Installation</a></li>
+    
+
+    <li class="toctree-l2"><a href="#connection">Connection</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#node-pool">Node Pool</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#endpoint">Endpoint</a></li>
+    
+
+    <li class="toctree-l2"><a href="#node">Node</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#calling-api-path">calling API Path</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#logging">Logging</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#output">Output</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#examples">Examples</a></li>
+    
+
+    <li class="toctree-l2"><a href="#xem-for-development">XEM for development</a></li>
+    
+
+    <li class="toctree-l2"><a href="#rubydoc">Rubydoc</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Examples</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="examples/configure/">Configure</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/nis/">Nis</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/account/">Account</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/block/">Block</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/chain/">Chain</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/mosaic/">Mosaic</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/namespace/">Namespace</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/node/">Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/transactions/">Transactions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/timesync/">Timesync</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/debug/">Debug</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/local/">Local</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/apostille/">Apostille</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/offline/">Offline</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="examples/util/">Util</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">nem-ruby</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Home</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/44uk/nem-ruby/edit/master/docs/index.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="introduction">Introduction</h2>
+<p><a href="https://badge.fury.io/rb/nem-ruby"><img alt="Gem Version" src="https://badge.fury.io/rb/nem-ruby.svg" /></a>
+<a href="https://travis-ci.org/44uk/nem-ruby"><img alt="Build Status" src="https://travis-ci.org/44uk/nem-ruby.svg?branch=master" /></a>
+<a href="https://codeclimate.com/github/44uk/nem-ruby"><img alt="Code Climate" src="https://codeclimate.com/github/44uk/nem-ruby/badges/gpa.svg" /></a>
+<a href="https://gitter.im/44uk/nem-ruby?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img alt="Join the chat at https://gitter.im/44uk/nem-ruby" src="https://badges.gitter.im/44uk/nem-ruby.svg" /></a></p>
+<p><img src="https://cloud.githubusercontent.com/assets/370508/24320282/a332d238-1175-11e7-96dc-75bc30e562d2.png" width="280" height="280" alt="nem" align="right" /></p>
+<p>Ruby gem for communicating with the nem.</p>
+<p>For further development of nem with ruby, <a href="./about#feedback-and-contact">feel free to send me your feedback!</a></p>
+<h2 id="installation">Installation</h2>
+<pre><code class="bash">$ gem install nem-ruby
+</code></pre>
+
+<p>or add this line to your application's Gemfile.</p>
+<pre><code class="ruby">gem 'nem-ruby'
+</code></pre>
+
+<h2 id="connection">Connection</h2>
+<pre><code class="ruby">require 'pp'
+require 'nem'
+
+# connect to remote node
+node = Nem::Node.new(host: 'bigalice2.nem.ninja')
+
+# ENV['NEM_URL'] can be used if it set.
+# export NEM_URL=http://bigalice2.nem.ninja:7890
+node = Nem::Node.new
+
+# connect to local node if no params
+node = Nem::Node.new
+
+# passing options
+node = Nem::Node.new(host: '127.0.0.1', port: 7890)
+
+# passing url
+node = Nem::Node.new(url: 'http://127.0.0.1:7890')
+</code></pre>
+
+<p>You can pick node from <a href="https://supernodes.nem.io/">NEM Node Rewards</a>.</p>
+<h3 id="node-pool">Node Pool</h3>
+<pre><code class="ruby"># create node pool
+node = Nem::NodePool.new([
+  Nem::Node.new(host: 'dummy1.example.com'),
+  Nem::Node.new(host: 'dummy2.example.com'),
+  Nem::Node.new(host: 'bigalice2.nem.ninja')
+])
+</code></pre>
+
+<h2 id="endpoint">Endpoint</h2>
+<pre><code class="ruby">endpoint = Nem::Endpoint::Account.new(node)
+pp endpoint.find('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')
+# &lt;Nem::Model::Account:0x007fca1b101070
+#   @address=&quot;TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4&quot;,
+#   @balance=68000000,
+#   @cosignatories=[],
+#   @cosignatory_of=[],
+#   @harvested_blocks=1,
+#   @importance=0.0,
+#   @label=nil,
+#   @public_key=&quot;e59ef184a612d4c3c4d89b5950eb57262c69862b2f96e59c5043bf41765c482f&quot;,
+#   @remote_status=&quot;INACTIVE&quot;,
+#   @status=&quot;LOCKED&quot;,
+#   @vested_balance=62145647
+# &gt;
+</code></pre>
+
+<h2 id="node">Node</h2>
+<pre><code class="ruby">node.heartbeat
+# &lt;Nem::Model::Heartbeat:0x007f83d3b6eb68 @code=1, @message=&quot;ok&quot;, @type=2&gt;
+# See https://nemproject.github.io/#heart-beat-request
+
+node.status
+# &lt;Nem::Model::Status:0x007f83d3b54920 @code=6, @message=&quot;status&quot;, @type=4&gt;
+# See https://nemproject.github.io/#status-request
+</code></pre>
+
+<h3 id="calling-api-path">calling API Path</h3>
+<p>Also call Nem::Node#request method. The method receive <em>HTTP Method</em>, <em>API Path</em>, <em>Parameters</em>
+It returns hash which converted API JSON response. by API path /heartbeat, /status</p>
+<p>See <a href="https://nemproject.github.io/">NEM NIS API Documentation</a>.</p>
+<pre><code class="ruby">pp node.request :get, 'heartbeat'
+
+pp node.request :get, 'status'
+
+pp node.request :get, 'account/get', address: 'TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4'
+
+pp node.request :post, 'account/unlock', privateKey: '00983bb01d05edecfaef55df9486c111abb6299c754a002069b1d0ef4537441bda'
+</code></pre>
+
+<h2 id="logging">Logging</h2>
+<pre><code class="ruby"># custom loggin output (default is STDOUT)
+Nem.logger = Logger.new('/path/to/nem-ruby.log')
+# turn on output request information.
+Nem.logger.level = Logger::DEBUG
+
+# also set condig this way.
+Nem.configure do |conf|
+  conf.logger = Logger.new('./nem-ruby.log')
+  conf.logger.level = Logger::DEBUG
+
+  # you can set deadline(sec)
+  conf.deadline = 7200
+
+  # set :mainnet if you'd like to use on mainnet(default :testnet)
+  conf.default_network = :mainnet
+end
+</code></pre>
+
+<h3 id="output">Output</h3>
+<pre><code>D, [2017-09-26T08:03:54.752718 #78207] DEBUG -- : host:http://127.0.0.1:7890/   method:post     path:/transaction/prepare-announce      params:{:transaction=&gt;{:type=&gt;257, :network=&gt;:testnet, :recipient=&gt;&quot;TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF&quot;, :amount=&gt;1000000, :message=&gt;{:payload=&gt;&quot;476f6f64206c75636b21&quot;, :type=&gt;1}, :fee=&gt;100000, :timeStamp=&gt;78793049, :deadline=&gt;78796649, :version=&gt;2550136833, :signer=&gt;&quot;be2ba9cb15a547110d511a4d43c0482fbb584d78781abac01fb053d18f4a0033&quot;}, :privateKey=&gt;&quot;4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214&quot;}
+</code></pre>
+
+<h2 id="examples">Examples</h2>
+<p>More specific example codes are in <strong><a href="https://github.com/44uk/nem-ruby/tree/master/examples">examples/</a></strong> directory.</p>
+<h2 id="xem-for-development">XEM for development</h2>
+<p>You can get Testnet XEM for development / testing from these faucet or thread.</p>
+<ul>
+<li><a href="http://test-nem-faucet.44uk.net/">NEM Testnet Faucet - You can get Testnet XEM for development / testing.</a></li>
+<li><a href="http://tomotomo9696.xyz/nem/faucet/">NEM TESTNET faucet〜てすとねっと蛇口〜</a></li>
+<li><a href="http://namuyan.dip.jp/nem/testnet/">NEM testnet Faucet</a></li>
+<li><a href="https://forum.nem.io/t/paste-you-address-here-for-beta-nem-testnet-xem/829">Paste you address here for beta NEM (Testnet XEM) - Technical Discussion - NEM Forum</a></li>
+</ul>
+<h2 id="rubydoc">Rubydoc</h2>
+<ul>
+<li><a href="http://www.rubydoc.info/gems/nem-ruby">Documentation for nem-ruby - rubydoc.info</a></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="examples/configure/" class="btn btn-neutral float-right" title="Configure">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2017, <a href="https://github.com/44uk">Yoshiyuki Ieyama</a>, <a href="https://twitter.com/44uk_i3">44uk_i3</a>.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/44uk/nem-ruby" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+        <span style="margin-left: 15px"><a href="examples/configure/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="./js/theme.js"></script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.16.3
+Build Date UTC : 2017-12-28 07:19:00
+-->

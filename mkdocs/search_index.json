@@ -1,0 +1,464 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "Introduction\n\n\n\n\n\n\n\n\n\n\n\n\nRuby gem for communicating with the nem.\n\n\nFor further development of nem with ruby, \nfeel free to send me your feedback!\n\n\nInstallation\n\n\n$ gem install nem-ruby\n\n\n\n\nor add this line to your application's Gemfile.\n\n\ngem 'nem-ruby'\n\n\n\n\nConnection\n\n\nrequire 'pp'\nrequire 'nem'\n\n# connect to remote node\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\n\n# ENV['NEM_URL'] can be used if it set.\n# export NEM_URL=http://bigalice2.nem.ninja:7890\nnode = Nem::Node.new\n\n# connect to local node if no params\nnode = Nem::Node.new\n\n# passing options\nnode = Nem::Node.new(host: '127.0.0.1', port: 7890)\n\n# passing url\nnode = Nem::Node.new(url: 'http://127.0.0.1:7890')\n\n\n\n\nYou can pick node from \nNEM Node Rewards\n.\n\n\nNode Pool\n\n\n# create node pool\nnode = Nem::NodePool.new([\n  Nem::Node.new(host: 'dummy1.example.com'),\n  Nem::Node.new(host: 'dummy2.example.com'),\n  Nem::Node.new(host: 'bigalice2.nem.ninja')\n])\n\n\n\n\nEndpoint\n\n\nendpoint = Nem::Endpoint::Account.new(node)\npp endpoint.find('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n# <Nem::Model::Account:0x007fca1b101070\n#   @address=\"TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4\",\n#   @balance=68000000,\n#   @cosignatories=[],\n#   @cosignatory_of=[],\n#   @harvested_blocks=1,\n#   @importance=0.0,\n#   @label=nil,\n#   @public_key=\"e59ef184a612d4c3c4d89b5950eb57262c69862b2f96e59c5043bf41765c482f\",\n#   @remote_status=\"INACTIVE\",\n#   @status=\"LOCKED\",\n#   @vested_balance=62145647\n# >\n\n\n\n\nNode\n\n\nnode.heartbeat\n# <Nem::Model::Heartbeat:0x007f83d3b6eb68 @code=1, @message=\"ok\", @type=2>\n# See https://nemproject.github.io/#heart-beat-request\n\nnode.status\n# <Nem::Model::Status:0x007f83d3b54920 @code=6, @message=\"status\", @type=4>\n# See https://nemproject.github.io/#status-request\n\n\n\n\ncalling API Path\n\n\nAlso call Nem::Node#request method. The method receive \nHTTP Method\n, \nAPI Path\n, \nParameters\n\nIt returns hash which converted API JSON response. by API path /heartbeat, /status\n\n\nSee \nNEM NIS API Documentation\n.\n\n\npp node.request :get, 'heartbeat'\n\npp node.request :get, 'status'\n\npp node.request :get, 'account/get', address: 'TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4'\n\npp node.request :post, 'account/unlock', privateKey: '00983bb01d05edecfaef55df9486c111abb6299c754a002069b1d0ef4537441bda'\n\n\n\n\nLogging\n\n\n# custom loggin output (default is STDOUT)\nNem.logger = Logger.new('/path/to/nem-ruby.log')\n# turn on output request information.\nNem.logger.level = Logger::DEBUG\n\n# also set condig this way.\nNem.configure do |conf|\n  conf.logger = Logger.new('./nem-ruby.log')\n  conf.logger.level = Logger::DEBUG\n\n  # you can set deadline(sec)\n  conf.deadline = 7200\n\n  # set :mainnet if you'd like to use on mainnet(default :testnet)\n  conf.default_network = :mainnet\nend\n\n\n\n\nOutput\n\n\nD, [2017-09-26T08:03:54.752718 #78207] DEBUG -- : host:http://127.0.0.1:7890/   method:post     path:/transaction/prepare-announce      params:{:transaction=>{:type=>257, :network=>:testnet, :recipient=>\"TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF\", :amount=>1000000, :message=>{:payload=>\"476f6f64206c75636b21\", :type=>1}, :fee=>100000, :timeStamp=>78793049, :deadline=>78796649, :version=>2550136833, :signer=>\"be2ba9cb15a547110d511a4d43c0482fbb584d78781abac01fb053d18f4a0033\"}, :privateKey=>\"4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214\"}\n\n\n\n\nExamples\n\n\nMore specific example codes are in \nexamples/\n directory.\n\n\nXEM for development\n\n\nYou can get Testnet XEM for development / testing from these faucet or thread.\n\n\n\n\nNEM Testnet Faucet - You can get Testnet XEM for development / testing.\n\n\nNEM TESTNET faucet\u301c\u3066\u3059\u3068\u306d\u3063\u3068\u86c7\u53e3\u301c\n\n\nNEM testnet Faucet\n\n\nPaste you address here for beta NEM (Testnet XEM) - Technical Discussion - NEM Forum\n\n\n\n\nRubydoc\n\n\n\n\nDocumentation for nem-ruby - rubydoc.info",
+            "title": "Home"
+        },
+        {
+            "location": "/#introduction",
+            "text": "Ruby gem for communicating with the nem.  For further development of nem with ruby,  feel free to send me your feedback!",
+            "title": "Introduction"
+        },
+        {
+            "location": "/#installation",
+            "text": "$ gem install nem-ruby  or add this line to your application's Gemfile.  gem 'nem-ruby'",
+            "title": "Installation"
+        },
+        {
+            "location": "/#connection",
+            "text": "require 'pp'\nrequire 'nem'\n\n# connect to remote node\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\n\n# ENV['NEM_URL'] can be used if it set.\n# export NEM_URL=http://bigalice2.nem.ninja:7890\nnode = Nem::Node.new\n\n# connect to local node if no params\nnode = Nem::Node.new\n\n# passing options\nnode = Nem::Node.new(host: '127.0.0.1', port: 7890)\n\n# passing url\nnode = Nem::Node.new(url: 'http://127.0.0.1:7890')  You can pick node from  NEM Node Rewards .",
+            "title": "Connection"
+        },
+        {
+            "location": "/#node-pool",
+            "text": "# create node pool\nnode = Nem::NodePool.new([\n  Nem::Node.new(host: 'dummy1.example.com'),\n  Nem::Node.new(host: 'dummy2.example.com'),\n  Nem::Node.new(host: 'bigalice2.nem.ninja')\n])",
+            "title": "Node Pool"
+        },
+        {
+            "location": "/#endpoint",
+            "text": "endpoint = Nem::Endpoint::Account.new(node)\npp endpoint.find('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n# <Nem::Model::Account:0x007fca1b101070\n#   @address=\"TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4\",\n#   @balance=68000000,\n#   @cosignatories=[],\n#   @cosignatory_of=[],\n#   @harvested_blocks=1,\n#   @importance=0.0,\n#   @label=nil,\n#   @public_key=\"e59ef184a612d4c3c4d89b5950eb57262c69862b2f96e59c5043bf41765c482f\",\n#   @remote_status=\"INACTIVE\",\n#   @status=\"LOCKED\",\n#   @vested_balance=62145647\n# >",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/#node",
+            "text": "node.heartbeat\n# <Nem::Model::Heartbeat:0x007f83d3b6eb68 @code=1, @message=\"ok\", @type=2>\n# See https://nemproject.github.io/#heart-beat-request\n\nnode.status\n# <Nem::Model::Status:0x007f83d3b54920 @code=6, @message=\"status\", @type=4>\n# See https://nemproject.github.io/#status-request",
+            "title": "Node"
+        },
+        {
+            "location": "/#calling-api-path",
+            "text": "Also call Nem::Node#request method. The method receive  HTTP Method ,  API Path ,  Parameters \nIt returns hash which converted API JSON response. by API path /heartbeat, /status  See  NEM NIS API Documentation .  pp node.request :get, 'heartbeat'\n\npp node.request :get, 'status'\n\npp node.request :get, 'account/get', address: 'TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4'\n\npp node.request :post, 'account/unlock', privateKey: '00983bb01d05edecfaef55df9486c111abb6299c754a002069b1d0ef4537441bda'",
+            "title": "calling API Path"
+        },
+        {
+            "location": "/#logging",
+            "text": "# custom loggin output (default is STDOUT)\nNem.logger = Logger.new('/path/to/nem-ruby.log')\n# turn on output request information.\nNem.logger.level = Logger::DEBUG\n\n# also set condig this way.\nNem.configure do |conf|\n  conf.logger = Logger.new('./nem-ruby.log')\n  conf.logger.level = Logger::DEBUG\n\n  # you can set deadline(sec)\n  conf.deadline = 7200\n\n  # set :mainnet if you'd like to use on mainnet(default :testnet)\n  conf.default_network = :mainnet\nend",
+            "title": "Logging"
+        },
+        {
+            "location": "/#output",
+            "text": "D, [2017-09-26T08:03:54.752718 #78207] DEBUG -- : host:http://127.0.0.1:7890/   method:post     path:/transaction/prepare-announce      params:{:transaction=>{:type=>257, :network=>:testnet, :recipient=>\"TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF\", :amount=>1000000, :message=>{:payload=>\"476f6f64206c75636b21\", :type=>1}, :fee=>100000, :timeStamp=>78793049, :deadline=>78796649, :version=>2550136833, :signer=>\"be2ba9cb15a547110d511a4d43c0482fbb584d78781abac01fb053d18f4a0033\"}, :privateKey=>\"4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214\"}",
+            "title": "Output"
+        },
+        {
+            "location": "/#examples",
+            "text": "More specific example codes are in  examples/  directory.",
+            "title": "Examples"
+        },
+        {
+            "location": "/#xem-for-development",
+            "text": "You can get Testnet XEM for development / testing from these faucet or thread.   NEM Testnet Faucet - You can get Testnet XEM for development / testing.  NEM TESTNET faucet\u301c\u3066\u3059\u3068\u306d\u3063\u3068\u86c7\u53e3\u301c  NEM testnet Faucet  Paste you address here for beta NEM (Testnet XEM) - Technical Discussion - NEM Forum",
+            "title": "XEM for development"
+        },
+        {
+            "location": "/#rubydoc",
+            "text": "Documentation for nem-ruby - rubydoc.info",
+            "title": "Rubydoc"
+        },
+        {
+            "location": "/examples/configure/",
+            "text": "Gem configuration\n\n\nNem.configure do |conf|\n  # output path\n  conf.logger = Logger.new('./nem-ruby.log')\n\n  # logger level\n  conf.logger.level = Logger::DEBUG\n\n  # deadline(sec)\n  conf.deadline = 7200\n\n  # :mainnet if you'd like to use on mainnet!\n  conf.default_network = :mainnet\nend",
+            "title": "Configure"
+        },
+        {
+            "location": "/examples/configure/#gem-configuration",
+            "text": "Nem.configure do |conf|\n  # output path\n  conf.logger = Logger.new('./nem-ruby.log')\n\n  # logger level\n  conf.logger.level = Logger::DEBUG\n\n  # deadline(sec)\n  conf.deadline = 7200\n\n  # :mainnet if you'd like to use on mainnet!\n  conf.default_network = :mainnet\nend",
+            "title": "Gem configuration"
+        },
+        {
+            "location": "/examples/nis/",
+            "text": "Node\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\n\n\n\n\nheartbeat\n\n\npp node.heartbeat\n\n# passing API Path\npp node.request :get, 'heartbeat'\n\n\n\n\nstatus\n\n\npp node.status\n\n# passing API Path\npp node.request :get, 'status'",
+            "title": "Nis"
+        },
+        {
+            "location": "/examples/nis/#node",
+            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')",
+            "title": "Node"
+        },
+        {
+            "location": "/examples/nis/#heartbeat",
+            "text": "pp node.heartbeat\n\n# passing API Path\npp node.request :get, 'heartbeat'",
+            "title": "heartbeat"
+        },
+        {
+            "location": "/examples/nis/#status",
+            "text": "pp node.status\n\n# passing API Path\npp node.request :get, 'status'",
+            "title": "status"
+        },
+        {
+            "location": "/examples/account/",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Account.new(node)\n\n\n\n\nFind Address\n\n\n# find by address\npp endpoint.find('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n# alias\npp endpoint.get('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n# find by public key\npp endpoint.find_by_public_key('e59ef184a612d4c3c4d89b5950eb57262c69862b2f96e59c5043bf41765c482f')\n\n# find forwarded by address\npp endpoint.find_forwarded('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n# find forwarded by public key\npp endpoint.find_forwarded_by_public_key('e59ef184a612d4c3c4d89b5950eb57262c69862b2f96e59c5043bf41765c482f')\n\n\n\n\nHervests\n\n\npp endpoint.harvests('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n\n\n\nNamespace / Mosaics\n\n\n# namespace\npp endpoint.namespace('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')\n\n# fetch mosaic definition of account\npp endpoint.mosaic_definition('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')\n\n# fetch owned mosaics of account\npp endpoint.mosaic_owned('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')\n\n\n\n\nTransactions\n\n\n## incomings\npp endpoint.transfers_incoming('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n## outgoings\npp endpoint.transfers_outgoing('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n## all\npp endpoint.transfers_all('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n## unconfirmed\npp endpoint.transfers_unconfirmed('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n\n\n\nStatus\n\n\npp endpoint.status('TDJNDAQ7F7AQRXKP2YVTH67QYCWWKE6QLSJFWN64')\n\n\n\n\nUnlocked\n\n\npp endpoint.unlocked_info\n\n\n\n\nHistorical\n\n\npp endpoint.historical('TDWWYDGQNBKSAJBSHZX7QWVX7WNVAWWB7HGPWRB2',\n  start_height: 1245390,\n  end_height: 1245400,\n  increment: 1\n)\n\n\n\n\nGenerate Account / Lock, Unlock\n\n\nThe APIs allowed only Local NIS.\n\n\n## generate account\npp endpoint.generate\n\n## lock account\npp endpoint.lock('__private_key__')\n\n## unlock account\npp endpoint.unlock('__private_key__')",
+            "title": "Account"
+        },
+        {
+            "location": "/examples/account/#endpoint",
+            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Account.new(node)",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/examples/account/#find-address",
+            "text": "# find by address\npp endpoint.find('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n# alias\npp endpoint.get('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n# find by public key\npp endpoint.find_by_public_key('e59ef184a612d4c3c4d89b5950eb57262c69862b2f96e59c5043bf41765c482f')\n\n# find forwarded by address\npp endpoint.find_forwarded('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n# find forwarded by public key\npp endpoint.find_forwarded_by_public_key('e59ef184a612d4c3c4d89b5950eb57262c69862b2f96e59c5043bf41765c482f')",
+            "title": "Find Address"
+        },
+        {
+            "location": "/examples/account/#hervests",
+            "text": "pp endpoint.harvests('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')",
+            "title": "Hervests"
+        },
+        {
+            "location": "/examples/account/#namespace-mosaics",
+            "text": "# namespace\npp endpoint.namespace('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')\n\n# fetch mosaic definition of account\npp endpoint.mosaic_definition('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')\n\n# fetch owned mosaics of account\npp endpoint.mosaic_owned('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')",
+            "title": "Namespace / Mosaics"
+        },
+        {
+            "location": "/examples/account/#transactions",
+            "text": "## incomings\npp endpoint.transfers_incoming('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n## outgoings\npp endpoint.transfers_outgoing('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n## all\npp endpoint.transfers_all('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')\n\n## unconfirmed\npp endpoint.transfers_unconfirmed('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')",
+            "title": "Transactions"
+        },
+        {
+            "location": "/examples/account/#status",
+            "text": "pp endpoint.status('TDJNDAQ7F7AQRXKP2YVTH67QYCWWKE6QLSJFWN64')",
+            "title": "Status"
+        },
+        {
+            "location": "/examples/account/#unlocked",
+            "text": "pp endpoint.unlocked_info",
+            "title": "Unlocked"
+        },
+        {
+            "location": "/examples/account/#historical",
+            "text": "pp endpoint.historical('TDWWYDGQNBKSAJBSHZX7QWVX7WNVAWWB7HGPWRB2',\n  start_height: 1245390,\n  end_height: 1245400,\n  increment: 1\n)",
+            "title": "Historical"
+        },
+        {
+            "location": "/examples/account/#generate-account-lock-unlock",
+            "text": "The APIs allowed only Local NIS.  ## generate account\npp endpoint.generate\n\n## lock account\npp endpoint.lock('__private_key__')\n\n## unlock account\npp endpoint.unlock('__private_key__')",
+            "title": "Generate Account / Lock, Unlock"
+        },
+        {
+            "location": "/examples/block/",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Account.new(node)\n\n\n\n\nat public\n\n\npp endpoint.at_public(1_223_559)",
+            "title": "Block"
+        },
+        {
+            "location": "/examples/block/#endpoint",
+            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Account.new(node)",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/examples/block/#at-public",
+            "text": "pp endpoint.at_public(1_223_559)",
+            "title": "at public"
+        },
+        {
+            "location": "/examples/chain/",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Chain.new(node)\n\n\n\n\nheight\n\n\npp endpoint.height\n\n\n\n\nscore\n\n\npp endpoint.score\n\n\n\n\nlast block\n\n\npp endpoint.last_block",
+            "title": "Chain"
+        },
+        {
+            "location": "/examples/chain/#endpoint",
+            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Chain.new(node)",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/examples/chain/#height",
+            "text": "pp endpoint.height",
+            "title": "height"
+        },
+        {
+            "location": "/examples/chain/#score",
+            "text": "pp endpoint.score",
+            "title": "score"
+        },
+        {
+            "location": "/examples/chain/#last-block",
+            "text": "pp endpoint.last_block",
+            "title": "last block"
+        },
+        {
+            "location": "/examples/mosaic/",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new\nendpoint = Nem::Endpoint::Mosaic.new(node)\n\n\n\n\nsupply\n\n\npp mo_endpoint.supply('nembar:vip')",
+            "title": "Mosaic"
+        },
+        {
+            "location": "/examples/mosaic/#endpoint",
+            "text": "node = Nem::Node.new\nendpoint = Nem::Endpoint::Mosaic.new(node)",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/examples/mosaic/#supply",
+            "text": "pp mo_endpoint.supply('nembar:vip')",
+            "title": "supply"
+        },
+        {
+            "location": "/examples/namespace/",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Namespace.new(node)\n\n\n\n\nfind\n\n\npp ns_endpoint.find('alice')\n\n\n\n\nroot\n\n\npp ns_endpoint.root(882, page_size: 1)\n\n\n\n\nmosaic definition page\n\n\npp ns_endpoint.mosaic_definition('tpico')",
+            "title": "Namespace"
+        },
+        {
+            "location": "/examples/namespace/#endpoint",
+            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Namespace.new(node)",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/examples/namespace/#find",
+            "text": "pp ns_endpoint.find('alice')",
+            "title": "find"
+        },
+        {
+            "location": "/examples/namespace/#root",
+            "text": "pp ns_endpoint.root(882, page_size: 1)",
+            "title": "root"
+        },
+        {
+            "location": "/examples/namespace/#mosaic-definition-page",
+            "text": "pp ns_endpoint.mosaic_definition('tpico')",
+            "title": "mosaic definition page"
+        },
+        {
+            "location": "/examples/node/",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Node.new(node)\n\n\n\n\nInfo\n\n\npp endpoint.node_info\npp endpoint.node_extended_info\npp endpoint.node_experiences\n\n\n\n\nPeerlist\n\n\n# mapped methods\npp endpoint.node_peerlist_all\npp endpoint.node_peerlist_reachable\npp endpoint.node_peerlist_active\n\n# another way\npp endpoint.node_peerlist(:all)\npp endpoint.node_peerlist(:reachable)\npp endpoint.node_peerlist(:active)\n\n\n\n\nActive peers max chain height\n\n\nendpoint = node_endpoint = Nem::Endpoint::Node.new(Nem::Node.new)\n\npp endpoint.node_active_peers_max_chain_height\n\n\n\n\nBoot node request\n\n\nbnr = Nis::Struct::BootNodeRequest.new(\n  metaData: {\n    application: 'NIS'\n  },\n  endpoint: {\n    protocol: 'http',\n    port: 7890,\n    host: 'localhost'\n  },\n  identity: {\n    'private-key': 'a6cbd01d04edecfaef51df9486c111abb6299c764a00206eb1d01f4587491b3f',\n    name: 'Alice'\n  }\n)\n\nbegin\n  pp endpoint.node_boot(boot_node_request: bnr)\nrescue => ex\n  pp ex\nend",
+            "title": "Node"
+        },
+        {
+            "location": "/examples/node/#endpoint",
+            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Node.new(node)",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/examples/node/#info",
+            "text": "pp endpoint.node_info\npp endpoint.node_extended_info\npp endpoint.node_experiences",
+            "title": "Info"
+        },
+        {
+            "location": "/examples/node/#peerlist",
+            "text": "# mapped methods\npp endpoint.node_peerlist_all\npp endpoint.node_peerlist_reachable\npp endpoint.node_peerlist_active\n\n# another way\npp endpoint.node_peerlist(:all)\npp endpoint.node_peerlist(:reachable)\npp endpoint.node_peerlist(:active)",
+            "title": "Peerlist"
+        },
+        {
+            "location": "/examples/node/#active-peers-max-chain-height",
+            "text": "endpoint = node_endpoint = Nem::Endpoint::Node.new(Nem::Node.new)\n\npp endpoint.node_active_peers_max_chain_height",
+            "title": "Active peers max chain height"
+        },
+        {
+            "location": "/examples/node/#boot-node-request",
+            "text": "bnr = Nis::Struct::BootNodeRequest.new(\n  metaData: {\n    application: 'NIS'\n  },\n  endpoint: {\n    protocol: 'http',\n    port: 7890,\n    host: 'localhost'\n  },\n  identity: {\n    'private-key': 'a6cbd01d04edecfaef51df9486c111abb6299c764a00206eb1d01f4587491b3f',\n    name: 'Alice'\n  }\n)\n\nbegin\n  pp endpoint.node_boot(boot_node_request: bnr)\nrescue => ex\n  pp ex\nend",
+            "title": "Boot node request"
+        },
+        {
+            "location": "/examples/transactions/",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Transaction.new(node)\n\n\n\n\nTransfer\n\n\nVersion1(XEM transfer)\n\n\n# sender\nA_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'\n\n# recipient\nB_ADDRESS = 'TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\ntx_endpoint = Nem::Endpoint::Transaction.new(node)\n\n# with plain message\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nVersion2(mosaic transfer)\n\n\n# define custom mosaic attachment\nclass KonHeart < Nem::Model::MosaicAttachment\n  def initialize(quantity)\n    mosaic_id = Nem::Model::MosaicId.new(\n      namespace_id: 'kon',\n      name: 'heart'\n    )\n    properties = Nem::Model::MosaicProperties.new(\n      divisibility: 3,\n      initial_supply: 100_000_000\n    )\n    super(\n      mosaic_id: mosaic_id,\n      properties: properties,\n      quantity: quantity\n    )\n  end\nend\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\ntx.mosaics << Nem::Mosaic::Xem.new(1)\ntx.mosaics << KonHeart.new(1)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nImportance Transfer\n\n\ntx = Nem::Transaction::ImportanceTransfer.new(B_PUBLIC_KEY, :activate)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nMultisig Signature\n\n\n\n\n\nNamespace\n\n\n\n\n\nMosaic\n\n\nCreation\n\n\n\n\n\nSupply Change\n\n\n\n\n\nMultisig Aggregate Modification\n\n\n\n\n\n\n\nAdd cosignatory\n\n\n\n\n\nLocal node\n\n\nnode = Nem::Node.new\nendpoint = Nem::Endpoint::Transaction.new(node)\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\n# use #prepare_announce method for local node without signature\nres = endpoint.prepare_announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "title": "Transactions"
+        },
+        {
+            "location": "/examples/transactions/#endpoint",
+            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Transaction.new(node)",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/examples/transactions/#transfer",
+            "text": "",
+            "title": "Transfer"
+        },
+        {
+            "location": "/examples/transactions/#version1xem-transfer",
+            "text": "# sender\nA_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'\n\n# recipient\nB_ADDRESS = 'TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\ntx_endpoint = Nem::Endpoint::Transaction.new(node)\n\n# with plain message\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "title": "Version1(XEM transfer)"
+        },
+        {
+            "location": "/examples/transactions/#version2mosaic-transfer",
+            "text": "# define custom mosaic attachment\nclass KonHeart < Nem::Model::MosaicAttachment\n  def initialize(quantity)\n    mosaic_id = Nem::Model::MosaicId.new(\n      namespace_id: 'kon',\n      name: 'heart'\n    )\n    properties = Nem::Model::MosaicProperties.new(\n      divisibility: 3,\n      initial_supply: 100_000_000\n    )\n    super(\n      mosaic_id: mosaic_id,\n      properties: properties,\n      quantity: quantity\n    )\n  end\nend\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\ntx.mosaics << Nem::Mosaic::Xem.new(1)\ntx.mosaics << KonHeart.new(1)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "title": "Version2(mosaic transfer)"
+        },
+        {
+            "location": "/examples/transactions/#importance-transfer",
+            "text": "tx = Nem::Transaction::ImportanceTransfer.new(B_PUBLIC_KEY, :activate)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "title": "Importance Transfer"
+        },
+        {
+            "location": "/examples/transactions/#multisig-signature",
+            "text": "",
+            "title": "Multisig Signature"
+        },
+        {
+            "location": "/examples/transactions/#namespace",
+            "text": "",
+            "title": "Namespace"
+        },
+        {
+            "location": "/examples/transactions/#mosaic",
+            "text": "",
+            "title": "Mosaic"
+        },
+        {
+            "location": "/examples/transactions/#creation",
+            "text": "",
+            "title": "Creation"
+        },
+        {
+            "location": "/examples/transactions/#supply-change",
+            "text": "",
+            "title": "Supply Change"
+        },
+        {
+            "location": "/examples/transactions/#multisig-aggregate-modification",
+            "text": "",
+            "title": "Multisig Aggregate Modification"
+        },
+        {
+            "location": "/examples/transactions/#add-cosignatory",
+            "text": "",
+            "title": "Add cosignatory"
+        },
+        {
+            "location": "/examples/transactions/#local-node",
+            "text": "node = Nem::Node.new\nendpoint = Nem::Endpoint::Transaction.new(node)\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\n# use #prepare_announce method for local node without signature\nres = endpoint.prepare_announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "title": "Local node"
+        },
+        {
+            "location": "/examples/timesync/",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Timesync.new(node)\n\n\n\n\nNetwork time\n\n\npp endpoint.network_time",
+            "title": "Timesync"
+        },
+        {
+            "location": "/examples/timesync/#endpoint",
+            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Timesync.new(node)",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/examples/timesync/#network-time",
+            "text": "pp endpoint.network_time",
+            "title": "Network time"
+        },
+        {
+            "location": "/examples/debug/",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Debug.new(node)\n\n\n\n\nconnections\n\n\n# mapped methods\npp endpoint.connections_incoming\npp endpoint.connections_outgoing\npp endpoint.connections_timers\n\n# another way\npp endpoint.debug_connections(:in)\npp endpoint.debug_connections(:out)\n\n\n\n\ntime synchronization\n\n\npp endpoint.time_synchronization",
+            "title": "Debug"
+        },
+        {
+            "location": "/examples/debug/#endpoint",
+            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Debug.new(node)",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/examples/debug/#connections",
+            "text": "# mapped methods\npp endpoint.connections_incoming\npp endpoint.connections_outgoing\npp endpoint.connections_timers\n\n# another way\npp endpoint.debug_connections(:in)\npp endpoint.debug_connections(:out)",
+            "title": "connections"
+        },
+        {
+            "location": "/examples/debug/#time-synchronization",
+            "text": "pp endpoint.time_synchronization",
+            "title": "time synchronization"
+        },
+        {
+            "location": "/examples/local/",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new\nendpoint = Nem::Endpoint::Local.new(node)\n\n\n\n\naccount transfers\n\n\nvalue = '00b4a68d16dc505302e9631b860664ba43a8183f0903bc5782a2403b2f9eb3c8a1'\n\n# mapped methods\npp endpoint.transfers_incoming(value)\npp endpoint.transfers_outgoing(value)\npp endpoint.transfers_all(value)\n\n# another way\npp endpoint.transfers(value, :in)\npp endpoint.transfers(value, :out)\npp endpoint.transfers(value, :all)\n\n\n\n\nchain blocks after\n\n\npp endpoint.blocks_after(1_223_559)",
+            "title": "Local"
+        },
+        {
+            "location": "/examples/local/#endpoint",
+            "text": "node = Nem::Node.new\nendpoint = Nem::Endpoint::Local.new(node)",
+            "title": "Endpoint"
+        },
+        {
+            "location": "/examples/local/#account-transfers",
+            "text": "value = '00b4a68d16dc505302e9631b860664ba43a8183f0903bc5782a2403b2f9eb3c8a1'\n\n# mapped methods\npp endpoint.transfers_incoming(value)\npp endpoint.transfers_outgoing(value)\npp endpoint.transfers_all(value)\n\n# another way\npp endpoint.transfers(value, :in)\npp endpoint.transfers(value, :out)\npp endpoint.transfers(value, :all)",
+            "title": "account transfers"
+        },
+        {
+            "location": "/examples/local/#chain-blocks-after",
+            "text": "pp endpoint.blocks_after(1_223_559)",
+            "title": "chain blocks after"
+        },
+        {
+            "location": "/examples/apostille/",
+            "text": "Public Apostille\n\n\nCreate\n\n\nrequire 'pp'\nrequire 'nem'\n\nFIXTURES_PATH = File.expand_path('../../spec/fixtures', __FILE__)\n\n# sender\nA_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\ntx_endpoint = Nem::Endpoint::Transaction.new(node)\n\nfile = File.open(\"#{FIXTURES_PATH}/nemLogoV2.png\")\napo = Nem::Apostille.new(kp, file, :sha1,\n  multisig: false,\n  private: false,\n  network: :testnet\n)\ntx = apo.transaction\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\npp \"ApostilleFormat: #{apo.apostille_format(res.transaction_hash)}\"\n\nFileUtils.cp(file.path, apo.apostille_format(res.transaction_hash))\n\n\n\n\nAudit\n\n\nrequire 'pp'\nrequire 'nem'\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\ntx_endpoint = Nem::Endpoint::Transaction.new(node)\n\n# transaction hash from Filename\ntx_hash = 'c035c2603356852687c4730fbc6f8d21da3af7c4c0eb8b3619bc9ecdc833255a'\ntx = tx_endpoint.find(tx_hash)\n\n# NOTE: it may return \"Hash was not found in cache\"\n# because of NIS not supporting caching transactions.\n# 'fe4e545902cde315617a435ebfd5fe8875d699e2f2363262f5'\napostille_hash = tx.message.payload\nfile = File.open(\"#{FIXTURES_PATH}/nemLogoV2 -- Apostille TX c035c2603356852687c4730fbc6f8d21da3af7c4c0eb8b3619bc9ecdc833255a -- Date 2017-12-18.png\")\n\napa = Nem::ApostilleAudit.new(file, apostille_hash)\npp apa.valid? ? 'OK, Valid Apostille!' : 'Bad, Invalid Apostille!'",
+            "title": "Apostille"
+        },
+        {
+            "location": "/examples/apostille/#public-apostille",
+            "text": "",
+            "title": "Public Apostille"
+        },
+        {
+            "location": "/examples/apostille/#create",
+            "text": "require 'pp'\nrequire 'nem'\n\nFIXTURES_PATH = File.expand_path('../../spec/fixtures', __FILE__)\n\n# sender\nA_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\ntx_endpoint = Nem::Endpoint::Transaction.new(node)\n\nfile = File.open(\"#{FIXTURES_PATH}/nemLogoV2.png\")\napo = Nem::Apostille.new(kp, file, :sha1,\n  multisig: false,\n  private: false,\n  network: :testnet\n)\ntx = apo.transaction\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\npp \"ApostilleFormat: #{apo.apostille_format(res.transaction_hash)}\"\n\nFileUtils.cp(file.path, apo.apostille_format(res.transaction_hash))",
+            "title": "Create"
+        },
+        {
+            "location": "/examples/apostille/#audit",
+            "text": "require 'pp'\nrequire 'nem'\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\ntx_endpoint = Nem::Endpoint::Transaction.new(node)\n\n# transaction hash from Filename\ntx_hash = 'c035c2603356852687c4730fbc6f8d21da3af7c4c0eb8b3619bc9ecdc833255a'\ntx = tx_endpoint.find(tx_hash)\n\n# NOTE: it may return \"Hash was not found in cache\"\n# because of NIS not supporting caching transactions.\n# 'fe4e545902cde315617a435ebfd5fe8875d699e2f2363262f5'\napostille_hash = tx.message.payload\nfile = File.open(\"#{FIXTURES_PATH}/nemLogoV2 -- Apostille TX c035c2603356852687c4730fbc6f8d21da3af7c4c0eb8b3619bc9ecdc833255a -- Date 2017-12-18.png\")\n\napa = Nem::ApostilleAudit.new(file, apostille_hash)\npp apa.valid? ? 'OK, Valid Apostille!' : 'Bad, Invalid Apostille!'",
+            "title": "Audit"
+        },
+        {
+            "location": "/examples/offline/",
+            "text": "Offline transaction\n\n\nCreate signed transaction\n\n\nrequire 'pp'\nrequire 'nem'\n\n# sender\nA_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'\n\n# recipient\nB_ADDRESS = 'TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck! Offline transfer.')\nreq = Nem::Request::Announce.new(tx, kp)\n\n# signed announce\npp data = req.to_entity\npp 'save as tx.json'\nFile.write 'tx.json', data.to_json\n\n\n\n\nAnnounce signed transaction\n\n\nrequire 'pp'\nrequire 'nem'\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\ntx_endpoint = Nem::Endpoint::Transaction.new(node)\n\nreq = File.read('tx.json')\nres = tx_endpoint.announce(JSON.parse(req))\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "title": "Offline"
+        },
+        {
+            "location": "/examples/offline/#offline-transaction",
+            "text": "",
+            "title": "Offline transaction"
+        },
+        {
+            "location": "/examples/offline/#create-signed-transaction",
+            "text": "require 'pp'\nrequire 'nem'\n\n# sender\nA_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'\n\n# recipient\nB_ADDRESS = 'TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck! Offline transfer.')\nreq = Nem::Request::Announce.new(tx, kp)\n\n# signed announce\npp data = req.to_entity\npp 'save as tx.json'\nFile.write 'tx.json', data.to_json",
+            "title": "Create signed transaction"
+        },
+        {
+            "location": "/examples/offline/#announce-signed-transaction",
+            "text": "require 'pp'\nrequire 'nem'\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\ntx_endpoint = Nem::Endpoint::Transaction.new(node)\n\nreq = File.read('tx.json')\nres = tx_endpoint.announce(JSON.parse(req))\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "title": "Announce signed transaction"
+        },
+        {
+            "location": "/examples/util/",
+            "text": "Deserialize transaction\n\n\nrequire 'pp'\nrequire 'nem'\n\n# sender\nA_PRIVATE_KEY = '260206d683962350532408e8774fd14870a173b7fba17f6b504da3dbc5f1cc9f'\n\n# receiver\nB_ADDRESS = 'TAWKJTUP4DWKLDKKS534TYP6G324CBNMXKBA4X7B'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\nreq = Nem::Request::Announce.new(tx, kp)\n\nentity = req.to_entity\n\n# You can also announce to nem Network later.\npp entity.to_json\n\n# deserialize data into hash\npp Nem::Util::Deserializer.deserialize_transaction(req.to_entity[:data])",
+            "title": "Util"
+        },
+        {
+            "location": "/examples/util/#deserialize-transaction",
+            "text": "require 'pp'\nrequire 'nem'\n\n# sender\nA_PRIVATE_KEY = '260206d683962350532408e8774fd14870a173b7fba17f6b504da3dbc5f1cc9f'\n\n# receiver\nB_ADDRESS = 'TAWKJTUP4DWKLDKKS534TYP6G324CBNMXKBA4X7B'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\nreq = Nem::Request::Announce.new(tx, kp)\n\nentity = req.to_entity\n\n# You can also announce to nem Network later.\npp entity.to_json\n\n# deserialize data into hash\npp Nem::Util::Deserializer.deserialize_transaction(req.to_entity[:data])",
+            "title": "Deserialize transaction"
+        },
+        {
+            "location": "/about/",
+            "text": "Feedback and Contact\n\n\nFor further development of nem with ruby, feel free to send me your feedback, feature requests, bug reports!\n\n\n\n\n44uk/nem-ruby - gitter\n\n\n@44uk_i3 - Twitter\n\n\n\n\nand I would be glad if you could let me know any project using the gem!\n\n\nDonation\n\n\nThe project gratefully accepts donations via nem:xem.\n\n\nNCPBJTNKHODIGPDMPKPETJK6YLMUPAW7ISBIQGUP\n\n\n\n\nThanks\n\n\n\n\nNEM - Distributed Ledger Technology (Blockchain)\n\n\nNEM NIS API Documentation\n\n\nNEM Forum\n\n\n\n\nContributing\n\n\nBug reports and pull requests are welcome on GitHub at \n44uk/nem-ruby\n. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the \nContributor Covenant\n code of conduct.\n\n\nLicense\n\n\nThe gem is available as open source under the terms of the \nMIT License\n.",
+            "title": "About"
+        },
+        {
+            "location": "/about/#feedback-and-contact",
+            "text": "For further development of nem with ruby, feel free to send me your feedback, feature requests, bug reports!   44uk/nem-ruby - gitter  @44uk_i3 - Twitter   and I would be glad if you could let me know any project using the gem!",
+            "title": "Feedback and Contact"
+        },
+        {
+            "location": "/about/#donation",
+            "text": "The project gratefully accepts donations via nem:xem.  NCPBJTNKHODIGPDMPKPETJK6YLMUPAW7ISBIQGUP",
+            "title": "Donation"
+        },
+        {
+            "location": "/about/#thanks",
+            "text": "NEM - Distributed Ledger Technology (Blockchain)  NEM NIS API Documentation  NEM Forum",
+            "title": "Thanks"
+        },
+        {
+            "location": "/about/#contributing",
+            "text": "Bug reports and pull requests are welcome on GitHub at  44uk/nem-ruby . This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the  Contributor Covenant  code of conduct.",
+            "title": "Contributing"
+        },
+        {
+            "location": "/about/#license",
+            "text": "The gem is available as open source under the terms of the  MIT License .",
+            "title": "License"
+        }
+    ]
+}

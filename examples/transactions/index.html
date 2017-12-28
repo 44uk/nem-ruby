@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Transactions - nem-ruby</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Transactions";
+    var mkdocs_page_input_path = "examples/transactions.md";
+    var mkdocs_page_url = "/examples/transactions/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> nem-ruby</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Examples</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../configure/">Configure</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../nis/">Nis</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../account/">Account</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../block/">Block</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../chain/">Chain</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../mosaic/">Mosaic</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../namespace/">Namespace</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../node/">Node</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Transactions</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#endpoint">Endpoint</a></li>
+    
+
+    <li class="toctree-l3"><a href="#transfer">Transfer</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#version1xem-transfer">Version1(XEM transfer)</a></li>
+        
+            <li><a class="toctree-l4" href="#version2mosaic-transfer">Version2(mosaic transfer)</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#importance-transfer">Importance Transfer</a></li>
+    
+
+    <li class="toctree-l3"><a href="#multisig-signature">Multisig Signature</a></li>
+    
+
+    <li class="toctree-l3"><a href="#namespace">Namespace</a></li>
+    
+
+    <li class="toctree-l3"><a href="#mosaic">Mosaic</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#creation">Creation</a></li>
+        
+            <li><a class="toctree-l4" href="#supply-change">Supply Change</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l3"><a href="#multisig-aggregate-modification">Multisig Aggregate Modification</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#add-cosignatory">Add cosignatory</a></li>
+        
+            <li><a class="toctree-l4" href="#local-node">Local node</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../timesync/">Timesync</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../debug/">Debug</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../local/">Local</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../apostille/">Apostille</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../offline/">Offline</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../util/">Util</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">nem-ruby</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Examples &raquo;</li>
+        
+      
+    
+    <li>Transactions</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/44uk/nem-ruby/edit/master/docs/examples/transactions.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="endpoint">Endpoint</h2>
+<pre><code class="ruby">node = Nem::Node.new(host: 'bigalice2.nem.ninja')
+endpoint = Nem::Endpoint::Transaction.new(node)
+</code></pre>
+
+<h2 id="transfer">Transfer</h2>
+<h3 id="version1xem-transfer">Version1(XEM transfer)</h3>
+<pre><code class="ruby"># sender
+A_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'
+
+# recipient
+B_ADDRESS = 'TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF'
+
+kp = Nem::Keypair.new(A_PRIVATE_KEY)
+node = Nem::Node.new(host: 'bigalice2.nem.ninja')
+tx_endpoint = Nem::Endpoint::Transaction.new(node)
+
+# with plain message
+tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
+pp &quot;Fee: #{tx.fee.to_i}&quot;
+
+req = Nem::Request::Announce.new(tx, kp)
+res = tx_endpoint.announce(req)
+
+pp &quot;Message: #{res.message}&quot;
+pp &quot;TransactionHash: #{res.transaction_hash}&quot;
+</code></pre>
+
+<h3 id="version2mosaic-transfer">Version2(mosaic transfer)</h3>
+<pre><code class="ruby"># define custom mosaic attachment
+class KonHeart &lt; Nem::Model::MosaicAttachment
+  def initialize(quantity)
+    mosaic_id = Nem::Model::MosaicId.new(
+      namespace_id: 'kon',
+      name: 'heart'
+    )
+    properties = Nem::Model::MosaicProperties.new(
+      divisibility: 3,
+      initial_supply: 100_000_000
+    )
+    super(
+      mosaic_id: mosaic_id,
+      properties: properties,
+      quantity: quantity
+    )
+  end
+end
+
+tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
+tx.mosaics &lt;&lt; Nem::Mosaic::Xem.new(1)
+tx.mosaics &lt;&lt; KonHeart.new(1)
+pp &quot;Fee: #{tx.fee.to_i}&quot;
+
+req = Nem::Request::Announce.new(tx, kp)
+res = tx_endpoint.announce(req)
+
+pp &quot;Message: #{res.message}&quot;
+pp &quot;TransactionHash: #{res.transaction_hash}&quot;
+</code></pre>
+
+<h2 id="importance-transfer">Importance Transfer</h2>
+<pre><code class="ruby">tx = Nem::Transaction::ImportanceTransfer.new(B_PUBLIC_KEY, :activate)
+pp &quot;Fee: #{tx.fee.to_i}&quot;
+
+req = Nem::Request::Announce.new(tx, kp)
+res = endpoint.announce(req)
+
+pp &quot;Message: #{res.message}&quot;
+pp &quot;TransactionHash: #{res.transaction_hash}&quot;
+</code></pre>
+
+<h2 id="multisig-signature">Multisig Signature</h2>
+<pre><code class="ruby"></code></pre>
+
+<h2 id="namespace">Namespace</h2>
+<pre><code class="ruby"></code></pre>
+
+<h2 id="mosaic">Mosaic</h2>
+<h3 id="creation">Creation</h3>
+<pre><code class="ruby"></code></pre>
+
+<h3 id="supply-change">Supply Change</h3>
+<pre><code class="ruby"></code></pre>
+
+<h2 id="multisig-aggregate-modification">Multisig Aggregate Modification</h2>
+<pre><code class="ruby">
+</code></pre>
+
+<h3 id="add-cosignatory">Add cosignatory</h3>
+<pre><code class="ruby"></code></pre>
+
+<h3 id="local-node">Local node</h3>
+<pre><code class="ruby">node = Nem::Node.new
+endpoint = Nem::Endpoint::Transaction.new(node)
+
+tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
+pp &quot;Fee: #{tx.fee.to_i}&quot;
+
+req = Nem::Request::Announce.new(tx, kp)
+# use #prepare_announce method for local node without signature
+res = endpoint.prepare_announce(req)
+
+pp &quot;Message: #{res.message}&quot;
+pp &quot;TransactionHash: #{res.transaction_hash}&quot;
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../timesync/" class="btn btn-neutral float-right" title="Timesync">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../node/" class="btn btn-neutral" title="Node"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2017, <a href="https://github.com/44uk">Yoshiyuki Ieyama</a>, <a href="https://twitter.com/44uk_i3">44uk_i3</a>.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/44uk/nem-ruby" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../node/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../timesync/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

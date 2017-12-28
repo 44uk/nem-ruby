@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Account - nem-ruby</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Account";
+    var mkdocs_page_input_path = "examples/account.md";
+    var mkdocs_page_url = "/examples/account/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> nem-ruby</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Examples</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../configure/">Configure</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../nis/">Nis</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Account</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#endpoint">Endpoint</a></li>
+    
+
+    <li class="toctree-l3"><a href="#find-address">Find Address</a></li>
+    
+
+    <li class="toctree-l3"><a href="#hervests">Hervests</a></li>
+    
+
+    <li class="toctree-l3"><a href="#namespace-mosaics">Namespace / Mosaics</a></li>
+    
+
+    <li class="toctree-l3"><a href="#transactions">Transactions</a></li>
+    
+
+    <li class="toctree-l3"><a href="#status">Status</a></li>
+    
+
+    <li class="toctree-l3"><a href="#unlocked">Unlocked</a></li>
+    
+
+    <li class="toctree-l3"><a href="#historical">Historical</a></li>
+    
+
+    <li class="toctree-l3"><a href="#generate-account-lock-unlock">Generate Account / Lock, Unlock</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../block/">Block</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../chain/">Chain</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../mosaic/">Mosaic</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../namespace/">Namespace</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../node/">Node</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../transactions/">Transactions</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../timesync/">Timesync</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../debug/">Debug</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../local/">Local</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../apostille/">Apostille</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../offline/">Offline</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../util/">Util</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../about/">About</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">nem-ruby</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Examples &raquo;</li>
+        
+      
+    
+    <li>Account</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/44uk/nem-ruby/edit/master/docs/examples/account.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="endpoint">Endpoint</h2>
+<pre><code class="ruby">node = Nem::Node.new(host: 'bigalice2.nem.ninja')
+endpoint = Nem::Endpoint::Account.new(node)
+</code></pre>
+
+<h2 id="find-address">Find Address</h2>
+<pre><code class="ruby"># find by address
+pp endpoint.find('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')
+
+# alias
+pp endpoint.get('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')
+
+# find by public key
+pp endpoint.find_by_public_key('e59ef184a612d4c3c4d89b5950eb57262c69862b2f96e59c5043bf41765c482f')
+
+# find forwarded by address
+pp endpoint.find_forwarded('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')
+
+# find forwarded by public key
+pp endpoint.find_forwarded_by_public_key('e59ef184a612d4c3c4d89b5950eb57262c69862b2f96e59c5043bf41765c482f')
+</code></pre>
+
+<h2 id="hervests">Hervests</h2>
+<pre><code class="ruby">pp endpoint.harvests('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')
+</code></pre>
+
+<h2 id="namespace-mosaics">Namespace / Mosaics</h2>
+<pre><code class="ruby"># namespace
+pp endpoint.namespace('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
+
+# fetch mosaic definition of account
+pp endpoint.mosaic_definition('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
+
+# fetch owned mosaics of account
+pp endpoint.mosaic_owned('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
+</code></pre>
+
+<h2 id="transactions">Transactions</h2>
+<pre><code class="ruby">## incomings
+pp endpoint.transfers_incoming('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')
+
+## outgoings
+pp endpoint.transfers_outgoing('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')
+
+## all
+pp endpoint.transfers_all('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')
+
+## unconfirmed
+pp endpoint.transfers_unconfirmed('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')
+</code></pre>
+
+<h2 id="status">Status</h2>
+<pre><code class="ruby">pp endpoint.status('TDJNDAQ7F7AQRXKP2YVTH67QYCWWKE6QLSJFWN64')
+</code></pre>
+
+<h2 id="unlocked">Unlocked</h2>
+<pre><code class="ruby">pp endpoint.unlocked_info
+</code></pre>
+
+<h2 id="historical">Historical</h2>
+<pre><code class="ruby">pp endpoint.historical('TDWWYDGQNBKSAJBSHZX7QWVX7WNVAWWB7HGPWRB2',
+  start_height: 1245390,
+  end_height: 1245400,
+  increment: 1
+)
+</code></pre>
+
+<h2 id="generate-account-lock-unlock">Generate Account / Lock, Unlock</h2>
+<p>The APIs allowed only Local NIS.</p>
+<pre><code class="ruby">## generate account
+pp endpoint.generate
+
+## lock account
+pp endpoint.lock('__private_key__')
+
+## unlock account
+pp endpoint.unlock('__private_key__')
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../block/" class="btn btn-neutral float-right" title="Block">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../nis/" class="btn btn-neutral" title="Nis"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2017, <a href="https://github.com/44uk">Yoshiyuki Ieyama</a>, <a href="https://twitter.com/44uk_i3">44uk_i3</a>.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/44uk/nem-ruby" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../nis/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../block/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
