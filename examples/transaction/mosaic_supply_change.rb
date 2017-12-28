@@ -12,7 +12,7 @@ mosaic_id = Nem::Model::MosaicId.new(
 )
 
 kp = Nem::Keypair.new(A_PRIVATE_KEY)
-node = Nem::Node.new(host: '104.128.226.60')
+node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 
 tx = Nem::Transaction::MosaicSupplyChange.new(mosaic_id, :increase, 1_000)
 tx_endpoint = Nem::Endpoint::Transaction.new(node)

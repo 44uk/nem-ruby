@@ -11,7 +11,7 @@ M_PRIVATE_KEY = '00f077782658ae91b77f238ba5fcd7ef110564b5c189072e4d4590d9b17f9d7
 A_PUBLIC_KEY  = 'be2ba9cb15a547110d511a4d43c0482fbb584d78781abac01fb053d18f4a0033'
 
 kp = Nem::Keypair.new(M_PRIVATE_KEY)
-node = Nem::Node.new(host: '104.128.226.60')
+node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 node = Nem::Node.new
 tx_endpoint = Nem::Endpoint::Transaction.new(node)
 

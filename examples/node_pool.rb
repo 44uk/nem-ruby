@@ -7,17 +7,17 @@ Nem.logger.level = Logger::DEBUG
 nodes = Nem::NodePool.new([
   Nem::Node.new(host: 'dummy1.example.com'),
   Nem::Node.new(host: 'dummy2.example.com'),
-  Nem::Node.new(host: '104.128.226.60')
+  Nem::Node.new(host: 'bigalice2.nem.ninja')
 ])
 
 # Create from hash definitions
 # nodes = Nem::NodePool.from_hash([
 #   {host: 'dummy1.example.com'},
 #   {host: 'dummy2.example.com'},
-#   {host: '104.128.226.60'}
+#   {host: 'bigalice2.nem.ninja'}
 # ])
 
 account_endpoint = Nem::Endpoint::Account.new(nodes)
 
-# switch to 104.128.226.60
+# switch to bigalice2.nem.ninja
 pp account_endpoint.find('TBULEAUG2CZQISUR442HWA6UAKGWIXHDABJVIPS4')

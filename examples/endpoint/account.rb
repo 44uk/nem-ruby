@@ -4,13 +4,13 @@ require 'nem'
 Nem.logger.level = Logger::DEBUG
 
 # single node
-# node = Nem::Node.new(host: '104.128.226.60')
+# node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 
 # multiple nodes
 node = Nem::NodePool.new([
   Nem::Node.new(host: 'bigalice2.nem.ninja'),
   Nem::Node.new(host: '192.3.61.243'),
-  Nem::Node.new(host: '104.128.226.60')
+  Nem::Node.new(host: 'bigalice2.nem.ninja')
 ])
 
 # new Account Endpoint Object
