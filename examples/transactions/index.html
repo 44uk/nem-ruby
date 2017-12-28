@@ -114,7 +114,7 @@
     <li class="toctree-l3"><a href="#multisig-signature">Multisig Signature</a></li>
     
 
-    <li class="toctree-l3"><a href="#namespace">Namespace</a></li>
+    <li class="toctree-l3"><a href="#provision-namespace">Provision Namespace</a></li>
     
 
     <li class="toctree-l3"><a href="#mosaic">Mosaic</a></li>
@@ -215,26 +215,16 @@
                 <h2 id="endpoint">Endpoint</h2>
 <pre><code class="ruby">node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 endpoint = Nem::Endpoint::Transaction.new(node)
+kp = Nem::Keypair.new(A_PRIVATE_KEY)
 </code></pre>
 
 <h2 id="transfer">Transfer</h2>
 <h3 id="version1xem-transfer">Version1(XEM transfer)</h3>
-<pre><code class="ruby"># sender
-A_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'
-
-# recipient
-B_ADDRESS = 'TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF'
-
-kp = Nem::Keypair.new(A_PRIVATE_KEY)
-node = Nem::Node.new(host: 'bigalice2.nem.ninja')
-tx_endpoint = Nem::Endpoint::Transaction.new(node)
-
-# with plain message
-tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
+<pre><code class="ruby">tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
 pp &quot;Fee: #{tx.fee.to_i}&quot;
 
 req = Nem::Request::Announce.new(tx, kp)
-res = tx_endpoint.announce(req)
+res = endpoint.announce(req)
 
 pp &quot;Message: #{res.message}&quot;
 pp &quot;TransactionHash: #{res.transaction_hash}&quot;
@@ -266,7 +256,7 @@ tx.mosaics &lt;&lt; KonHeart.new(1)
 pp &quot;Fee: #{tx.fee.to_i}&quot;
 
 req = Nem::Request::Announce.new(tx, kp)
-res = tx_endpoint.announce(req)
+res = endpoint.announce(req)
 
 pp &quot;Message: #{res.message}&quot;
 pp &quot;TransactionHash: #{res.transaction_hash}&quot;
@@ -284,30 +274,127 @@ pp &quot;TransactionHash: #{res.transaction_hash}&quot;
 </code></pre>
 
 <h2 id="multisig-signature">Multisig Signature</h2>
-<pre><code class="ruby"></code></pre>
+<pre><code class="ruby">account_endpoint = Nem::Endpoint::Account.new(node)
+txes = account_endpoint.transfers_unconfirmed(B_ADDRESS)
 
-<h2 id="namespace">Namespace</h2>
-<pre><code class="ruby"></code></pre>
+unless txes.size &gt; 0
+  puts 'There are no transactions to sign.'
+  exit
+end
+
+need_sig_tx = txes.first
+pp &quot;Unconfirmed Transaction Hash: #{need_sig_tx.hash}&quot;
+
+tx = Nem::Transaction::MultisigSignature.new(need_sig_tx.hash, M_ADDRESS, B_PUBLIC_KEY)
+
+req = Nem::Request::Announce.new(tx, kp)
+res = endpoint.announce(req)
+
+pp &quot;Message: #{res.message}&quot;
+pp &quot;TransactionHash: #{res.transaction_hash}&quot;
+</code></pre>
+
+<h2 id="provision-namespace">Provision Namespace</h2>
+<pre><code class="ruby">tx = Nem::Transaction::ProvisionNamespace.new('sushi')
+pp &quot;Fee: #{tx.fee.to_i}&quot;
+
+req = Nem::Request::Announce.new(tx, kp)
+res = endpoint.announce(req)
+
+pp &quot;Message: #{res.message}&quot;
+pp &quot;TransactionHash: #{res.transaction_hash}&quot;
+</code></pre>
 
 <h2 id="mosaic">Mosaic</h2>
 <h3 id="creation">Creation</h3>
-<pre><code class="ruby"></code></pre>
+<pre><code class="ruby">mosaic_id = Nem::Model::MosaicId.new(
+  namespace_id: 'sushi',
+  name: 'maguro'
+)
+
+properties = Nem::Model::MosaicProperties.new(
+  divisibility: 0,
+  initial_supply: 10_000,
+  supply_mutable: true,
+  transferable: true
+)
+
+levy = Nem::Model::MosaicLevy.new(
+  type: 1,
+  recipient: A_ADDRESS,
+  mosaic_id: Nem::Model::MosaicId.new(
+    namespace_id: 'nem',
+    name: 'xem'
+  ),
+  fee: 1_000
+)
+
+definition = Nem::Model::MosaicDefinition.new(
+  creator: A_PUBLIC_KEY,
+  id: mosaic_id,
+  description: 'Japanese Soul food SHUSHI.',
+  properties: properties,
+  levy: levy
+)
+
+tx = Nem::Transaction::MosaicDefinitionCreation.new(definition)
+pp &quot;Fee: #{tx.fee.to_i}&quot;
+
+req = Nem::Request::Announce.new(tx, kp)
+res = endpoint.announce(req)
+
+pp &quot;Message: #{res.message}&quot;
+pp &quot;TransactionHash: #{res.transaction_hash}&quot;
+</code></pre>
 
 <h3 id="supply-change">Supply Change</h3>
-<pre><code class="ruby"></code></pre>
+<pre><code class="ruby">mosaic_id = Nem::Model::MosaicId.new(
+  namespace_id: 'sushi',
+  name: 'maguro'
+)
+
+tx = Nem::Transaction::MosaicSupplyChange.new(mosaic_id, :increase, 1_000)
+pp &quot;Fee: #{tx.fee.to_i}&quot;
+
+req = Nem::Request::Announce.new(tx, kp)
+res = tx_endpoint.announce(req)
+
+pp &quot;Message: #{res.message}&quot;
+pp &quot;TransactionHash: #{res.transaction_hash}&quot;
+</code></pre>
 
 <h2 id="multisig-aggregate-modification">Multisig Aggregate Modification</h2>
-<pre><code class="ruby">
+<pre><code class="ruby">msig_cosignatories = [
+  Nem::Transaction::MultisigCosignatoryModification.new(:add, A_PUBLIC_KEY)
+]
+relative_change = 1
+tx = Nem::Transaction::MultisigAggregateModification.new(msig_cosignatories, relative_change)
+pp &quot;Fee: #{tx.fee.to_i}&quot;
+
+req = Nem::Request::Announce.new(tx, kp)
+res = endpoint.prepare_announce(req)
+
+pp &quot;Message: #{res.message}&quot;
+pp &quot;TransactionHash: #{res.transaction_hash}&quot;
 </code></pre>
 
 <h3 id="add-cosignatory">Add cosignatory</h3>
-<pre><code class="ruby"></code></pre>
+<pre><code class="ruby">msig_cosigratories = [
+  Nem::Transaction::MultisigCosignatoryModification.new(:add, B_PUBLIC_KEY)
+]
+relative_change = 1
+mtx = Nem::Transaction::MultisigAggregateModification.new(msig_cosigratories, relative_change)
+tx = Nem::Transaction::Multisig.new(mtx, M_PUBLIC_KEY)
+
+req = Nem::Request::Announce.new(tx, kp)
+res = endpoint.announce(req)
+
+pp &quot;Message: #{res.message}&quot;
+pp &quot;TransactionHash: #{res.transaction_hash}&quot;
+</code></pre>
 
 <h3 id="local-node">Local node</h3>
-<pre><code class="ruby">node = Nem::Node.new
-endpoint = Nem::Endpoint::Transaction.new(node)
-
-tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
+<pre><code class="ruby">tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
 pp &quot;Fee: #{tx.fee.to_i}&quot;
 
 req = Nem::Request::Announce.new(tx, kp)

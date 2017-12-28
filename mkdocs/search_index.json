@@ -257,12 +257,12 @@
         },
         {
             "location": "/examples/transactions/",
-            "text": "Endpoint\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Transaction.new(node)\n\n\n\n\nTransfer\n\n\nVersion1(XEM transfer)\n\n\n# sender\nA_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'\n\n# recipient\nB_ADDRESS = 'TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\ntx_endpoint = Nem::Endpoint::Transaction.new(node)\n\n# with plain message\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nVersion2(mosaic transfer)\n\n\n# define custom mosaic attachment\nclass KonHeart < Nem::Model::MosaicAttachment\n  def initialize(quantity)\n    mosaic_id = Nem::Model::MosaicId.new(\n      namespace_id: 'kon',\n      name: 'heart'\n    )\n    properties = Nem::Model::MosaicProperties.new(\n      divisibility: 3,\n      initial_supply: 100_000_000\n    )\n    super(\n      mosaic_id: mosaic_id,\n      properties: properties,\n      quantity: quantity\n    )\n  end\nend\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\ntx.mosaics << Nem::Mosaic::Xem.new(1)\ntx.mosaics << KonHeart.new(1)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nImportance Transfer\n\n\ntx = Nem::Transaction::ImportanceTransfer.new(B_PUBLIC_KEY, :activate)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nMultisig Signature\n\n\n\n\n\nNamespace\n\n\n\n\n\nMosaic\n\n\nCreation\n\n\n\n\n\nSupply Change\n\n\n\n\n\nMultisig Aggregate Modification\n\n\n\n\n\n\n\nAdd cosignatory\n\n\n\n\n\nLocal node\n\n\nnode = Nem::Node.new\nendpoint = Nem::Endpoint::Transaction.new(node)\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\n# use #prepare_announce method for local node without signature\nres = endpoint.prepare_announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "text": "Endpoint\n\n\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Transaction.new(node)\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\n\n\n\n\nTransfer\n\n\nVersion1(XEM transfer)\n\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nVersion2(mosaic transfer)\n\n\n# define custom mosaic attachment\nclass KonHeart < Nem::Model::MosaicAttachment\n  def initialize(quantity)\n    mosaic_id = Nem::Model::MosaicId.new(\n      namespace_id: 'kon',\n      name: 'heart'\n    )\n    properties = Nem::Model::MosaicProperties.new(\n      divisibility: 3,\n      initial_supply: 100_000_000\n    )\n    super(\n      mosaic_id: mosaic_id,\n      properties: properties,\n      quantity: quantity\n    )\n  end\nend\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\ntx.mosaics << Nem::Mosaic::Xem.new(1)\ntx.mosaics << KonHeart.new(1)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nImportance Transfer\n\n\ntx = Nem::Transaction::ImportanceTransfer.new(B_PUBLIC_KEY, :activate)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nMultisig Signature\n\n\naccount_endpoint = Nem::Endpoint::Account.new(node)\ntxes = account_endpoint.transfers_unconfirmed(B_ADDRESS)\n\nunless txes.size > 0\n  puts 'There are no transactions to sign.'\n  exit\nend\n\nneed_sig_tx = txes.first\npp \"Unconfirmed Transaction Hash: #{need_sig_tx.hash}\"\n\ntx = Nem::Transaction::MultisigSignature.new(need_sig_tx.hash, M_ADDRESS, B_PUBLIC_KEY)\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nProvision Namespace\n\n\ntx = Nem::Transaction::ProvisionNamespace.new('sushi')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nMosaic\n\n\nCreation\n\n\nmosaic_id = Nem::Model::MosaicId.new(\n  namespace_id: 'sushi',\n  name: 'maguro'\n)\n\nproperties = Nem::Model::MosaicProperties.new(\n  divisibility: 0,\n  initial_supply: 10_000,\n  supply_mutable: true,\n  transferable: true\n)\n\nlevy = Nem::Model::MosaicLevy.new(\n  type: 1,\n  recipient: A_ADDRESS,\n  mosaic_id: Nem::Model::MosaicId.new(\n    namespace_id: 'nem',\n    name: 'xem'\n  ),\n  fee: 1_000\n)\n\ndefinition = Nem::Model::MosaicDefinition.new(\n  creator: A_PUBLIC_KEY,\n  id: mosaic_id,\n  description: 'Japanese Soul food SHUSHI.',\n  properties: properties,\n  levy: levy\n)\n\ntx = Nem::Transaction::MosaicDefinitionCreation.new(definition)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nSupply Change\n\n\nmosaic_id = Nem::Model::MosaicId.new(\n  namespace_id: 'sushi',\n  name: 'maguro'\n)\n\ntx = Nem::Transaction::MosaicSupplyChange.new(mosaic_id, :increase, 1_000)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nMultisig Aggregate Modification\n\n\nmsig_cosignatories = [\n  Nem::Transaction::MultisigCosignatoryModification.new(:add, A_PUBLIC_KEY)\n]\nrelative_change = 1\ntx = Nem::Transaction::MultisigAggregateModification.new(msig_cosignatories, relative_change)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.prepare_announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nAdd cosignatory\n\n\nmsig_cosigratories = [\n  Nem::Transaction::MultisigCosignatoryModification.new(:add, B_PUBLIC_KEY)\n]\nrelative_change = 1\nmtx = Nem::Transaction::MultisigAggregateModification.new(msig_cosigratories, relative_change)\ntx = Nem::Transaction::Multisig.new(mtx, M_PUBLIC_KEY)\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"\n\n\n\n\nLocal node\n\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\n# use #prepare_announce method for local node without signature\nres = endpoint.prepare_announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
             "title": "Transactions"
         },
         {
             "location": "/examples/transactions/#endpoint",
-            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Transaction.new(node)",
+            "text": "node = Nem::Node.new(host: 'bigalice2.nem.ninja')\nendpoint = Nem::Endpoint::Transaction.new(node)\nkp = Nem::Keypair.new(A_PRIVATE_KEY)",
             "title": "Endpoint"
         },
         {
@@ -272,12 +272,12 @@
         },
         {
             "location": "/examples/transactions/#version1xem-transfer",
-            "text": "# sender\nA_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'\n\n# recipient\nB_ADDRESS = 'TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\nnode = Nem::Node.new(host: 'bigalice2.nem.ninja')\ntx_endpoint = Nem::Endpoint::Transaction.new(node)\n\n# with plain message\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "text": "tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
             "title": "Version1(XEM transfer)"
         },
         {
             "location": "/examples/transactions/#version2mosaic-transfer",
-            "text": "# define custom mosaic attachment\nclass KonHeart < Nem::Model::MosaicAttachment\n  def initialize(quantity)\n    mosaic_id = Nem::Model::MosaicId.new(\n      namespace_id: 'kon',\n      name: 'heart'\n    )\n    properties = Nem::Model::MosaicProperties.new(\n      divisibility: 3,\n      initial_supply: 100_000_000\n    )\n    super(\n      mosaic_id: mosaic_id,\n      properties: properties,\n      quantity: quantity\n    )\n  end\nend\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\ntx.mosaics << Nem::Mosaic::Xem.new(1)\ntx.mosaics << KonHeart.new(1)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "text": "# define custom mosaic attachment\nclass KonHeart < Nem::Model::MosaicAttachment\n  def initialize(quantity)\n    mosaic_id = Nem::Model::MosaicId.new(\n      namespace_id: 'kon',\n      name: 'heart'\n    )\n    properties = Nem::Model::MosaicProperties.new(\n      divisibility: 3,\n      initial_supply: 100_000_000\n    )\n    super(\n      mosaic_id: mosaic_id,\n      properties: properties,\n      quantity: quantity\n    )\n  end\nend\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\ntx.mosaics << Nem::Mosaic::Xem.new(1)\ntx.mosaics << KonHeart.new(1)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
             "title": "Version2(mosaic transfer)"
         },
         {
@@ -287,13 +287,13 @@
         },
         {
             "location": "/examples/transactions/#multisig-signature",
-            "text": "",
+            "text": "account_endpoint = Nem::Endpoint::Account.new(node)\ntxes = account_endpoint.transfers_unconfirmed(B_ADDRESS)\n\nunless txes.size > 0\n  puts 'There are no transactions to sign.'\n  exit\nend\n\nneed_sig_tx = txes.first\npp \"Unconfirmed Transaction Hash: #{need_sig_tx.hash}\"\n\ntx = Nem::Transaction::MultisigSignature.new(need_sig_tx.hash, M_ADDRESS, B_PUBLIC_KEY)\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
             "title": "Multisig Signature"
         },
         {
-            "location": "/examples/transactions/#namespace",
-            "text": "",
-            "title": "Namespace"
+            "location": "/examples/transactions/#provision-namespace",
+            "text": "tx = Nem::Transaction::ProvisionNamespace.new('sushi')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "title": "Provision Namespace"
         },
         {
             "location": "/examples/transactions/#mosaic",
@@ -302,27 +302,27 @@
         },
         {
             "location": "/examples/transactions/#creation",
-            "text": "",
+            "text": "mosaic_id = Nem::Model::MosaicId.new(\n  namespace_id: 'sushi',\n  name: 'maguro'\n)\n\nproperties = Nem::Model::MosaicProperties.new(\n  divisibility: 0,\n  initial_supply: 10_000,\n  supply_mutable: true,\n  transferable: true\n)\n\nlevy = Nem::Model::MosaicLevy.new(\n  type: 1,\n  recipient: A_ADDRESS,\n  mosaic_id: Nem::Model::MosaicId.new(\n    namespace_id: 'nem',\n    name: 'xem'\n  ),\n  fee: 1_000\n)\n\ndefinition = Nem::Model::MosaicDefinition.new(\n  creator: A_PUBLIC_KEY,\n  id: mosaic_id,\n  description: 'Japanese Soul food SHUSHI.',\n  properties: properties,\n  levy: levy\n)\n\ntx = Nem::Transaction::MosaicDefinitionCreation.new(definition)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
             "title": "Creation"
         },
         {
             "location": "/examples/transactions/#supply-change",
-            "text": "",
+            "text": "mosaic_id = Nem::Model::MosaicId.new(\n  namespace_id: 'sushi',\n  name: 'maguro'\n)\n\ntx = Nem::Transaction::MosaicSupplyChange.new(mosaic_id, :increase, 1_000)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = tx_endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
             "title": "Supply Change"
         },
         {
             "location": "/examples/transactions/#multisig-aggregate-modification",
-            "text": "",
+            "text": "msig_cosignatories = [\n  Nem::Transaction::MultisigCosignatoryModification.new(:add, A_PUBLIC_KEY)\n]\nrelative_change = 1\ntx = Nem::Transaction::MultisigAggregateModification.new(msig_cosignatories, relative_change)\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.prepare_announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
             "title": "Multisig Aggregate Modification"
         },
         {
             "location": "/examples/transactions/#add-cosignatory",
-            "text": "",
+            "text": "msig_cosigratories = [\n  Nem::Transaction::MultisigCosignatoryModification.new(:add, B_PUBLIC_KEY)\n]\nrelative_change = 1\nmtx = Nem::Transaction::MultisigAggregateModification.new(msig_cosigratories, relative_change)\ntx = Nem::Transaction::Multisig.new(mtx, M_PUBLIC_KEY)\n\nreq = Nem::Request::Announce.new(tx, kp)\nres = endpoint.announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
             "title": "Add cosignatory"
         },
         {
             "location": "/examples/transactions/#local-node",
-            "text": "node = Nem::Node.new\nendpoint = Nem::Endpoint::Transaction.new(node)\n\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\n# use #prepare_announce method for local node without signature\nres = endpoint.prepare_announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
+            "text": "tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\npp \"Fee: #{tx.fee.to_i}\"\n\nreq = Nem::Request::Announce.new(tx, kp)\n# use #prepare_announce method for local node without signature\nres = endpoint.prepare_announce(req)\n\npp \"Message: #{res.message}\"\npp \"TransactionHash: #{res.transaction_hash}\"",
             "title": "Local node"
         },
         {
