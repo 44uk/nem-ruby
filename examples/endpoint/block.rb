@@ -2,6 +2,7 @@ require 'pp'
 require 'nem'
 
 Nem.logger.level = Logger::DEBUG
+Nem.debug = true
 
 node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 
