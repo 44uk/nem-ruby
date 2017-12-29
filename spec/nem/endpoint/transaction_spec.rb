@@ -2,12 +2,30 @@ require 'spec_helper'
 require 'webmock_helper'
 
 describe Nem::Endpoint::Transaction do
-  let(:node) { Nem::Node.new }
-  let(:endpoint) { described_class.new(node) }
+  shared_examples 'call endpoint methods' do
+    let(:webmock) { true }
+    let(:node) { Nem::Node.new }
+    let(:endpoint) { described_class.new(node) }
 
-  subject { endpoint }
+    before { WebMock.disable! unless webmock }
+    after { WebMock.enable! }
 
-  describe '#find' do
-    it { expect(subject.find('37c34ead4c3fe6af42d994135798262f785ba2d807c02ac3608bc10da12e5f87')).to be_a Nem::Model::Transaction }
+    describe '#find' do
+      subject { endpoint.find('7b0b441343d8a67e43810600fb4885b93a9dc90316b406dc5d90206edf7f2b1d') }
+      it { is_expected.to be_a Nem::Model::Transaction }
+    end
+  end
+
+  context 'webmock' do
+    it_behaves_like 'call endpoint methods'
+  end
+
+  if ENV['remote'] == 'enable'
+    context 'remote node' do
+      it_behaves_like 'call endpoint methods' do
+        let(:webmock) { false }
+        let(:node) { Nem::Node.new(host: '176.9.68.110') }
+      end
+    end
   end
 end

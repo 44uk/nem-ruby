@@ -2,28 +2,50 @@ require 'spec_helper'
 require 'webmock_helper'
 
 describe Nem::Endpoint::Debug do
-  let(:node) { Nem::Node.new }
-  let(:endpoint) { described_class.new(node) }
+  shared_examples 'call endpoint methods' do
+    let(:webmock) { true }
+    let(:node) { Nem::Node.new }
+    let(:endpoint) { described_class.new(node) }
 
-  subject { endpoint }
+    before { WebMock.disable! unless webmock }
+    after { WebMock.enable! }
 
-  describe '#time_syncronization' do
-    it { expect(subject.time_syncronization).to be_a Array }
+    describe '#time_syncronization' do
+      subject { endpoint.time_syncronization }
+      it { is_expected.to be_a Array }
+    end
+
+    describe '#timers' do
+      subject { endpoint.timers }
+      it { is_expected.to be_a Array }
+    end
+
+    describe '#connections_incoming' do
+      subject { endpoint.connections_incoming }
+      it { is_expected.to be_a Struct }
+    end
+
+    describe '#connections_outgoing' do
+      subject { endpoint.connections_outgoing }
+      it { is_expected.to be_a Struct }
+    end
+
+    describe '#connections' do
+      subject { endpoint.connections(:in) }
+      it { is_expected.to be_a Struct }
+    end
   end
 
-  describe '#timers' do
-    it { expect(subject.timers).to be_a Array }
+  context 'webmock' do
+    it_behaves_like 'call endpoint methods'
   end
 
-  describe '#connections_incoming' do
-    it { expect(subject.connections_incoming).to be_a Struct }
-  end
-
-  describe '#connections_outgoing' do
-    it { expect(subject.connections_outgoing).to be_a Struct }
-  end
-
-  describe '#connections' do
-    it { expect(subject.connections(:in)).to be_a Struct }
+  if ENV['remote'] == 'enable'
+    context 'remote node' do
+      it_behaves_like 'call endpoint methods' do
+        let(:webmock) { false }
+        let(:node) { Nem::Node.new(host: '176.9.68.110') }
+      end
+    end
   end
 end

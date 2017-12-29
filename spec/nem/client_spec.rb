@@ -74,7 +74,7 @@ describe Nem::Client do
 
     context '/account/get' do
       it { expect(subject.request(:get, '/account/get',
-        address: 'TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS'
+        address: 'NCYP7E7S67LB4G4Y4RJWE7REFBZI4EXJ73MRKIWW'
       )).to eq hash_stub_from_json('account_get') }
     end
 

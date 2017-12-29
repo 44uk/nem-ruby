@@ -1,87 +1,17 @@
 {
   "data": [
     {
-      "quantity": 290550000,
+      "quantity": 15620135,
       "mosaicId": {
         "namespaceId": "nem",
         "name": "xem"
       }
     },
     {
-      "quantity": 60,
+      "quantity": 2300000000000,
       "mosaicId": {
-        "namespaceId": "xembook",
-        "name": "tip"
-      }
-    },
-    {
-      "quantity": 9990,
-      "mosaicId": {
-        "namespaceId": "tpico",
-        "name": "test"
-      }
-    },
-    {
-      "quantity": 1,
-      "mosaicId": {
-        "namespaceId": "daoka",
-        "name": "daoka"
-      }
-    },
-    {
-      "quantity": 9000000000000000,
-      "mosaicId": {
-        "namespaceId": "tpico",
-        "name": "maxsupdiv"
-      }
-    },
-    {
-      "quantity": 1,
-      "mosaicId": {
-        "namespaceId": "daoka.ecobi",
-        "name": "ecotelo"
-      }
-    },
-    {
-      "quantity": 1000,
-      "mosaicId": {
-        "namespaceId": "ocknamo",
-        "name": "cha170test2"
-      }
-    },
-    {
-      "quantity": 530000000,
-      "mosaicId": {
-        "namespaceId": "tpico",
-        "name": "levy"
-      }
-    },
-    {
-      "quantity": 10,
-      "mosaicId": {
-        "namespaceId": "ocknamo",
-        "name": "ohganemochi"
-      }
-    },
-    {
-      "quantity": 10000,
-      "mosaicId": {
-        "namespaceId": "tpico",
-        "name": "sbm"
-      }
-    },
-    {
-      "quantity": 10001,
-      "mosaicId": {
-        "namespaceId": "tpico",
-        "name": "notsbm"
-      }
-    },
-    {
-      "quantity": 5,
-      "mosaicId": {
-        "namespaceId": "kannatest",
-        "name": "kannatest"
+        "namespaceId": "nemether",
+        "name": "nemether"
       }
     }
   ]

@@ -13,7 +13,7 @@ def hash_stub_from_json(path)
   JSON.parse(load_stub_from_json(path), symbolize_names: true)
 end
 
-NIS_URL = 'http://127.0.0.1:7890'.freeze
+NEM_URL = 'http://127.0.0.1:7890'.freeze
 routes  = YAML.load_file(File.join(FIXTURES_PATH, 'webmock_routes.yml'))
 
 WebMock.enable!
@@ -24,7 +24,7 @@ routes.each do |path, opts|
   stub_body   = load_stub_from_json(stub_path)
   stub_params = opts['params']
 
-  webmock = WebMock.stub_request(stub_method, "#{NIS_URL}/#{path}").to_return(
+  webmock = WebMock.stub_request(stub_method, "#{NEM_URL}/#{path}").to_return(
     body:    stub_body,
     status:  stub_status,
     headers: { 'Content-Type' => 'application/json' }

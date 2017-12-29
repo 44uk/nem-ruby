@@ -11,7 +11,7 @@ describe Nem::Node do
     it { expect(subject.status).to be_a Nem::Model::Status }
   end
 
-  describe '#shutdown' do
-    # it { expect(subject.shutdown).to be_a Nem::Model::Status }
-  end
+  # describe '#shutdown' do
+  #   it { expect(subject.shutdown).to be_a Nem::Model::Status }
+  # end
 end

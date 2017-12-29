@@ -1,20 +1,20 @@
 {
   "data": [
     {
-      "creator": "43637c03a21c90f1a72c3b718e1a6985a815860412fa14c7fbed6c5e1a5f6206",
-      "description": "levy test",
+      "creator": "b089dc609b9ba65d9f5f3b5f58561ec5cc480f6e7eebf22b7ab88479f08706db",
+      "description": "NemEther mosaic : Built to demonstrate the speed and security of NEM against Ethereum. No ICO. Not hackable like Ethereum contracts. Initial supply- 95100000. More mosaics will be added gradually as Ether is mined.",
       "id": {
-        "namespaceId": "tpico",
-        "name": "levy"
+        "namespaceId": "nemether",
+        "name": "nemether"
       },
       "properties": [
         {
           "name": "divisibility",
-          "value": "3"
+          "value": "6"
         },
         {
           "name": "initialSupply",
-          "value": "530000"
+          "value": "95100000"
         },
         {
           "name": "supplyMutable",
@@ -26,122 +26,14 @@
         }
       ],
       "levy": {
-        "fee": 1,
-        "recipient": "TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR",
+        "fee": 10,
+        "recipient": "NC56RYVRUPG3WRNGMVNRKODJZJNZKZYS76UAPO7K",
         "type": 1,
         "mosaicId": {
           "namespaceId": "nem",
           "name": "xem"
         }
       }
-    },
-    {
-      "creator": "43637c03a21c90f1a72c3b718e1a6985a815860412fa14c7fbed6c5e1a5f6206",
-      "description": "maximum supply(9000000000) and divisibility(6)",
-      "id": {
-        "namespaceId": "tpico",
-        "name": "maxsupdiv"
-      },
-      "properties": [
-        {
-          "name": "divisibility",
-          "value": "6"
-        },
-        {
-          "name": "initialSupply",
-          "value": "9000000000"
-        },
-        {
-          "name": "supplyMutable",
-          "value": "true"
-        },
-        {
-          "name": "transferable",
-          "value": "true"
-        }
-      ],
-      "levy": {}
-    },
-    {
-      "creator": "43637c03a21c90f1a72c3b718e1a6985a815860412fa14c7fbed6c5e1a5f6206",
-      "description": "not small business mosaic test",
-      "id": {
-        "namespaceId": "tpico",
-        "name": "notsbm"
-      },
-      "properties": [
-        {
-          "name": "divisibility",
-          "value": "0"
-        },
-        {
-          "name": "initialSupply",
-          "value": "10001"
-        },
-        {
-          "name": "supplyMutable",
-          "value": "false"
-        },
-        {
-          "name": "transferable",
-          "value": "false"
-        }
-      ],
-      "levy": {}
-    },
-    {
-      "creator": "43637c03a21c90f1a72c3b718e1a6985a815860412fa14c7fbed6c5e1a5f6206",
-      "description": "small business mosaic test",
-      "id": {
-      "namespaceId": "tpico",
-      "name": "sbm"
-      },
-      "properties": [
-        {
-          "name": "divisibility",
-          "value": "0"
-        },
-        {
-          "name": "initialSupply",
-          "value": "10000"
-        },
-        {
-          "name": "supplyMutable",
-          "value": "false"
-        },
-        {
-          "name": "transferable",
-          "value": "false"
-        }
-      ],
-      "levy": {}
-    },
-    {
-      "creator": "43637c03a21c90f1a72c3b718e1a6985a815860412fa14c7fbed6c5e1a5f6206",
-      "description": "nem-petit-icoテスト用モザイクです。 https://github.com/44uk/nem-petit-ico",
-      "id": {
-        "namespaceId": "tpico",
-        "name": "test"
-      },
-      "properties": [
-        {
-          "name": "divisibility",
-          "value": "0"
-        },
-        {
-          "name": "initialSupply",
-          "value": "10000"
-        },
-        {
-          "name": "supplyMutable",
-          "value": "true"
-        },
-        {
-          "name": "transferable",
-          "value": "false"
-        }
-      ],
-      "levy": {}
     }
   ]
 }
