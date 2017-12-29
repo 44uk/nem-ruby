@@ -10,13 +10,13 @@ account/generate:
 account/get:
   method: get
   params:
-    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+    address: NCYP7E7S67LB4G4Y4RJWE7REFBZI4EXJ73MRKIWW
 
 account/get/from-public-key:
   method: get
   stub: account/get
   params:
-    publicKey: a11a1a6c17a24252e674d151713cdf51991ad101751e4af02a20c61b59f1fe1a
+    publicKey: 719862cd7d0f4e875a6a0274c9a1738f38f40ad9944179006a54c34724c1274d
 
 account/get/forwarded:
   method: get
@@ -30,56 +30,63 @@ account/get/forwarded/from-public-key:
   params:
     publicKey: f9bd190dd0c364261f5c8a74870cc7f7374e631352293c62ecc437657e5de2cd
 
+account/historical/get:
+  method: get
+  params:
+    address: NDEVPOSK4OMR4PRTLYFHX4W5QTOND7TZDT2DTU4Q
+    startHeight: 1
+    endHeight: 100000
+    increment: 1000
+
+account/harvests:
+  method: get
+  params:
+    address: NANEMOABLAGR72AZ2RV3V4ZHDCXW25XQ73O7OBT5
+
+account/importances:
+  method: get
+
 account/status:
   method: get
   params:
-    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+    address: NDEVPOSK4OMR4PRTLYFHX4W5QTOND7TZDT2DTU4Q
 
 account/transfers/incoming:
   method: get
   params:
-    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+    address: NANEMOABLAGR72AZ2RV3V4ZHDCXW25XQ73O7OBT5
 
 account/transfers/outgoing:
   method: get
   params:
-    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+    address: NANEMOABLAGR72AZ2RV3V4ZHDCXW25XQ73O7OBT5
 
 account/transfers/all:
   method: get
   stub: account/transfers/incoming
   params:
-    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
+    address: NANEMOABLAGR72AZ2RV3V4ZHDCXW25XQ73O7OBT5
 
 account/unconfirmedTransactions:
   method: get
   params:
-    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
-
-account/harvests:
-  method: get
-  params:
-    address: TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS
-
-account/importances:
-  method: get
+    address: NANEMOABLAGR72AZ2RV3V4ZHDCXW25XQ73O7OBT5
 
 account/namespace/page:
   method: get
   params:
-    address: TD3RXTHBLK6J3UD2BH2PXSOFLPWZOTR34WCG4HXH
-    parent: makoto.metal
+    address: NC56RYVRUPG3WRNGMVNRKODJZJNZKZYS76UAPO7K
 
 account/mosaic/definition/page:
   method: get
   params:
-    address: TD3RXTHBLK6J3UD2BH2PXSOFLPWZOTR34WCG4HXH
-    parent: makoto.metal.coins
+    address: NC56RYVRUPG3WRNGMVNRKODJZJNZKZYS76UAPO7K
+    parent: nemether
 
 account/mosaic/owned:
   method: get
   params:
-    address: TD3RXTHBLK6J3UD2BH2PXSOFLPWZOTR34WCG4HXH
+    address: NC56RYVRUPG3WRNGMVNRKODJZJNZKZYS76UAPO7K
 
 account/unlock:
   method: post
@@ -94,13 +101,15 @@ account/lock:
 account/unlocked/info:
   method: post
 
-account/historical/get:
+block/get:
   method: get
   params:
-    address: NALICELGU3IVY4DPJKHYLSSVYFFWYS5QPLYEZDJJ
-    startHeight: 17592
-    endHeight: 17592
-    increment: 1
+    blockHash: 58efa578aea719b644e8d7c731852bb26d8505257e03a897c8102e8c894a99d6
+
+block/at/public:
+  method: post
+  params:
+    height: 100000
 
 chain/height:
   method: get
@@ -110,16 +119,6 @@ chain/score:
 
 chain/last-block:
   method: get
-
-block/get:
-  method: get
-  params:
-    blockHash: 58efa578aea719b644e8d7c731852bb26d8505257e03a897c8102e8c894a99d6
-
-block/at/public:
-  method: post
-  params:
-    height: 2649
 
 local/chain/blocks-after:
   method: post
@@ -187,7 +186,7 @@ time-sync/network-time:
 mosaic/supply:
   method: get
   params:
-    mosaicId: nembar:vip
+    mosaicId: nemether:nemether
 
 namespace/root/page:
   method: get
@@ -198,17 +197,17 @@ namespace/root/page:
 namespace:
   method: get
   params:
-    namespace: makoto.metal.coins
+    namespace: nemether
 
 namespace/mosaic/definition/page:
   method: get
   params:
-    namespace: makoto.metal.coins
+    namespace: nemether
 
 transaction/get:
   method: get
   params:
-    hash: 37c34ead4c3fe6af42d994135798262f785ba2d807c02ac3608bc10da12e5f87
+    hash: 7b0b441343d8a67e43810600fb4885b93a9dc90316b406dc5d90206edf7f2b1d
 
 transaction/prepare-announce:
   method: post
