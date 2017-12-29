@@ -1,18 +1,201 @@
 {
-  "account": {
-    "address": "TALICELCD3XPH4FFI5STGGNSNSWPOTG5E4DS2TOS",
-    "balance": 124446551689680,
-    "vestedBalance": 104443451691625,
-    "importance": 0.010263666447108395,
-    "publicKey": "a11a1a6c17a24252e674d151713cdf51991ad101751e4af02a20c61b59f1fe1a",
-    "label": null,
-    "harvestedBlocks": 645,
-    "multisigInfo": {}
-  },
   "meta": {
-    "cosignatoryOf": [],
     "cosignatories": [],
+    "cosignatoryOf": [
+      {
+        "address": "NAFUNDBUKIOSTMD4BNXL7ZFE735QHN7A3FBS6CMY",
+        "harvestedBlocks": 0,
+        "balance": 132783873580000,
+        "importance": 0.013129239315053902,
+        "vestedBalance": 132783873579709,
+        "publicKey": "ac4b53284650c8d3a2c5b56dbf8fce9f65cda411a07d7e24cea1cdc867cbbc9d",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 5,
+          "minCosignatories": 3
+        }
+      },
+      {
+        "address": "NAFUNDGO2QUZTHTD2GWTJ56QT3SSDKJQVEBSHKA7",
+        "harvestedBlocks": 0,
+        "balance": 466000000,
+        "importance": 0,
+        "vestedBalance": 466000000,
+        "publicKey": "2333576327e547c6bb23d1f274172bf9b6d07ccefeefe3f9c1ba45991f087d0a",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 4,
+          "minCosignatories": 0
+        }
+      },
+      {
+        "address": "NAFUNDFE4HIZWV36FKGFXFFHG5SMUH2XVEEKE4ZD",
+        "harvestedBlocks": 0,
+        "balance": 201629909630000,
+        "importance": 0.01986254921280772,
+        "vestedBalance": 201629909630000,
+        "publicKey": "11306ac95b36d409aecf87d8f66b01347d313a06ce1154a5610386e0a57de426",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 6,
+          "minCosignatories": 4
+        }
+      },
+      {
+        "address": "NBMOSAICOD4F54EE5CDMR23CCBGOAM2XSIUX6TRS",
+        "harvestedBlocks": 0,
+        "balance": 368818000020,
+        "importance": 0.00004630823529645043,
+        "vestedBalance": 368568447618,
+        "publicKey": "53e140b5947f104cabc2d6fe8baedbc30ef9a0609c717d9613de593ec2a266d3",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 6,
+          "minCosignatories": 4
+        }
+      },
+      {
+        "address": "NBVNAYBUDGETVYJXWOIUVJZULRZG7OUOS7KHAPHM",
+        "harvestedBlocks": 0,
+        "balance": 9572828230000,
+        "importance": 0.0010617141001188924,
+        "vestedBalance": 9572828230000,
+        "publicKey": "4dceb1cb700b1bc7a58a9c76b3e827d797d20c4ace5ab8e40b397fba5c81be9a",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 4,
+          "minCosignatories": 3
+        }
+      },
+      {
+        "address": "NDSUSTAAB2GWHBUFJXP7QQGYHBVEFWZESBUUWM4P",
+        "harvestedBlocks": 0,
+        "balance": 0,
+        "importance": 0,
+        "vestedBalance": 0,
+        "publicKey": "b74e3914b13cb742dfbceef110d85bad14bd3bb77051a08be93c0f8a0651fde2",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 4,
+          "minCosignatories": 0
+        }
+      },
+      {
+        "address": "NDEVPOSK4OMR4PRTLYFHX4W5QTOND7TZDT2DTU4Q",
+        "harvestedBlocks": 0,
+        "balance": 900000118000000,
+        "importance": 0.08862423870381507,
+        "vestedBalance": 900000118000000,
+        "publicKey": "56a7ae8caca7356fffe98e1dfdf3f4218bb837b5ec6aae927a964e2ff1861e20",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 6,
+          "minCosignatories": 0
+        }
+      },
+      {
+        "address": "NAFUNDHZWSIV4ARXSGGSFONCGFGYTLCB7VOT53SR",
+        "harvestedBlocks": 0,
+        "balance": 211885172630000,
+        "importance": 0.020872284739328083,
+        "vestedBalance": 211885172630000,
+        "publicKey": "ec3bb27e0d9aab1757d20bd80986f4fc19a2275b975117588220370aecc44a53",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 6,
+          "minCosignatories": 4
+        }
+      },
+      {
+        "address": "NCOPERAWEWCD4A34NP5UQCCKEX44MW4SL3QYJYS5",
+        "harvestedBlocks": 0,
+        "balance": 67060293813954,
+        "importance": 0.006612794245074767,
+        "vestedBalance": 67060293813954,
+        "publicKey": "6f4dc5fa7b531f56543a4b567fefea2fcf080be71af73aca9925968eeee2ad0f",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 4,
+          "minCosignatories": 0
+        }
+      },
+      {
+        "address": "NAFUNDEULL67VO7WCJBGBHCLCMD5KEH5EI7G5SGR",
+        "harvestedBlocks": 0,
+        "balance": 869583717590000,
+        "importance": 0.0856294330042591,
+        "vestedBalance": 869583717590000,
+        "publicKey": "6360d1c79365cffb9811aa308e5e545976c1124577597eecb7848b79ec6130a3",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 6,
+          "minCosignatories": 5
+        }
+      },
+      {
+        "address": "NAFUNDDWQUHMIKPV2JUH2VNCYEAQX3O7QKHECZUV",
+        "harvestedBlocks": 0,
+        "balance": 294326232310000,
+        "importance": 0.028989450160306816,
+        "vestedBalance": 294326231719510,
+        "publicKey": "662eca63f3ec0235917a8f257e844403983d8e7bc84c05806e889bc57b38dfe4",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 6,
+          "minCosignatories": 4
+        }
+      },
+      {
+        "address": "NCMARKECQXP3SQZSJPCBKOQWIXRRI7LIS4FTU4VZ",
+        "harvestedBlocks": 0,
+        "balance": 68749686000000,
+        "importance": 0.00677913218379721,
+        "vestedBalance": 68749686000000,
+        "publicKey": "f41b99320549741c5cce42d9e4bb836d98c50ed5415d0c3c2912d1bb50e6a0e5",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 4,
+          "minCosignatories": 0
+        }
+      },
+      {
+        "address": "NAMESPACEWH4MKFMBCVFERDPOOP4FK7MTBXDPZZA",
+        "harvestedBlocks": 0,
+        "balance": 10960648781776,
+        "importance": 0.0010883744066351197,
+        "vestedBalance": 10954448634433,
+        "publicKey": "3e82e1c1e4a75adaa3cba8c101c3cd31d9817a2eb966eb3b511fb2ed45b8e262",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 6,
+          "minCosignatories": 5
+        }
+      },
+      {
+        "address": "NBUDGET3HWOO5TNXMWWAFRLQOCMM4JPHRA5YZJI2",
+        "harvestedBlocks": 0,
+        "balance": 3355695830000,
+        "importance": 0.0003402491267889336,
+        "vestedBalance": 3355695829859,
+        "publicKey": "eb6b1c1ca8afc8bdd818f40f00146c80b43d7be1d567fd72f37828b53c0a95de",
+        "label": null,
+        "multisigInfo": {
+          "cosignatoriesCount": 4,
+          "minCosignatories": 3
+        }
+      }
+    ],
     "status": "LOCKED",
-    "remoteStatus": "ACTIVE"
+    "remoteStatus": "INACTIVE"
+  },
+  "account": {
+    "address": "NCYP7E7S67LB4G4Y4RJWE7REFBZI4EXJ73MRKIWW",
+    "harvestedBlocks": 0,
+    "balance": 2000000,
+    "importance": 0,
+    "vestedBalance": 2000000,
+    "publicKey": "719862cd7d0f4e875a6a0274c9a1738f38f40ad9944179006a54c34724c1274d",
+    "label": null,
+    "multisigInfo": {}
   }
 }

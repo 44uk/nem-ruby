@@ -1,12 +1,62 @@
 {
   "cosignatories": [
     {
-      "address": "TDPP2C4XQLMESBMCYGWN4NRAJAKZEYRV75KGYSOB",
+      "address": "NCYP7E7S67LB4G4Y4RJWE7REFBZI4EXJ73MRKIWW",
       "harvestedBlocks": 0,
-      "balance": 9975800000,
+      "balance": 2000000,
       "importance": 0,
-      "vestedBalance": 9918674405,
-      "publicKey": "be2ba9cb15a547110d511a4d43c0482fbb584d78781abac01fb053d18f4a0033",
+      "vestedBalance": 2000000,
+      "publicKey": "719862cd7d0f4e875a6a0274c9a1738f38f40ad9944179006a54c34724c1274d",
+      "label": null,
+      "multisigInfo": {}
+    },
+    {
+      "address": "NDKICABB2EXCLIQ6DHWL66CK7QPYUGLMDVTLUIEB",
+      "harvestedBlocks": 0,
+      "balance": 3250000,
+      "importance": 0,
+      "vestedBalance": 3248604,
+      "publicKey": "43aa69177018fc3e2bdbeb259c81cddf24be50eef9c5386db51d82386c41475a",
+      "label": null,
+      "multisigInfo": {}
+    },
+    {
+      "address": "NADMEHCFJD45GPTDL4HZP2LJLZVAZRLYWYPNEMLY",
+      "harvestedBlocks": 0,
+      "balance": 2000000,
+      "importance": 0,
+      "vestedBalance": 2000000,
+      "publicKey": "1fbdbdde28daf828245e4533765726f0b7790e0b7146e2ce205df3e86366980b",
+      "label": null,
+      "multisigInfo": {}
+    },
+    {
+      "address": "NALICEXDMHEAVGSWHLSXDMUMCCHTBJLPKPI63IFY",
+      "harvestedBlocks": 0,
+      "balance": 1420001887,
+      "importance": 0,
+      "vestedBalance": 1420001887,
+      "publicKey": "dd7d3ac741ce2a757311f88d9cebf63200e934aebdd85917ce981c572312375f",
+      "label": null,
+      "multisigInfo": {}
+    },
+    {
+      "address": "NCOSIGIMCITYNRE7XUR77OREOYFLPAILCNUYLTPD",
+      "harvestedBlocks": 0,
+      "balance": 3112000000,
+      "importance": 0,
+      "vestedBalance": 3111999970,
+      "publicKey": "826cedee421ff66e708858c17815fcd831a4bb68e3d8956299334e9e24380ba8",
+      "label": null,
+      "multisigInfo": {}
+    },
+    {
+      "address": "NCOJAG5GFBUEKABEQQK74PO6QLB65TIKISGLMGS3",
+      "harvestedBlocks": 0,
+      "balance": 2000000,
+      "importance": 0,
+      "vestedBalance": 2000000,
+      "publicKey": "92e342d666284f0cf04b44e7290df3925be5e8591c6444f33f4604948cdbbde6",
       "label": null,
       "multisigInfo": {}
     }
