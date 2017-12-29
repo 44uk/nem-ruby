@@ -19,7 +19,7 @@ B_ADDRESS = 'TA4TX6U5HG2MROAESH2JE5524T4ZOY2EQKQ6ELHF'
 B_PUBLIC_KEY = '9e7ab2924cd1a3482df784db190614cfc8a33671f5d80a5b15a9c9e8b4d13933'
 
 kp = Nem::Keypair.new(A_PRIVATE_KEY)
-node = Nem::Node.new(host: '104.128.226.60')
+node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 tx_endpoint = Nem::Endpoint::Transaction.new(node)
 
 # with encrypted message

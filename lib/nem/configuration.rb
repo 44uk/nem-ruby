@@ -4,14 +4,13 @@ module Nem
   module Configuration
     DEADLINE = 3600
 
-    # Logger for {#debug}, default is `Nem::Logger.new(STDOUT)`
-    # @return [Logger]
-    attr_accessor :logger, :deadline, :default_network
+    attr_accessor :logger, :deadline, :default_network, :debug
 
     def self.extended(base)
       base.logger = Logger.new($stdout).tap { |l| l.level = Logger::INFO }
       base.deadline = DEADLINE
       base.default_network = :testnet
+      base.debug = false
     end
 
     # @yield [self]

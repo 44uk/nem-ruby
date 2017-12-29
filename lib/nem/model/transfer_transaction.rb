@@ -14,7 +14,7 @@ module Nem
         end
         if transaction[:mosaics]
           attrs[:mosaics] = transaction[:mosaics].map do |mo|
-            Mosaic.new(mo)
+            Mosaic.new_from_mosaic(mo)
           end
         end
         new(attrs)

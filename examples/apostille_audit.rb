@@ -5,7 +5,7 @@ Nem.logger.level = Logger::DEBUG
 
 FIXTURES_PATH = File.expand_path('../../spec/fixtures', __FILE__)
 
-node = Nem::Node.new(host: '104.128.226.60')
+node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 tx_endpoint = Nem::Endpoint::Transaction.new(node)
 
 # transaction hash from Filename

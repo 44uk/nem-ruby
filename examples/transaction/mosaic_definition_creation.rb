@@ -39,7 +39,7 @@ definition = Nem::Model::MosaicDefinition.new(
 )
 
 kp = Nem::Keypair.new(A_PRIVATE_KEY)
-node = Nem::Node.new(host: '104.128.226.60')
+node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 tx_endpoint = Nem::Endpoint::Transaction.new(node)
 
 tx = Nem::Transaction::MosaicDefinitionCreation.new(definition)

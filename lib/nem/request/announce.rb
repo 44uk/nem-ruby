@@ -17,6 +17,9 @@ module Nem
       # @return [Hash] Attribute and value pairs
       def to_entity(state = nil)
         entity = prepare_entity
+        if Nem.debug
+          Nem.logger.debug '%s' % [entity.inspect]
+        end
         if state == :prepare
           { transaction: entity,
             privateKey: keypair.private }

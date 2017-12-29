@@ -41,7 +41,7 @@ class Nem::Client
   # @param [Hash] params API Parameters
   # @return [Hash] Hash converted API Response
   def request(method, path, params = {})
-    log(method, path, params)
+    log(method, path, params) if Nem.debug
     if connection.remote? && local_only?(path)
       raise Nem::Error, "The request (#{method} #{path}) is only permitted to local NIS."
     end

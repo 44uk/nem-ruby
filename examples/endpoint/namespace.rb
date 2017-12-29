@@ -1,7 +1,7 @@
 require 'pp'
 require 'nem'
 
-node = Nem::Node.new(host: '104.128.226.60')
+node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 
 # new Namespace Endpoint Object
 ns_endpoint = Nem::Endpoint::Namespace.new(node)

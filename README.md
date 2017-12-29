@@ -1,7 +1,7 @@
 # nem-ruby
 
-[![Build Status](https://travis-ci.org/44uk/nem-ruby.svg?branch=master)](https://travis-ci.org/44uk/nem-ruby)
 [![Gem Version](https://badge.fury.io/rb/nem-ruby.svg)](https://badge.fury.io/rb/nem-ruby)
+[![Build Status](https://travis-ci.org/44uk/nem-ruby.svg?branch=master)](https://travis-ci.org/44uk/nem-ruby)
 [![Code Climate](https://codeclimate.com/github/44uk/nem-ruby/badges/gpa.svg)](https://codeclimate.com/github/44uk/nem-ruby)
 [![Join the chat at https://gitter.im/44uk/nem-ruby](https://badges.gitter.im/44uk/nem-ruby.svg)](https://gitter.im/44uk/nem-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
