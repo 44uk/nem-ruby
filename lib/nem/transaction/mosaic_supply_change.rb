@@ -23,6 +23,7 @@ module Nem
       end
 
       # attributes must be CAMEL CASE for NIS params
+      # @return [Hash]
       def to_hash
         {
           mosaicId: mosaic_id.to_hash,

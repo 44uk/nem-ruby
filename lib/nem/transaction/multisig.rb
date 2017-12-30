@@ -18,6 +18,7 @@ module Nem
       end
 
       # attributes must be CAMEL CASE for NIS params
+      # @return [Hash]
       def to_hash
         {
           otherTrans: other_trans.to_hash,

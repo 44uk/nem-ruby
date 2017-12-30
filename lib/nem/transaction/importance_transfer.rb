@@ -21,6 +21,7 @@ module Nem
       end
 
       # attributes must be CAMEL CASE for NIS params
+      # @return [Hash]
       def to_hash
         {
           mode: parse_mode,

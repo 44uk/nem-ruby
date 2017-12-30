@@ -1,5 +1,11 @@
 module Nem
   module Transaction
+    # @attr [Integer] type
+    # @attr [Integer] fee
+    # @attr [Integer] timestamp
+    # @attr [Integer] deadline
+    # @attr [String] signer
+    # @attr [String] signature
     class Base
       attr_reader :type, :fee,
         :timestamp, :deadline, :signer, :signature
@@ -33,6 +39,7 @@ module Nem
       end
 
       # it can be override by child class
+      # @return [Integer]
       def version
         network(hex: true) + 1
       end
