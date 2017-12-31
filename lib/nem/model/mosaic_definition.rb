@@ -19,9 +19,9 @@ module Nem
         :meta_id
 
       def self.new_from_mosaic_definition(hash)
-        id = Nem::Model::MosaicId.new_from_mosaic_id(hash[:id])
-        props = Nem::Model::MosaicProperties.new_from_mosaic_properties(hash[:properties])
-        levy = Nem::Model::MosaicLevy.new_from_mosaic_levy(hash[:levy])
+        id = MosaicId.new_from_mosaic_id(hash[:id])
+        props = MosaicProperties.new_from_mosaic_properties(hash[:properties])
+        levy = MosaicLevy.new_from_mosaic_levy(hash[:levy])
         new(
           creator: hash[:creator],
           description: hash[:description],
@@ -34,13 +34,13 @@ module Nem
       def self.new_from_mosaic_definition_meta_data_pair(hash)
         meta = hash[:meta]
         mosaic = hash[:mosaic]
-        id = Nem::Model::MosaicId.new_from_mosaic_id(mosaic[:id])
-        props = Nem::Model::MosaicProperties.new_from_mosaic_properties(mosaic[:properties])
-        levy = Nem::Model::MosaicLevy.new_from_mosaic_levy(mosaic[:levy])
+        id = MosaicId.new_from_mosaic_id(mosaic[:id])
+        props = MosaicProperties.new_from_mosaic_properties(mosaic[:properties])
+        levy = MosaicLevy.new_from_mosaic_levy(mosaic[:levy])
         new(
           meta_id: meta[:id],
-          creator: hash[:creator],
-          description: hash[:description],
+          creator: mosaic[:creator],
+          description: mosaic[:description],
           id: id,
           properties: props,
           levy: levy

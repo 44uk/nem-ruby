@@ -1,5 +1,7 @@
 module Nem
   module Transaction
+    # @attr [Interger] modification_type
+    # @attr [Interger] cosignatory_account
     class MultisigCosignatoryModification
       attr_reader :modification_type, :cosignatory_account
 
@@ -12,6 +14,7 @@ module Nem
       end
 
       # attributes must be CAMEL CASE for NIS params
+      # @return [Hash]
       def to_hash
         {
           modificationType: parse_type,

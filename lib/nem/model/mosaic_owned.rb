@@ -7,7 +7,7 @@ module Nem
 
       def self.new_from_mosaic_owned(hash)
         mosaics = hash[:data].inject({}) do |memo, mos|
-          mosaic = Nem::Model::Mosaic.new_from_mosaic(mos)
+          mosaic = Mosaic.new_from_mosaic(mos)
           memo[mosaic.fqn] = mosaic
           memo
         end

@@ -1,14 +1,14 @@
 module Nem
   module Transaction
+    # @attr [String] new_part
+    # @attr [String] parent
+    # @attr [String] rental_fee_sink
+    # @attr [Integer] rental_fee
     class ProvisionNamespace < Nem::Transaction::Base
       TYPE = 0x2001 # 8193 (provision namespace transaction)
 
       attr_reader :new_part, :parent, :rental_fee_sink, :rental_fee
 
-      # @attr [String] new_part
-      # @attr [String] parent
-      # @attr [String] rental_fee_sink
-      # @attr [Integer] rental_fee
       def initialize(new_part, parent = nil, network: nil)
         @new_part = new_part
         @parent = parent
@@ -20,15 +20,18 @@ module Nem
         @fee = Nem::Fee::ProvisionNamespace.new(self)
       end
 
+      # @return [Boolean]
       def root?
         !!(@parent == nil)
       end
 
+      # @return [Boolean]
       def sub?
         !!(@parent && @new_part)
       end
 
       # attributes must be CAMEL CASE for NIS params
+      # @return [Hash]
       def to_hash
         {
           newPart: new_part,
