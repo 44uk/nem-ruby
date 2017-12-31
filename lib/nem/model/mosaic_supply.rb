@@ -10,7 +10,7 @@ module Nem
       attr_reader :id, :supply
 
       def self.new_from_mosaic_supply(hash)
-        id = Nem::Model::MosaicId.new_from_mosaic_id(hash[:mosaicId])
+        id = MosaicId.new_from_mosaic_id(hash[:mosaicId])
         new(
           id: id,
           supply: hash[:supply]

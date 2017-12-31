@@ -10,7 +10,7 @@ module Nem
 
       def self.new_from_mosaic_levy(hash)
         return nil if hash.empty?
-        mosaic_id = Nem::Model::MosaicId.new_from_mosaic_id(hash[:mosaicId])
+        mosaic_id = MosaicId.new_from_mosaic_id(hash[:mosaicId])
         new(
           fee: hash[:fee],
           recipient: hash[:recipient],
