@@ -39,8 +39,8 @@ module Nem
         levy = MosaicLevy.new_from_mosaic_levy(mosaic[:levy])
         new(
           meta_id: meta[:id],
-          creator: hash[:creator],
-          description: hash[:description],
+          creator: mosaic[:creator],
+          description: mosaic[:description],
           id: id,
           properties: props,
           levy: levy
