@@ -180,10 +180,13 @@ module Nem
 
       # @param [Nem::Struct::Mosaic] mosaic
       # @return [Array]
-      def self.serialize_mosaic_and_quantity(mosaic_attachment)
+      def self.serialize_mosaic_attachment(mosaic_attachment)
         a = []
-        a.concat serialize_mosaic_id(mosaic_attachment[:mosaicId])
-        a.concat serialize_long(mosaic_attachment[:quantity])
+        mosaic_id = serialize_mosaic_id(mosaic_attachment[:mosaicId])
+        quantity = serialize_long(mosaic_attachment[:quantity])
+        a.concat serialize_int((mosaic_id + quantity).size)
+        a.concat mosaic_id
+        a.concat quantity
       end
 
       # @param [Array <Nem::Struct::Mosaic>] entities
@@ -192,9 +195,8 @@ module Nem
         a = []
         a.concat serialize_int(entities.size)
         mosaics = entities.inject([]) do |memo, ent|
-          memo.concat serialize_mosaic_and_quantity(ent)
+          memo.concat serialize_mosaic_attachment(ent)
         end
-        a.concat serialize_int(mosaics.size)
         a.concat mosaics
       end
 

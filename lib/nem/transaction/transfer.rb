@@ -42,6 +42,7 @@ module Nem
 
       # attributes must be CAMEL CASE for NIS params
       # @return [Hash]
+      # Mosaics need to be sorted by fqn. if not it will occur FAILURE_SIGNATURE_NOT_VERIFIABLE
       def to_hash
         tmp = {
           amount: amount * 1_000_000,
@@ -49,7 +50,9 @@ module Nem
           message: message.to_hash
         }
         unless mosaics.empty?
-          tmp[:mosaics] = mosaics.map do |moa|
+          tmp[:mosaics] = mosaics
+            .sort_by { |mo| mo.fqn }
+            .map do |moa|
             {
               mosaicId: {
                 namespaceId: moa.mosaic_id.namespace_id,
