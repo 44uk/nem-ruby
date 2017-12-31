@@ -33,15 +33,37 @@ module Nem
         tx[:recipient] = deserialize_a(s[4, 40])
         tx[:amount] = deserialize_int(s[44, 8])
         tx[:message] = {}
-        message_len = deserialize_int(s[52, 4])
-        if message_len > 0
-          # s[60, 4] # length of payload
+        msg_len = deserialize_int(s[52, 4])
+        if msg_len > 0
+          payload_len = deserialize_int(s[60, 4])
           tx[:message] = {
             type: deserialize_int(s[56, 4]),
-            payload: Nem::Util::Convert.hex_to_utf8(deserialize_hex(s[64, s.size]))
+            payload: Nem::Util::Convert.hex_to_utf8(deserialize_hex(s[64, payload_len]))
           }
         else
           tx[:message] = { type: 1, payload: '' }
+        end
+
+        mosaic_cnt = deserialize_int(s[56 + msg_len, 4])
+        return tx unless mosaic_cnt
+
+        # mosaic section
+        tx[:mosaics] = []
+        offset = 0
+        mosaic_cnt.times do |i|
+          mo_len = deserialize_int(s[offset + 60 + msg_len, 4])
+          # ns_len = deserialize_int(s[offset+64+msg_len, 4])
+          ns_name_len = deserialize_int(s[offset + 68 + msg_len, 4])
+          mo_name_len = deserialize_int(s[offset + 72 + msg_len + ns_name_len, 4])
+          ns = Nem::Util::Convert.hex_to_utf8 deserialize_hex(s[offset + 72 + msg_len, ns_name_len])
+          name = Nem::Util::Convert.hex_to_utf8 deserialize_hex(s[offset + 76 + msg_len + ns_name_len, mo_name_len])
+          quantity = deserialize_int(s[offset + 76 + msg_len + ns_name_len + mo_name_len, 8])
+          attachment = {
+            mosaicId: { namespaceId: ns, name: name },
+            quantity: quantity
+          }
+          tx[:mosaics] << attachment
+          offset += mo_len + 4
         end
         tx
       end
