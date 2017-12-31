@@ -231,7 +231,9 @@ pp &quot;TransactionHash: #{res.transaction_hash}&quot;
 </code></pre>
 
 <h3 id="version2mosaic-transfer">Version2(mosaic transfer)</h3>
-<pre><code class="ruby"># define custom mosaic attachment
+<pre><code class="ruby">tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
+
+# define custom mosaic attachment if you already know mosaic definition
 class KonHeart &lt; Nem::Model::MosaicAttachment
   def initialize(quantity)
     mosaic_id = Nem::Model::MosaicId.new(
@@ -249,10 +251,21 @@ class KonHeart &lt; Nem::Model::MosaicAttachment
     )
   end
 end
-
-tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
-tx.mosaics &lt;&lt; Nem::Mosaic::Xem.new(1)
 tx.mosaics &lt;&lt; KonHeart.new(1)
+
+# fetch mosaic definition
+ns_endpoint = Nem::Endpoint::Namespace.new(node)
+mo_def = ns_endpoint.mosaic_definition('kon').first
+moa = Nem::Model::MosaicAttachment.new(
+  mosaic_id: mo_def.id,
+  properties: mo_def.properties,
+  quantity: 1
+)
+tx.mosaics &lt;&lt; moa
+
+# send xem as mosaic
+tx.mosaics &lt;&lt; Nem::Mosaic::Xem.new(1)
+
 pp &quot;Fee: #{tx.fee.to_i}&quot;
 
 req = Nem::Request::Announce.new(tx, kp)
