@@ -26,10 +26,12 @@ module Nem
         @fee = Nem::Fee::Transfer.new(self)
       end
 
+      # @return [Boolean]
       def has_message?
         @message.bytesize > 0
       end
 
+      # @return [Boolean]
       def has_mosaics?
         @mosaics.size > 0
       end
@@ -39,6 +41,7 @@ module Nem
       end
 
       # attributes must be CAMEL CASE for NIS params
+      # @return [Hash]
       def to_hash
         tmp = {
           amount: amount * 1_000_000,

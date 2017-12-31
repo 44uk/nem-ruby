@@ -2,6 +2,7 @@ module Nem
   module Transaction
     # @attr [Array <Nem::Model::MultisigCosignatoryModification>] modifications
     # @attr [Interger] relative_change
+    # @attr [Interger] min_cosignatories
     class MultisigAggregateModification < Nem::Transaction::Base
       TYPE = 0x1001 # 4097 (multisig aggregate modification transfer transaction)
 
@@ -17,6 +18,7 @@ module Nem
       end
 
       # attributes must be CAMEL CASE for NIS params
+      # @return [Hash]
       def to_hash
         {
           modifications: modifications.map(&:to_hash),

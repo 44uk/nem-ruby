@@ -10,7 +10,7 @@ module Nem
           amount: transaction[:amount],
         )
         unless transaction[:message].empty?
-          attrs[:message] = Nem::Model::Message.new_from_message(transaction[:message])
+          attrs[:message] = Message.new_from_message(transaction[:message])
         end
         if transaction[:mosaics]
           attrs[:mosaics] = transaction[:mosaics].map do |mo|
