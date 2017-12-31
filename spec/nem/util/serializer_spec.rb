@@ -5,7 +5,7 @@ describe Nem::Util::Serializer do
 
   let(:private_key) { '00983bb01d05edecfaef55df9486c111abb6299c754a002069b1d0ef4537441bda' }
   let(:mosaic_id) { { namespaceId: 'makoto.metal.silver', name: 'coin' } }
-  let(:mosaic) { { mosaicId: mosaic_id, quantity: 123_000 } }
+  let(:mosaic_attachment) { { mosaicId: mosaic_id, quantity: 123_000 } }
   let(:property) { { name: 'divisibility', value: '3' } }
   let(:properties) do
     [ { name: 'divisibility', value: '3' },
@@ -50,9 +50,9 @@ describe Nem::Util::Serializer do
 
   it { expect(subject.serialize_mosaic_id(mosaic_id)).to eq [31, 0, 0, 0, 19, 0, 0, 0, 109, 97, 107, 111, 116, 111, 46, 109, 101, 116, 97, 108, 46, 115, 105, 108, 118, 101, 114, 4, 0, 0, 0, 99, 111, 105, 110] }
 
-  it { expect(subject.serialize_mosaic_and_quantity(mosaic)).to eq [31, 0, 0, 0, 19, 0, 0, 0, 109, 97, 107, 111, 116, 111, 46, 109, 101, 116, 97, 108, 46, 115, 105, 108, 118, 101, 114, 4, 0, 0, 0, 99, 111, 105, 110, 120, 224, 1, 0, 0, 0, 0, 0] }
+  it { expect(subject.serialize_mosaic_attachment(mosaic_attachment)).to eq [43, 0, 0 , 0, 31, 0, 0, 0, 19, 0, 0, 0, 109, 97, 107, 111, 116, 111, 46, 109, 101, 116, 97, 108, 46, 115, 105, 108, 118, 101, 114, 4, 0, 0, 0, 99, 111, 105, 110, 120, 224, 1, 0, 0, 0, 0, 0] }
 
-  it { expect(subject.serialize_mosaics([mosaic])).to eq [1, 0, 0, 0, 43, 0, 0, 0, 31, 0, 0, 0, 19, 0, 0, 0, 109, 97, 107, 111, 116, 111, 46, 109, 101, 116, 97, 108, 46, 115, 105, 108, 118, 101, 114, 4, 0, 0, 0, 99, 111, 105, 110, 120, 224, 1, 0, 0, 0, 0, 0] }
+  it { expect(subject.serialize_mosaics([mosaic_attachment])).to eq [1, 0, 0, 0, 43, 0, 0, 0, 31, 0, 0, 0, 19, 0, 0, 0, 109, 97, 107, 111, 116, 111, 46, 109, 101, 116, 97, 108, 46, 115, 105, 108, 118, 101, 114, 4, 0, 0, 0, 99, 111, 105, 110, 120, 224, 1, 0, 0, 0, 0, 0] }
 
   it { expect(subject.serialize_property(property)).to eq [21, 0, 0, 0, 12, 0, 0, 0, 100, 105, 118, 105, 115, 105, 98, 105, 108, 105, 116, 121, 1, 0, 0, 0, 51] }
 
