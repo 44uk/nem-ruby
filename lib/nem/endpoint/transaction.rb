@@ -1,6 +1,7 @@
 module Nem
   module Endpoint
     class Transaction < Nem::Endpoint::Base
+      # @param [String] hash
       # @return [Nem::Model::Transaction]
       def find(hash)
         request!(:get,
@@ -13,6 +14,7 @@ module Nem
 
       alias get find
 
+      # @return [Nem::Model::NemAnnounceResult]
       def announce(req)
         request!(:post,
           '/transaction/announce',
@@ -22,6 +24,7 @@ module Nem
         end
       end
 
+      # @return [Nem::Model::NemAnnounceResult]
       def prepare_announce(req)
         request!(:post,
           '/transaction/prepare-announce',

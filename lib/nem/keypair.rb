@@ -18,7 +18,7 @@ module Nem
       bin_signed.unpack('H*').first
     end
 
-    # https://ryuta46.com/693
+    # @return [Nem::Keypair] new key pair
     def self.generate(seed = SecureRandom.hex(64))
       new(seed)
     end
