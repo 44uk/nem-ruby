@@ -99,21 +99,11 @@ describe Nem::Fee::Transfer do
 
   context 'ns:mos transfer' do
     let(:mosaic_klass) do
-      Class.new(Nem::Model::MosaicAttachment) do
-        def initialize(quantity)
-          super(
-            mosaic_id: Nem::Model::MosaicId.new(
-              namespace_id: 'nem', name: 'xem'
-            ),
-            properties: Nem::Model::MosaicProperties.new(
-              divisibility: 3,
-              initial_supply: 100_000_000,
-              supply_mutable: false,
-              transferable: true
-            ),
-            quantity: quantity
-          )
-        end
+      Class.new(Nem::Mosaic::Base) do
+        namespace_id 'foo'
+        name 'bar'
+        divisibility 3
+        initial_supply 100_000_000
       end
     end
 
@@ -130,21 +120,11 @@ describe Nem::Fee::Transfer do
 
   context 'nem:xem and ns:mos transfer' do
     let(:mosaic_klass) do
-      Class.new(Nem::Model::MosaicAttachment) do
-        def initialize(quantity)
-          super(
-            mosaic_id: Nem::Model::MosaicId.new(
-              namespace_id: 'foo', name: 'bar'
-            ),
-            properties: Nem::Model::MosaicProperties.new(
-              divisibility: 3,
-              initial_supply: 100_000_000,
-              supply_mutable: false,
-              transferable: true
-            ),
-            quantity: quantity
-          )
-        end
+      Class.new(Nem::Mosaic::Base) do
+        namespace_id 'foo'
+        name 'bar'
+        divisibility 3
+        initial_supply 100_000_000
       end
     end
 
