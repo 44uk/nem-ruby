@@ -3,7 +3,7 @@ module Nem
     # @attr [Array <Nem::Model::MultisigCosignatoryModification>] modifications
     # @attr [Interger] relative_change
     # @attr [Interger] min_cosignatories
-    class MultisigAggregateModification < Nem::Transaction::Base
+    class MultisigAggregateModification < Base
       TYPE = 0x1001 # 4097 (multisig aggregate modification transfer transaction)
 
       attr_reader :modifications, :relative_change, :min_cosignatories

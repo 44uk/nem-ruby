@@ -3,7 +3,7 @@ module Nem
     # @attr [String] other_hash
     # @attr [String] other_account
     # @attr [String] signer
-    class MultisigSignature < Nem::Transaction::Base
+    class MultisigSignature < Base
       TYPE = 0x1002 # 4098 (multisig signature transaction)
 
       attr_reader :other_hash, :other_account, :signer
