@@ -1,6 +1,8 @@
 module Nem
   module Endpoint
     class Debug < Nem::Endpoint::Base
+      # @return [Nem::Model::Timesync]
+      # @see https://nemproject.github.io/#monitoring-the-network-time
       def time_syncronization
         request!(:get, '/debug/time-synchronization') do |res|
           res[:data].map do |sync|
@@ -9,6 +11,7 @@ module Nem
         end
       end
 
+      # @see https://nemproject.github.io/#monitoring-timers
       def timers
         request!(:get, '/debug/timers') do |res|
           res[:data].map do |timer|
@@ -18,6 +21,7 @@ module Nem
       end
 
       Connection = Struct.new(:outstanding, :most_recent)
+      # @see https://nemproject.github.io/#monitoring-incoming-and-outgoing-calls
       def connections_incoming
         request!(:get, '/debug/connections/incoming') do |res|
           outstanding = res[:outstanding].map do |con|
@@ -30,6 +34,7 @@ module Nem
         end
       end
 
+      # @see https://nemproject.github.io/#monitoring-incoming-and-outgoing-calls
       def connections_outgoing
         request!(:get, '/debug/connections/outgoing') do |res|
           outstanding = res[:outstanding].map do |con|

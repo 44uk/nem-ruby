@@ -4,7 +4,7 @@ module Nem
     # @attr [Symbol] supply_type
     # @attr [Integer] delta
     # @see https://nemproject.github.io/#mosaicSupplyChangeTransaction
-    class MosaicSupplyChange < Nem::Transaction::Base
+    class MosaicSupplyChange < Base
       TYPE = 0x4002 # 16386 (mosaic supply change transaction)
 
       INCREASE = 0x0001

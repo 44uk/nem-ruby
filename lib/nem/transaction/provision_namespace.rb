@@ -4,7 +4,7 @@ module Nem
     # @attr [String] parent
     # @attr [String] rental_fee_sink
     # @attr [Integer] rental_fee
-    class ProvisionNamespace < Nem::Transaction::Base
+    class ProvisionNamespace < Base
       TYPE = 0x2001 # 8193 (provision namespace transaction)
 
       attr_reader :new_part, :parent, :rental_fee_sink, :rental_fee
