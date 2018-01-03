@@ -95,6 +95,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../define_mosaic_attachment/">Define mosaic attachment</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../timesync/">Timesync</a>
                 </li>
                 <li class="">
@@ -195,7 +199,7 @@ tx_endpoint = Nem::Endpoint::Transaction.new(node)
 file = File.open(&quot;#{FIXTURES_PATH}/nemLogoV2.png&quot;)
 apo = Nem::Apostille.new(kp, file, :sha1,
   multisig: false,
-  private: false,
+  signed: false,
   network: :testnet
 )
 tx = apo.transaction

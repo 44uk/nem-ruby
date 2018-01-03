@@ -143,6 +143,10 @@
                 </li>
                 <li class="">
                     
+    <a class="" href="../define_mosaic_attachment/">Define mosaic attachment</a>
+                </li>
+                <li class="">
+                    
     <a class="" href="../timesync/">Timesync</a>
                 </li>
                 <li class="">
@@ -234,22 +238,11 @@ pp &quot;TransactionHash: #{res.transaction_hash}&quot;
 <pre><code class="ruby">tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
 
 # define custom mosaic attachment if you already know mosaic definition
-class KonHeart &lt; Nem::Model::MosaicAttachment
-  def initialize(quantity)
-    mosaic_id = Nem::Model::MosaicId.new(
-      namespace_id: 'kon',
-      name: 'heart'
-    )
-    properties = Nem::Model::MosaicProperties.new(
-      divisibility: 3,
-      initial_supply: 100_000_000
-    )
-    super(
-      mosaic_id: mosaic_id,
-      properties: properties,
-      quantity: quantity
-    )
-  end
+class KonHeart &lt; Nem::Mosaic::Base
+  namespace_id 'kon'
+  name 'heart'
+  divisibility 3
+  initial_supply 100_000_000
 end
 tx.mosaics &lt;&lt; KonHeart.new(1)
 
@@ -424,7 +417,7 @@ pp &quot;TransactionHash: #{res.transaction_hash}&quot;
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../timesync/" class="btn btn-neutral float-right" title="Timesync">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../define_mosaic_attachment/" class="btn btn-neutral float-right" title="Define mosaic attachment">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../node/" class="btn btn-neutral" title="Node"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -460,7 +453,7 @@ pp &quot;TransactionHash: #{res.transaction_hash}&quot;
         <span><a href="../node/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../timesync/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../define_mosaic_attachment/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
