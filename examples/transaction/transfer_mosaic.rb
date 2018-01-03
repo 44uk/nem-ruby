@@ -27,25 +27,12 @@ moa = Nem::Model::MosaicAttachment.new(
 )
 tx.mosaics << moa
 
-# define custom mosaic attachment
-class KonHeart < Nem::Model::MosaicAttachment
-  def initialize(quantity)
-    # set values what you defined
-    mosaic_id = Nem::Model::MosaicId.new(
-      namespace_id: 'kon',
-      name: 'heart'
-    )
-    # set values what you defined
-    properties = Nem::Model::MosaicProperties.new(
-      divisibility: 3,
-      initial_supply: 100_000_000
-    )
-    super(
-      mosaic_id: mosaic_id,
-      properties: properties,
-      quantity: quantity
-    )
-  end
+# define custom mosaic attachment if you already know definition.
+class KonHeart < Nem::Mosaic::Base
+  namespace_id 'kon'
+  name 'heart'
+  divisibility 3
+  initial_supply 100_000_000
 end
 tx.mosaics << KonHeart.new(1)
 

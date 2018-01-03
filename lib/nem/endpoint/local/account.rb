@@ -2,6 +2,7 @@ module Nem
   module Endpoint
     module Local
       class Account < Nem::Endpoint::Base
+        # @see https://nemproject.github.io/#transaction-data-with-decoded-messages
         def transfers_incoming(value, hash: nil, id: nil, page_size: nil)
           request!(:post, '/local/account/transfers/incoming',
             value: value,
@@ -15,6 +16,7 @@ module Nem
           end
         end
 
+        # @see https://nemproject.github.io/#transaction-data-with-decoded-messages
         def transfers_outgoing(value, hash: nil, id: nil, page_size: nil)
           request!(:post, '/local/account/transfers/outgoing',
             value: value,
@@ -28,6 +30,7 @@ module Nem
           end
         end
 
+        # @see https://nemproject.github.io/#transaction-data-with-decoded-messages
         def transfers_all(value, hash: nil, id: nil, page_size: nil)
           request!(:post, '/local/account/transfers/all',
             value: value,

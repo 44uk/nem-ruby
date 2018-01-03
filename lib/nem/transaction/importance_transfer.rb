@@ -3,7 +3,7 @@ module Nem
     # @attr [String] remote_account
     # @attr [Symbol] mode
     # @see https://nemproject.github.io/#importanceTransferTransaction
-    class ImportanceTransfer < Nem::Transaction::Base
+    class ImportanceTransfer < Base
       TYPE = 0x0801 # 2049 (importance transfer transaction)
 
       ACTIVATE   = 0x0001

@@ -1,24 +1,13 @@
 require 'spec_helper'
 
-class Nem::Mosaic::ExampleFooBar < Nem::Model::MosaicAttachment
-  def initialize(quantity)
-    mosaic_id = Nem::Model::MosaicId.new(
-      namespace_id: 'example.foo',
-      name: 'bar'
-    )
-    properties = Nem::Model::MosaicProperties.new(
-      divisibility: 3,
-      initial_supply: 100_000_000
-    )
-    super(
-      mosaic_id: mosaic_id,
-      properties: properties,
-      quantity: quantity
-    )
-  end
+class Nem::Mosaic::ExampleMosaic < Nem::Mosaic::Base
+  namespace_id 'example.foo'
+  name 'bar'
+  divisibility 3
+  initial_supply 100_000_000
 end
 
-describe Nem::Mosaic::ExampleFooBar do
+describe Nem::Mosaic::ExampleMosaic do
   subject { described_class.new(0.001) }
   it { expect(subject).to be_a Nem::Model::MosaicAttachment }
   it { expect(subject.mosaic_id).to be_a Nem::Model::MosaicId }

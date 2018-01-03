@@ -8,7 +8,7 @@ module Nem
     # @see https://nemproject.github.io/#initiating-a-transfer-transaction
     # @see https://nemproject.github.io/#version-1-transfer-transactions
     # @see https://nemproject.github.io/#version-2-transfer-transactions
-    class Transfer < Nem::Transaction::Base
+    class Transfer < Base
       TYPE = 0x0101 # 257 (transfer transaction)
 
       attr_reader :amount, :recipient, :message, :mosaics

@@ -4,7 +4,7 @@ module Nem
     # @attr [Integer] creation_fee
     # @attr [Integer] creation_fee_sink
     # @see https://nemproject.github.io/#mosaicDefinitionCreationTransaction
-    class MosaicDefinitionCreation < Nem::Transaction::Base
+    class MosaicDefinitionCreation < Base
       TYPE = 0x4001 # 16385 (mosaic definition creation transaction)
 
       attr_reader :mosaic_definition, :creation_fee, :creation_fee_sink

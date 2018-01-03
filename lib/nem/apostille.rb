@@ -6,22 +6,27 @@ require 'digest/sha3'
 class Nem::Apostille
   CHECKSUM = 'fe4e5459'.freeze
 
+  attr_reader :dedicated_keypair
+
   # @param [Nem::Keypair] keypair
-  # @param [string] file - The file
-  # @param [symbol] hashing - An hashing type (md5, sha1, sha256, sha3-256, sha3-512)
-  # @param [boolean] multisig - true if transaction is multisig, false otherwise
-  # @param [boolean] private - true if apostille is private / transferable / updateable, false if public
-  def initialize(keypair, file, hashing = :sha256, multisig: false, private: false, network: nil)
+  # @param [String] file - The file
+  # @param [Symbol] hashing - An hashing type (md5, sha1, sha256, sha3-256, sha3-512)
+  # @param [Boolean] multisig - true if transaction is multisig, false otherwise
+  # @param [Symbol] signed - true if apostille is private / transferable / updateable, false if public
+  def initialize(keypair, file, hashing = :sha256, multisig: false, signed: false, network: nil)
     @keypair = keypair
     @file = file
     @hashing = hashing
     @multisig = multisig
-    @private = private
+    @signed = signed
     @network = network || Nem.default_network
+
+    # TDOD: support multisig apostille
+    raise NotImplementedError, 'Sorry, Not yet multisig apostille' if multisig?
   end
 
-  def private?
-    @private
+  def signed?
+    @signed
   end
 
   def multisig?
@@ -29,13 +34,16 @@ class Nem::Apostille
   end
 
   def transaction
-    if private?
-      raise 'Not implemented private apostille.'
+    if signed?
+      @dedicated_keypair = generate_keypair
+      apostille_hash = header << @keypair.sign(calc_hash)
+      dedicated_address = Nem::Unit::Address.from_public_key(@dedicated_keypair.public, @network)
     else
+      apostille_hash = header << calc_hash
       dedicated_address = apostille[:sink]
-      apostille_hash = calc_hash
     end
 
+    # TDOD: support multisig apostille
     Nem::Transaction::Transfer.new(dedicated_address, 0, apostille_hash)
   end
 
@@ -53,8 +61,18 @@ class Nem::Apostille
 
   private
 
+  def generate_keypair
+    filename = File.basename(@file.path)
+    signed_filename = @keypair.sign(Digest::SHA256.hexdigest(filename))
+    signed_filename = "#{'0' * 64}#{signed_filename.sub(/^00/i, '')}"[-64, 64]
+    Nem::Keypair.new(signed_filename)
+  end
+
+  def header
+    "#{CHECKSUM}#{hex_type}"
+  end
+
   def calc_hash
-    checksum = "#{CHECKSUM}#{hex_type}"
     hashed = case @hashing
              when /\Amd5\z/      then Digest::MD5.file(@file)
              when /\Asha1\z/     then Digest::SHA1.file(@file)
@@ -62,7 +80,7 @@ class Nem::Apostille
              when /\Asha3-256\z/ then Digest::SHA3.file(@file, 256)
       else Digest::SHA3.file(@file, 512)
     end
-    checksum << hashed.hexdigest
+    hashed.hexdigest
   end
 
   def algo
@@ -77,28 +95,21 @@ class Nem::Apostille
   end
 
   def version
-    private? ? 0x80 : 0x00
+    signed? ? 0x80 : 0x00
   end
 
   def hex_type
-    '%02x' % (algo | version)
+    '%02x' % (version | algo)
   end
 
   def apostille
+    raise 'No need SINK Address for private apostille.' if signed?
     if @network == :mainnet
-      if private?
-        raise 'Not implemented private apostille.'
-      else
-        { private_key: nil,
-          sink: 'NCZSJHLTIMESERVBVKOW6US64YDZG2PFGQCSV23J' }
-      end
+      { private_key: nil,
+        sink: 'NCZSJHLTIMESERVBVKOW6US64YDZG2PFGQCSV23J' }
     else
-      if private?
-        raise 'Not implemented private apostille.'
-      else
-        { private_key: nil,
-          sink: 'TC7MCY5AGJQXZQ4BN3BOPNXUVIGDJCOHBPGUM2GE' }
-      end
+      { private_key: nil,
+        sink: 'TC7MCY5AGJQXZQ4BN3BOPNXUVIGDJCOHBPGUM2GE' }
     end
   end
 end

@@ -3,7 +3,7 @@ module Nem
     # @attr [Nem::Transaction::*] other_trans
     # @attr [String] signer
     # @see https://nemproject.github.io/#multisigTransaction
-    class Multisig < Nem::Transaction::Base
+    class Multisig < Base
       TYPE = 0x1004 # 4100 (multisig transaction)
 
       attr_reader :other_trans, :signer

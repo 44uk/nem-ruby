@@ -45,7 +45,7 @@ module Nem
       end
 
       def to_hash
-        raise 'it must be implemented by child class.'
+        raise NotImplementedError, "#{self.class}##{__method__} must be implemented."
       end
     end
   end
