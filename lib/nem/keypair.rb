@@ -18,6 +18,11 @@ module Nem
       bin_signed.unpack('H*').first
     end
 
+    def verify_signature(signer, hash, apostille_hash)
+      # TDOD: support private apostille
+      raise NotImplementedError, 'Not implemented private apostille'
+    end
+
     # @return [Nem::Keypair] new key pair
     def self.generate(seed = SecureRandom.hex(64))
       new(seed)

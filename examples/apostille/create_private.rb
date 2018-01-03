@@ -3,7 +3,7 @@ require 'nem'
 
 Nem.logger.level = Logger::DEBUG
 
-FIXTURES_PATH = File.expand_path('../../spec/fixtures', __FILE__)
+FIXTURES_PATH = File.expand_path('../../../spec/fixtures', __FILE__)
 
 # sender
 A_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'
@@ -13,9 +13,9 @@ node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 tx_endpoint = Nem::Endpoint::Transaction.new(node)
 
 file = File.open("#{FIXTURES_PATH}/nemLogoV2.png")
-apo = Nem::Apostille.new(kp, file, :sha1,
+apo = Nem::Apostille.new(kp, file, :sha256,
   multisig: false,
-  private: false,
+  signed: true,
   network: :testnet
 )
 tx = apo.transaction
@@ -27,5 +27,7 @@ res = tx_endpoint.announce(req)
 pp "Message: #{res.message}"
 pp "TransactionHash: #{res.transaction_hash}"
 pp "ApostilleFormat: #{apo.apostille_format(res.transaction_hash)}"
+pp "DedicatedPrivateKey: #{apo.dedicated_keypair.private}"
 
 FileUtils.cp(file.path, apo.apostille_format(res.transaction_hash))
+File.write('dedicatedPrivateKey.txt', apo.dedicated_keypair.private)

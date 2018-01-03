@@ -8,19 +8,27 @@ class Nem::ApostilleAudit
 
   # @param [File] file
   # @param [apostille_hash] Apostille formatted hash
-  def initialize(file, apostille_hash)
+  def initialize(file, apostille_hash, signer = nil)
+    @signer = signer
     @file = file
     @apostille_hash = apostille_hash
     @checksum, @version, @algo, @hash = split_apostille_hash
   end
 
   def valid?
-    raise 'Not implemented private apostille' if private?
     raise "Invalid checksum: #{@checksum}" unless @checksum == CHECKSUM
-    @hash == calc_hash
+    if signed? && @signer
+      KeyPair.verify_signature(
+        @signer,
+        @hash,
+        @apostille_hash
+      )
+    else
+      @hash == calc_hash
+    end
   end
 
-  def private?
+  def signed?
     @version == 0x80
   end
 

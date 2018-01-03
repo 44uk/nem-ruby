@@ -1,6 +1,7 @@
 require 'nem/version'
 require 'nem/error'
 require 'nem/configuration'
+require 'nem/unit'
 require 'nem/util'
 require 'nem/fee'
 require 'nem/mixin'
