@@ -38,7 +38,10 @@ pp account_endpoint.namespace('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
 pp account_endpoint.mosaic_definition('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
 
 # fetch owned mosaics of account
-pp account_endpoint.mosaic_owned('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
+mosaics = account_endpoint.mosaic_owned('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
+pp mosaics
+pp mosaics.find_by_namespace_id('tpico')
+pp mosaics.find_by_fqn('tpico:test')
 
 # transfers
 

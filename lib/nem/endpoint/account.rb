@@ -121,9 +121,9 @@ module Nem
       # @see https://nemproject.github.io/#retrieving-mosaics-that-an-account-owns
       def mosaic_owned(address)
         request!(:get, '/account/mosaic/owned', address: address) do |res|
-          res[:data].map do |moa|
-            Nem::Model::Mosaic.new_from_mosaic(moa)
-          end
+          Nem::Model::MosaicCollection.new(
+            res[:data].map { |moa| Nem::Model::Mosaic.new_from_mosaic(moa) }
+          )
         end
       end
 
