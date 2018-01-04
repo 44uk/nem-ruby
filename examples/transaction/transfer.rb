@@ -30,3 +30,13 @@ res = tx_endpoint.announce(req)
 
 pp "Message: #{res.message}"
 pp "TransactionHash: #{res.transaction_hash}"
+
+# with hexdecimal message
+tx = Nem::Transaction::Transfer.new(B_ADDRESS, 0, 'febaadfooddeadbeaf')
+pp "Fee: #{tx.fee.to_i}"
+
+req = Nem::Request::Announce.new(tx, kp)
+res = tx_endpoint.announce(req)
+
+pp "Message: #{res.message}"
+pp "TransactionHash: #{res.transaction_hash}"
