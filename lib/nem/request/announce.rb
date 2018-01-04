@@ -1,13 +1,11 @@
 module Nem
   module Request
-    # @attr [Nem::Struct::Transaction] transaction
+    # @attr [Nem::Model::Transaction] transaction
     # @attr [Nem::Keypair] keypair
-    # @attr [String] data
-    # @attr [String] signature
     # @see https://nemproject.github.io/#requestAnnounce
     # @see https://nemproject.github.io/#requestPrepareAnnounce
     class Announce
-      attr_reader :transaction, :keypair, :data, :signature
+      attr_reader :transaction, :keypair
 
       def initialize(transaction, keypair)
         @transaction = transaction
