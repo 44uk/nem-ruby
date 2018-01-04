@@ -2,7 +2,6 @@ module Nem
   module Model
     # @attr [String] value
     # @attr [Integer] type
-    # @attr [String] payload
     # @attr [String] public_key
     # @attr [String] private_key
     class Message
@@ -62,9 +61,14 @@ module Nem
         bytesize <= 1024
       end
 
+      # @return [Boolean]
+      def hex?
+        !!(value =~ /\Afe\h+\Z/)
+      end
+
       # @return [Hash]
       def to_hash
-        { payload: payload, type: @type }
+        { payload: payload, type: type }
       end
 
       # @return [String]
@@ -79,7 +83,7 @@ module Nem
 
       # @return [String]
       def payload
-        (value =~ /\Afe/ || encrypted?) ? value : value.unpack('H*').first
+        (hex? || encrypted?) ? value : value.unpack('H*').first
       end
 
       private
