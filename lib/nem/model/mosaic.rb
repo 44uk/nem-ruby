@@ -4,8 +4,7 @@ module Nem
       include Nem::Mixin::Assignable
 
       extend Forwardable
-
-      def_delegators :@mosaic_id, :fqn
+      def_delegators :@mosaic_id, :fqn, :namespace_id, :name
 
       attr_reader :mosaic_id, :quantity
 

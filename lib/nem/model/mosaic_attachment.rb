@@ -12,7 +12,7 @@ module Nem
         :supply_mutable,
         :transferable
 
-      attr_reader :mosaic_id, :properties, :quantity
+      attr_reader :mosaic_id, :quantity, :properties
 
       def amount
         return quantity * (10**properties.divisibility)
