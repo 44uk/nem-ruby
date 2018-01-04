@@ -122,7 +122,7 @@ Nem.configure do |conf|
   conf.logger.level = Logger::DEBUG
 
   # you can set deadline(sec)
-  conf.deadline = 7200
+  conf.default_deadline = 7200
 
   # set :mainnet if you'd like to use on mainnet(default :testnet)
   conf.default_network = :mainnet

@@ -45,7 +45,7 @@ module Nem
           type: tx.other_trans.type,
           fee: tx.other_trans.fee.to_i,
           timeStamp: Nem::Util.timestamp,
-          deadline: Nem::Util.deadline(Nem.deadline),
+          deadline: Nem::Util.deadline(Nem.default_deadline),
           signer: tx.signer,
           version: tx.other_trans.version
         )
@@ -59,7 +59,7 @@ module Nem
           type: transaction.type,
           fee: transaction.fee.to_i,
           timeStamp: Nem::Util.timestamp,
-          deadline: Nem::Util.deadline(Nem.deadline),
+          deadline: Nem::Util.deadline(Nem.default_deadline),
           signer: keypair.public,
           version: transaction.version
         )
