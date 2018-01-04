@@ -14,7 +14,7 @@ module Nem
         :height
 
       def version?(num)
-        num == 1 ? true : false  # TODO: version
+        version & 0x00000003 == num ? true : false
       end
 
       def self.new_from_account_transaction(hash)
@@ -40,6 +40,8 @@ module Nem
         klass.new_from_transaction_meta_data_pair(hash)
       end
 
+      private
+
       def self.common_part(hash)
         {
           timestamp: hash[:timeStamp],
@@ -53,18 +55,11 @@ module Nem
 
       def self.common_part_meta_data_pair(hash)
         meta = hash[:meta]
-        transaction = hash[:transaction]
-        {
+        common_part(hash[:transaction]).merge(
           id: meta[:id],
           hash: meta[:hash] ? meta[:hash][:data] : meta[:data],
-          height: meta[:height],
-          timestamp: transaction[:timeStamp],
-          version: transaction[:version],
-          type: transaction[:type],
-          signer: transaction[:signer],
-          fee: transaction[:fee],
-          deadline: transaction[:deadline]
-        }
+          height: meta[:height]
+        )
       end
     end
   end
