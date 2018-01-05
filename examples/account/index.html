@@ -232,7 +232,14 @@ pp endpoint.namespace('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
 pp endpoint.mosaic_definition('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
 
 # fetch owned mosaics of account
-pp endpoint.mosaic_owned('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
+mosaics = account_endpoint.mosaic_owned('TDPICOQ7GIEMIDJOOMIQSOYIJKG3C7V7OP2DUFIR')
+pp mosaics
+
+## can find by namespace
+pp mosaics.find_by_namespace_id('tpico')
+
+## can find by fqn
+pp mosaics.find_by_fqn('tpico:test')
 </code></pre>
 
 <h2 id="transactions">Transactions</h2>
