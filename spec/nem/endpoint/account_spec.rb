@@ -91,7 +91,7 @@ describe Nem::Endpoint::Account do
 
     describe '#mosaic_owned' do
       subject { endpoint.mosaic_owned('NC56RYVRUPG3WRNGMVNRKODJZJNZKZYS76UAPO7K') }
-      it { is_expected.to be_a Array }
+      it { is_expected.to be_a Nem::Model::MosaicCollection }
     end
   end
 

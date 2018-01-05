@@ -1,15 +1,7 @@
 require 'pp'
 require 'nem'
 
-# Library configuration
-Nem.configure do |conf|
-  conf.logger = Logger.new('./nem-ruby.log')
-  conf.logger.level = Logger::DEBUG
-  # you can set deadline(sec)
-  # conf.deadline = 7200
-  # set :mainnet if you'd like to use on mainnet!
-  # conf.default_network = :mainnet
-end
+Nem.logger.level = Logger::DEBUG
 
 # sender
 A_PRIVATE_KEY = '4ce5c8f9fce571db0d9ac1adf00b8d3ba0f078ed40835fd3d730a2f24b834214'

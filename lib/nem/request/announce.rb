@@ -1,13 +1,11 @@
 module Nem
   module Request
-    # @attr [Nem::Struct::Transaction] transaction
+    # @attr [Nem::Model::Transaction] transaction
     # @attr [Nem::Keypair] keypair
-    # @attr [String] data
-    # @attr [String] signature
     # @see https://nemproject.github.io/#requestAnnounce
     # @see https://nemproject.github.io/#requestPrepareAnnounce
     class Announce
-      attr_reader :transaction, :keypair, :data, :signature
+      attr_reader :transaction, :keypair
 
       def initialize(transaction, keypair)
         @transaction = transaction
@@ -47,7 +45,7 @@ module Nem
           type: tx.other_trans.type,
           fee: tx.other_trans.fee.to_i,
           timeStamp: Nem::Util.timestamp,
-          deadline: Nem::Util.deadline(Nem.deadline),
+          deadline: Nem::Util.deadline(Nem.default_deadline),
           signer: tx.signer,
           version: tx.other_trans.version
         )
@@ -61,7 +59,7 @@ module Nem
           type: transaction.type,
           fee: transaction.fee.to_i,
           timeStamp: Nem::Util.timestamp,
-          deadline: Nem::Util.deadline(Nem.deadline),
+          deadline: Nem::Util.deadline(Nem.default_deadline),
           signer: keypair.public,
           version: transaction.version
         )

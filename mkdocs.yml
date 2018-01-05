@@ -1,0 +1,28 @@
+site_url: https://44uk.github.io/nem-ruby/
+site_name: nem-ruby
+site_description: Ruby client library for the NEM Infrastructure Server API
+repo_url: https://github.com/44uk/nem-ruby
+copyright: Copyright &copy; 2017, <a href="https://github.com/44uk">Yoshiyuki Ieyama</a>, <a href="https://twitter.com/44uk_i3">44uk_i3</a>.
+theme: readthedocs
+extra_css:
+  - custom.css
+pages:
+  - Home: index.md
+  - Examples:
+    - examples/configure.md
+    - examples/nis.md
+    - examples/account.md
+    - examples/block.md
+    - examples/chain.md
+    - examples/mosaic.md
+    - examples/namespace.md
+    - examples/node.md
+    - examples/transactions.md
+    - examples/define_mosaic_attachment.md
+    - examples/timesync.md
+    - examples/debug.md
+    - examples/local.md
+    - examples/apostille.md
+    - examples/offline.md
+    - examples/util.md
+  - About: about.md
