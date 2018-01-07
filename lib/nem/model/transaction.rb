@@ -3,6 +3,9 @@ module Nem
     class Transaction
       include Nem::Mixin::Assignable
 
+      extend Forwardable
+      def_delegators :@version, :version, :network
+
       attr_reader :timestamp,
         :version,
         :type,
@@ -12,10 +15,6 @@ module Nem
         :id,
         :hash,
         :height
-
-      def version?(num)
-        version & 0x00000003 == num ? true : false
-      end
 
       def self.new_from_account_transaction(hash)
         new_from_account_transaction_meta_data_pair(
@@ -45,7 +44,7 @@ module Nem
       def self.common_part(hash)
         {
           timestamp: hash[:timeStamp],
-          version: hash[:version],
+          version: Nem::Unit::Version.new(hash[:version]),
           type: hash[:type],
           signer: hash[:signer],
           fee: hash[:fee],
