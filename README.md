@@ -7,11 +7,9 @@
 
 <img src="https://cloud.githubusercontent.com/assets/370508/24320282/a332d238-1175-11e7-96dc-75bc30e562d2.png" width="280" height="280" alt="nem" align="right" />
 
-Ruby gem for communicating with the nem.
+Ruby gem for communicating with nem network through the NIS API.
 
 *The gem is under development. Incompatible changes can be made.*
-
-*Not recommended for production use because of lack of testing, needed more improvement.*
 
 For further development of nem with ruby, [feel free to send me your feedback!](#feedback-and-contact)
 
