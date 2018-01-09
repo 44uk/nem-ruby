@@ -28,7 +28,8 @@ moa = Nem::Model::MosaicAttachment.new(
 tx.mosaics << moa
 
 # define custom mosaic attachment if you already know definition.
-class KonHeart < Nem::Mosaic::Base
+class KonHeart
+  include Nem::Mixin::MosaicAttachable
   namespace_id 'kon'
   name 'heart'
   divisibility 3

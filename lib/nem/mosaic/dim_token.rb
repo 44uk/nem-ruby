@@ -1,6 +1,7 @@
 module Nem
   module Mosaic
-    class DimToken < Base
+    class DimToken
+      include Nem::Mixin::MosaicAttachable
       namespace_id 'dim'
       name 'token'
       divisibility 6
