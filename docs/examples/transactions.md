@@ -27,7 +27,8 @@ pp "TransactionHash: #{res.transaction_hash}"
 tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
 
 # define custom mosaic attachment if you already know mosaic definition
-class KonHeart < Nem::Mosaic::Base
+class KonHeart
+  include Nem::Mixin::MosaicAttachable
   namespace_id 'kon'
   name 'heart'
   divisibility 3

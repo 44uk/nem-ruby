@@ -1,7 +1,8 @@
 ## Mosaic attachment definition
 
 ```ruby
-class MyMosaic < Nem::Mosaic::Base
+class MyMosaic
+  include Nem::Mixin::MosaicAttachable
   namespace_id 'my'
   name 'moz'
   divisibility 3

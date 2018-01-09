@@ -1,6 +1,7 @@
 module Nem
   module Mosaic
-    class DimCoin < Base
+    class DimCoin
+      include Nem::Mixin::MosaicAttachable
       namespace_id 'dim'
       name 'coin'
       divisibility 6
