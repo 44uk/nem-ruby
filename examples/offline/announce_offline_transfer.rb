@@ -4,8 +4,8 @@ require 'nem'
 node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 tx_endpoint = Nem::Endpoint::Transaction.new(node)
 
-req = File.read('tx.json')
-res = tx_endpoint.announce(JSON.parse(req))
+req = JSON.parse(File.read('tx.json'))
+res = tx_endpoint.announce(req)
 
 pp res
 pp "Message: #{res.message}"
