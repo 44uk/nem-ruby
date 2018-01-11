@@ -7,9 +7,8 @@ module Nem
     # @attr [String] signer
     # @attr [String] signature
     class Base
-      attr_reader :type, :fee,
-        :timestamp, :deadline, :signer, :signature
-      # :version, :network
+      attr_reader :type, :fee, :timestamp, :deadline,
+        :signer, :signature
 
       {
         transfer: 0x0101,

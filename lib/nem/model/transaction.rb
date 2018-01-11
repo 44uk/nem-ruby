@@ -43,12 +43,12 @@ module Nem
 
       def self.common_part(hash)
         {
-          timestamp: hash[:timeStamp],
-          version: Nem::Unit::Version.new(hash[:version]),
-          type: hash[:type],
-          signer: hash[:signer],
+          timestamp: Nem::Unit::Time.new_from_nemtime(hash[:timeStamp]),
+          deadline: Nem::Unit::Time.new_from_nemtime(hash[:deadline]),
           fee: hash[:fee],
-          deadline: hash[:deadline]
+          type: hash[:type],
+          version: Nem::Unit::Version.new(hash[:version]),
+          signer: hash[:signer]
         }
       end
 

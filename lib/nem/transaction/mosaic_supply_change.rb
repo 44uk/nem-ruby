@@ -12,7 +12,7 @@ module Nem
 
       attr_accessor :mosaic_id, :supply_type, :delta
 
-      def initialize(mosaic_id, type, delta, network: nil)
+      def initialize(mosaic_id, type, delta, timestamp: nil, deadline: nil, network: nil)
         @mosaic_id = mosaic_id
         @supply_type = type
         @delta = delta
@@ -20,6 +20,8 @@ module Nem
         @network = network || Nem.default_network
         @type = TYPE
         @fee = Nem::Fee::MosaicSupplyChangeTransfer.new(self)
+        @timestamp = timestamp || Time.now
+        @deadline = deadline || Time.now + Nem.default_deadline
       end
 
       # attributes must be CAMEL CASE for NIS params

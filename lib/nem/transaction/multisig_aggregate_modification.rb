@@ -8,13 +8,15 @@ module Nem
 
       attr_reader :modifications, :relative_change, :min_cosignatories
 
-      def initialize(modifications, relative_change, network: nil)
+      def initialize(modifications, relative_change, timestamp: nil, deadline: nil, network: nil)
         @modifications = modifications
         @relative_change = relative_change
 
         @network = network || Nem.default_network
         @type = TYPE
         @fee = Nem::Fee::MultisigAggregateModification.new(self)
+        @timestamp = timestamp || Time.now
+        @deadline = deadline || Time.now + Nem.default_deadline
       end
 
       # attributes must be CAMEL CASE for NIS params
