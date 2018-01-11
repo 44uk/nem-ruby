@@ -9,7 +9,7 @@ module Nem
 
       attr_reader :new_part, :parent, :rental_fee_sink, :rental_fee
 
-      def initialize(new_part, parent = nil, network: nil)
+      def initialize(new_part, parent = nil, timestamp: nil, deadline: nil, network: nil)
         @new_part = new_part
         @parent = parent
         @rental_fee = rental[:fee]
@@ -18,6 +18,8 @@ module Nem
         @network = network || Nem.default_network
         @type = TYPE
         @fee = Nem::Fee::ProvisionNamespace.new(self)
+        @timestamp = timestamp || Time.now
+        @deadline = deadline || Time.now + Nem.default_deadline
       end
 
       # @return [Boolean]

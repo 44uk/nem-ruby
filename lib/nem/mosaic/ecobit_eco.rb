@@ -1,6 +1,7 @@
 module Nem
   module Mosaic
-    class EcobitEco < Base
+    class EcobitEco
+      include Nem::Mixin::MosaicAttachable
       namespace_id 'ecobit'
       name 'eco'
       divisibility 0

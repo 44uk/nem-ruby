@@ -1,11 +1,11 @@
 module Nem
   module Mosaic
-    class DimCoin
+    class ComsaCms
       include Nem::Mixin::MosaicAttachable
-      namespace_id 'dim'
-      name 'coin'
+      namespace_id 'comsa'
+      name 'cms'
       divisibility 6
-      initial_supply 900_000_000
+      initial_supply 219042298
     end
   end
 end

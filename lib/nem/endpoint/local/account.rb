@@ -4,12 +4,12 @@ module Nem
       class Account < Nem::Endpoint::Base
         # @see https://nemproject.github.io/#transaction-data-with-decoded-messages
         def transfers_incoming(value, hash: nil, id: nil, page_size: nil)
-          request!(:post, '/local/account/transfers/incoming',
+          page = {
             value: value,
             hash: hash,
-            id: id,
-            pageSize: page_size
-          ) do |res|
+            id: id
+          }
+          request!(:post, '/local/account/transfers/incoming', page) do |res|
             res[:data].map do |tx|
               Nem::Model::Transaction.new_from_account_transaction_meta_data_pair(tx)
             end
@@ -18,12 +18,12 @@ module Nem
 
         # @see https://nemproject.github.io/#transaction-data-with-decoded-messages
         def transfers_outgoing(value, hash: nil, id: nil, page_size: nil)
-          request!(:post, '/local/account/transfers/outgoing',
+          page = {
             value: value,
             hash: hash,
-            id: id,
-            pageSize: page_size
-          ) do |res|
+            id: id
+          }
+          request!(:post, '/local/account/transfers/outgoing', page) do |res|
             res[:data].map do |tx|
               Nem::Model::Transaction.new_from_account_transaction_meta_data_pair(tx)
             end
@@ -32,12 +32,12 @@ module Nem
 
         # @see https://nemproject.github.io/#transaction-data-with-decoded-messages
         def transfers_all(value, hash: nil, id: nil, page_size: nil)
-          request!(:post, '/local/account/transfers/all',
+          page = {
             value: value,
             hash: hash,
-            id: id,
-            pageSize: page_size
-          ) do |res|
+            id: id
+          }
+          request!(:post, '/local/account/transfers/all', page) do |res|
             res[:data].map do |tx|
               Nem::Model::Transaction.new_from_account_transaction_meta_data_pair(tx)
             end

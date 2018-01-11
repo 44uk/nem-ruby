@@ -13,12 +13,12 @@ B_ADDRESS = 'TAWKJTUP4DWKLDKKS534TYP6G324CBNMXKBA4X7B'
 kp = Nem::Keypair.new(A_PRIVATE_KEY)
 tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
 req = Nem::Request::Announce.new(tx, kp)
-
-entity = req.to_entity
+data = req.to_entity[:data]
 
 # You can also announce to nem Network later.
-pp entity.to_json
+pp data
 
 # deserialize data into hash
-pp Nem::Util::Deserializer.deserialize_transaction(req.to_entity[:data])
+hash = Nem::Util::Deserializer.deserialize_transaction(data)
+pp Nem::Model::Transaction.new_from_account_transaction(hash)
 ```

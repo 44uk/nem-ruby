@@ -16,7 +16,7 @@ module Nem
       # @param [String] fqn
       # @return [Nem::Model::MosaicAttachment]
       def find_by_fqn(fqn)
-        attachments.find {|a| a.fqn == fqn }
+        attachments.find { |a| a.fqn == fqn }
       end
 
       alias :[] :find_by_fqn
@@ -24,7 +24,7 @@ module Nem
       # @param [String] namespace_id
       # @return [Nem::Model::MosaicCollection]
       def find_by_namespace_id(namespace_id)
-        self.class.new(attachments.select {|a| a.namespace_id == namespace_id })
+        self.class.new(attachments.select { |a| a.namespace_id == namespace_id })
       end
     end
   end

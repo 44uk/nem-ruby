@@ -1,6 +1,7 @@
 module Nem
   module Mosaic
-    class Xem < Base
+    class Xem
+      include Nem::Mixin::MosaicAttachable
       namespace_id 'nem'
       name 'xem'
       divisibility 6

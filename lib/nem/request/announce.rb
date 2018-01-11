@@ -41,11 +41,13 @@ module Nem
       end
 
       def prepare_multisig(tx)
+        timestamp = Nem::Unit::Time.new(tx.other_trans.timestamp)
+        deadline = Nem::Unit::Time.new(tx.other_trans.deadline)
         other_trans = tx.other_trans.to_hash.merge(
           type: tx.other_trans.type,
           fee: tx.other_trans.fee.to_i,
-          timeStamp: Nem::Util.timestamp,
-          deadline: Nem::Util.deadline(Nem.default_deadline),
+          timeStamp: timestamp.to_i,
+          deadline: deadline.to_i,
           signer: tx.signer,
           version: tx.other_trans.version
         )
@@ -55,11 +57,13 @@ module Nem
       end
 
       def set_common(hash)
+        timestamp = Nem::Unit::Time.new(transaction.timestamp)
+        deadline = Nem::Unit::Time.new(transaction.deadline)
         hash.merge(
           type: transaction.type,
           fee: transaction.fee.to_i,
-          timeStamp: Nem::Util.timestamp,
-          deadline: Nem::Util.deadline(Nem.default_deadline),
+          timeStamp: timestamp.to_i,
+          deadline: deadline.to_i,
           signer: keypair.public,
           version: transaction.version
         )
