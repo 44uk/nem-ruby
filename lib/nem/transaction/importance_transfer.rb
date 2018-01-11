@@ -11,13 +11,15 @@ module Nem
 
       attr_reader :mode, :remote_account
 
-      def initialize(remote_account, mode, network: nil)
+      def initialize(remote_account, mode, timestamp: nil, deadline: nil, network: nil)
         @remote_account = remote_account
         @mode = mode
 
         @network = network || Nem.default_network
         @type = TYPE
         @fee = Nem::Fee::ImportanceTransfer.new(self)
+        @timestamp = timestamp || Time.now
+        @deadline = deadline || Time.now + Nem.default_deadline
       end
 
       # attributes must be CAMEL CASE for NIS params

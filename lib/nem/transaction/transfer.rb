@@ -13,7 +13,7 @@ module Nem
 
       attr_reader :amount, :recipient, :message, :mosaics
 
-      def initialize(recipient, amount, message = '', mosaics: [], network: nil)
+      def initialize(recipient, amount, message = '', mosaics: [], timestamp: nil, deadline: nil, network: nil)
         @amount = amount
         @recipient = recipient
         @message = message.is_a?(Nem::Model::Message) ?
@@ -24,16 +24,18 @@ module Nem
         @network = network || Nem.default_network
         @type = TYPE
         @fee = Nem::Fee::Transfer.new(self)
+        @timestamp = timestamp || Time.now
+        @deadline = deadline || Time.now + Nem.default_deadline
       end
 
       # @return [Boolean]
       def has_message?
-        @message.bytesize > 0
+        message.bytesize > 0
       end
 
       # @return [Boolean]
       def has_mosaics?
-        @mosaics.size > 0
+        mosaics.size > 0
       end
 
       def version

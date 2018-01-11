@@ -8,13 +8,15 @@ module Nem
 
       attr_reader :other_trans, :signer
 
-      def initialize(trans, signer, network: nil)
+      def initialize(trans, signer, timestamp: nil, deadline: nil, network: nil)
         @other_trans = trans
         @signer = signer
 
         @network = network || Nem.default_network
         @type = TYPE
         @fee = Nem::Fee::Multisig.new(self)
+        @timestamp = timestamp || Time.now
+        @deadline = deadline || Time.now + Nem.default_deadline
       end
 
       # attributes must be CAMEL CASE for NIS params

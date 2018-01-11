@@ -9,12 +9,18 @@ B_ADDRESS = 'TAWKJTUP4DWKLDKKS534TYP6G324CBNMXKBA4X7B'
 
 kp = Nem::Keypair.new(A_PRIVATE_KEY)
 tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
+
+tx.mosaics << Nem::Mosaic::Xem.new(1_000)
+tx.mosaics << Nem::Mosaic::DimCoin.new(100)
+tx.mosaics << Nem::Mosaic::DimToken.new(10)
+tx.mosaics << Nem::Mosaic::EcobitEco.new(10_000)
+
 req = Nem::Request::Announce.new(tx, kp)
+data = req.to_entity[:data]
 
-entity = req.to_entity
-
-# You can also announce to nem Network later.
-pp entity.to_json
+# serialized transaction data
+pp data
 
 # deserialize data into hash
-pp Nem::Util::Deserializer.deserialize_transaction(req.to_entity[:data])
+hash = Nem::Util::Deserializer.deserialize_transaction(data)
+pp Nem::Model::Transaction.new_from_account_transaction(hash)

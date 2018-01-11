@@ -9,7 +9,7 @@ module Nem
 
       attr_reader :mosaic_definition, :creation_fee, :creation_fee_sink
 
-      def initialize(mosaic_definition, network: nil)
+      def initialize(mosaic_definition, timestamp: nil, deadline: nil, network: nil)
         @mosaic_definition = mosaic_definition
         @creation_fee = creation[:fee]
         @creation_fee_sink = creation[:sink]
@@ -17,6 +17,8 @@ module Nem
         @network = network || Nem.default_network
         @type = TYPE
         @fee = Nem::Fee::MosaicDefinitionCreation.new(self)
+        @timestamp = timestamp || Time.now
+        @deadline = deadline || Time.now + Nem.default_deadline
       end
 
       # attributes must be CAMEL CASE for NIS params
