@@ -175,7 +175,8 @@
             <div class="section">
               
                 <h2 id="mosaic-attachment-definition">Mosaic attachment definition</h2>
-<pre><code class="ruby">class MyMosaic &lt; Nem::Mosaic::Base
+<pre><code class="ruby">class MyMosaic
+  include Nem::Mixin::MosaicAttachable
   namespace_id 'my'
   name 'moz'
   divisibility 3
