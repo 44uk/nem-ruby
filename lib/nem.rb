@@ -1,3 +1,4 @@
+require 'forwardable'
 require 'nem/version'
 require 'nem/error'
 require 'nem/configuration'
