@@ -19,7 +19,7 @@ module Nem
     end
 
     def verify_signature(signer, hash, apostille_hash)
-      # TDOD: support private apostille
+      # TODO: support private apostille
       raise NotImplementedError, 'Not implemented private apostille'
     end
 
