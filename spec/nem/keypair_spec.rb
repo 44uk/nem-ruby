@@ -25,13 +25,24 @@ describe Nem::Keypair do
   describe '.generate' do
     context 'without seed' do
       subject { described_class.generate }
+      it { pp subject }
+
       it { expect(subject).to be_a Nem::Keypair }
-      it { expect(subject.private).to match(/[0-9a-f]{128}/) }
-      it { expect(subject.public).to match(/[0-9a-f]{64}/) }
+      it { expect(subject.private).to match(/\A\h{64}\z/) }
+      it { expect(subject.public).to match(/\A\h{64}\z/) }
     end
 
-    # context 'with seed' do
-    #   it { expect(described_class.generate('')).to be eq '' }
-    # end
+    context 'with seed' do
+      let(:seed) { SecureRandom.hex(32) }
+      subject { described_class.generate(seed) }
+      it { expect(subject).to be_a Nem::Keypair }
+      it { expect(subject.private).to eq seed }
+      it { expect(subject.public).to match(/\A\h{64}\z/) }
+    end
+
+    context 'with invalid seed' do
+      let(:seed) { SecureRandom.hex(34) }
+      it { expect { described_class.generate(seed) }.to raise_error ArgumentError }
+    end
   end
 end

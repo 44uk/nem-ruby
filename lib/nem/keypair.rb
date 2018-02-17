@@ -19,12 +19,15 @@ module Nem
     end
 
     def verify_signature(signer, hash, apostille_hash)
-      # TDOD: support private apostille
+      # TODO: support private apostille
       raise NotImplementedError, 'Not implemented private apostille'
     end
 
     # @return [Nem::Keypair] new key pair
-    def self.generate(seed = SecureRandom.hex(64))
+    def self.generate(seed = SecureRandom.hex(32))
+      unless seed =~ /\A\h{64}\z/ || seed =~ /\A\h{66}\z/
+        raise ArgumentError, 'PrivateKey is not valid!'
+      end
       new(seed)
     end
 
