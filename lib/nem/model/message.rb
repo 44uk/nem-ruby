@@ -32,6 +32,7 @@ module Nem
         bin_pk = (public_key || @public_key).scan(/../).map(&:hex).pack('C*')
         @value = Nem::Util::Ed25519.encrypt(bin_sk, bin_pk, value)
         @type = TYPE_ENCRYPTED
+        self
       end
 
       def decrypt!
@@ -39,6 +40,7 @@ module Nem
         bin_pk = (public_key || @public_key).scan(/../).map(&:hex).pack('C*')
         @value = Nem::Util::Ed25519.decrypt(bin_sk, bin_pk, payload)
         @type = TYPE_PLAIN
+        self
       end
 
       # @return [Boolean]
