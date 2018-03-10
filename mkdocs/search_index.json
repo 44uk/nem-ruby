@@ -432,12 +432,12 @@
         },
         {
             "location": "/examples/util/",
-            "text": "Deserialize transaction\n\n\nrequire 'pp'\nrequire 'nem'\n\n# sender\nA_PRIVATE_KEY = '260206d683962350532408e8774fd14870a173b7fba17f6b504da3dbc5f1cc9f'\n\n# receiver\nB_ADDRESS = 'TAWKJTUP4DWKLDKKS534TYP6G324CBNMXKBA4X7B'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\nreq = Nem::Request::Announce.new(tx, kp)\ndata = req.to_entity[:data]\n\n# You can also announce to nem Network later.\npp data\n\n# deserialize data into hash\nhash = Nem::Util::Deserializer.deserialize_transaction(data)\npp Nem::Model::Transaction.new_from_account_transaction(hash)",
+            "text": "Deserialize transaction\n\n\nrequire 'pp'\nrequire 'nem'\n\n# sender\nA_PRIVATE_KEY = '260206d683962350532408e8774fd14870a173b7fba17f6b504da3dbc5f1cc9f'\n\n# receiver\nB_ADDRESS = 'TAWKJTUP4DWKLDKKS534TYP6G324CBNMXKBA4X7B'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\nreq = Nem::Request::Announce.new(tx, kp)\ndata = req.to_entity[:data]\n\n# You can also announce to nem Network later.\npp data\n\n# deserialize data into hash\nhash = Nem::Util::Deserializer.deserialize(data)\npp Nem::Model::Transaction.new_from_account_transaction(hash)",
             "title": "Util"
         },
         {
             "location": "/examples/util/#deserialize-transaction",
-            "text": "require 'pp'\nrequire 'nem'\n\n# sender\nA_PRIVATE_KEY = '260206d683962350532408e8774fd14870a173b7fba17f6b504da3dbc5f1cc9f'\n\n# receiver\nB_ADDRESS = 'TAWKJTUP4DWKLDKKS534TYP6G324CBNMXKBA4X7B'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\nreq = Nem::Request::Announce.new(tx, kp)\ndata = req.to_entity[:data]\n\n# You can also announce to nem Network later.\npp data\n\n# deserialize data into hash\nhash = Nem::Util::Deserializer.deserialize_transaction(data)\npp Nem::Model::Transaction.new_from_account_transaction(hash)",
+            "text": "require 'pp'\nrequire 'nem'\n\n# sender\nA_PRIVATE_KEY = '260206d683962350532408e8774fd14870a173b7fba17f6b504da3dbc5f1cc9f'\n\n# receiver\nB_ADDRESS = 'TAWKJTUP4DWKLDKKS534TYP6G324CBNMXKBA4X7B'\n\nkp = Nem::Keypair.new(A_PRIVATE_KEY)\ntx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')\nreq = Nem::Request::Announce.new(tx, kp)\ndata = req.to_entity[:data]\n\n# You can also announce to nem Network later.\npp data\n\n# deserialize data into hash\nhash = Nem::Util::Deserializer.deserialize(data)\npp Nem::Model::Transaction.new_from_account_transaction(hash)",
             "title": "Deserialize transaction"
         },
         {
