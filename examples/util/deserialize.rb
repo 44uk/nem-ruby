@@ -22,5 +22,5 @@ data = req.to_entity[:data]
 pp data
 
 # deserialize data into hash
-hash = Nem::Util::Deserializer.deserialize_transaction(data)
+hash = Nem::Util::Deserializer.deserialize(data)
 pp Nem::Model::Transaction.new_from_account_transaction(hash)

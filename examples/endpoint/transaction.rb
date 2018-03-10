@@ -25,6 +25,9 @@ pp tx_endpoint.find(hash)
 hash = '4185cad053f0bc7a2b3b9e5adc493e81a5af2f0a431f3d34ba2a25c937731629'
 pp tx_endpoint.find(hash)
 
+# if tx has a message, convert hex to string
+# Nem::Util::Convert.hex_to_utf8(res.message.value)
+
 # aggregate (multisig)
 hash = 'f7d385a4c8b78d8a6a91c7b778df4ae793394c9c8bfeeca1393bf43770328a06'
 pp tx_endpoint.find(hash)

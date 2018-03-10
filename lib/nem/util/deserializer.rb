@@ -4,26 +4,38 @@ module Nem
       # Deserialize a transaction object
       # @param [String] serialized
       # @return [Hash]
-      def self.deserialize_transaction(serialized)
+      def self.deserialize(serialized)
         s = Nem::Util::Convert.hex2ua(serialized)
-        common = s[0, 60]
-        specific = s[60, s.size]
-        type = deserialize_int(common[0, 4])
-        method = case type
-                 when 0x0101 then method(:deserialize_transfer)
-                 when 0x0801 then method(:deserialize_importance_transfer)
-                 when 0x1001 then method(:deserialize_multisig_aggregate_modification)
-                 when 0x1002 then method(:deserialize_multisig_signature)
-                 when 0x1004 then method(:deserialize_multisig)
-                 when 0x2001 then method(:deserialize_provision_namespace)
-                 when 0x4001 then method(:deserialize_mosaic_definition_creation)
-                 when 0x4002 then method(:deserialize_mosaic_supply_change)
-          else raise "Not implemented entity type: #{type}"
-        end
-        deserialize_common(common).merge(method.call(specific))
+        deserialize_transaction(s)
       end
 
       private
+
+      def self.switch_method(type)
+        case type
+        when 0x0101 then method(:deserialize_transfer)
+        when 0x0801 then method(:deserialize_importance_transfer)
+        when 0x1001 then method(:deserialize_multisig_aggregate_modification)
+        when 0x1002 then method(:deserialize_multisig_signature)
+        when 0x1004 then method(:deserialize_multisig)
+        when 0x2001 then method(:deserialize_provision_namespace)
+        when 0x4001 then method(:deserialize_mosaic_definition_creation)
+        when 0x4002 then method(:deserialize_mosaic_supply_change)
+          else raise "Not implemented entity type: #{type}"
+        end
+      end
+
+      # Deserialize a transaction object
+      # @param [String] serialized
+      # @return [Hash]
+      def self.deserialize_transaction(s)
+        common = s[0, 60]
+        specific = s[60, s.size]
+        type = deserialize_int(common[0, 4])
+        method = switch_method(type)
+        # require 'pry'; binding.pry
+        deserialize_common(common).merge(method.call(specific))
+      end
 
       # Deserialize a transfer transaction object
       # @param [String] serialized
@@ -82,10 +94,30 @@ module Nem
       # @param [String] serialized
       # @return [Hash]
       def self.deserialize_multisig_aggregate_modification(s)
-        raise 'Not yet implimented.'
-        # TODO: deserializing
-        tx = {}
-        tx
+        mods = []
+        mod_count = deserialize_int(s[0, 4])
+        offset = 4
+        mod_count.times do |i|
+          mod_len = deserialize_int(s[offset, 4])
+          mods << {
+            modificationType: deserialize_int(s[offset + 4, 4]),
+            cosignatoryAccount: deserialize_hex(s[offset + 12, 32])
+          }
+          offset += 4 + mod_len
+        end
+        tx = {
+          modifications: mods,
+        }
+
+        if s[offset + 4, 4]
+          tx.merge(
+            minCosignatories: {
+              relativeChange: deserialize_int(s[offset + 4, 4])
+            }
+          )
+        else
+          tx
+        end
       end
 
       # Deserialize a multisig signature transaction object
@@ -102,10 +134,10 @@ module Nem
       # @param [String] serialized
       # @return [Hash]
       def self.deserialize_multisig(s)
-        raise 'Not yet implimented.'
-        # TODO: deserializing
-        tx = {}
-        tx
+        msig_len = deserialize_int(s[0, 4])
+        inner = s[4, msig_len]
+        inner_tx = deserialize_transaction(inner)
+        { otherTrans: inner_tx }
       end
 
       # Deserialize a provision namespace transaction object

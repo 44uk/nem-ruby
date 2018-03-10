@@ -60,17 +60,9 @@ module Nem
         end
         a.concat mods
 
-        # The following part describes the minimum cosignatories modification.
-        # The part is optional. Version 1 aggregate modification transactions should omit this part.
-        # Version 2 aggregate modification transactions with no minimum cosignatories modification
-        # should only write the length field with value 0x00, 0x00, 0x00, 0x00.
-        if true # only version2
-          if entity[:minCosignatories][:relativeChange] > 0
-            a.concat serialize_int(4)
-            a.concat serialize_int(entity[:minCosignatories][:relativeChange])
-          else
-            a.concat [0, 0, 0, 0]
-          end
+        if true # TODO: append only version2
+          a.concat serialize_int(4)
+          a.concat serialize_int(entity[:minCosignatories][:relativeChange])
         end
         a
       end

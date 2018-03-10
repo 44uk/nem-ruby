@@ -181,7 +181,7 @@ tx = Nem::Transaction::MultisigAggregateModification.new(msig_cosignatories, rel
 pp "Fee: #{tx.fee.to_i}"
 
 req = Nem::Request::Announce.new(tx, kp)
-res = endpoint.prepare_announce(req)
+res = endpoint.announce(req)
 
 pp "Message: #{res.message}"
 pp "TransactionHash: #{res.transaction_hash}"

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Nem::Util::Deserializer do
-  subject { described_class.deserialize_transaction(data) }
+  subject { described_class.deserialize(data) }
 
-  describe '.deserialize_transaction' do
+  describe '.deserialize' do
     context 'when transfer' do
       let(:data) { '01010000010000983ef0880420000000cc63b4dcdec745417043c3fa0992ec3a1695461a26d90264744648abbd5caa0da0860100000000004efe8804280000005441574b4a5455503444574b4c444b4b53353334545950364733323443424e4d584b42413458374200e1f5050000000012000000010000000a000000476f6f64206c75636b21' }
       let(:tx) do
@@ -58,15 +58,101 @@ describe Nem::Util::Deserializer do
     end
 
     context 'when multisig aggregate modification' do
-      let(:data) { '041000000100009856d29f0420000000be2ba9cb15a547110d511a4d43c0482fbb584d78781abac01fb053d18f4a0033f04902000000000066e09f0474000000011000000200009856d29f04200000006d72b57d2bc199d328e7ea3e24775f7f614760bc18f3f8501cd3daa9870cc40c20a107000000000066e09f04010000002800000002000000200000009e7ab2924cd1a3482df784db190614cfc8a33671f5d80a5b15a9c9e8b4d139330400000001000000' }
+      let(:data) { '0110000002000098eeaa8c05200000001d157e5c784d04c2f778e5fc44c01f1b30a63d52e865fee4aefde81cc47f9c5120a1070000000000feb88c05030000002800000001000000200000007cefca63978d86361a9a75000dd770b2bbe1a60eea3f50e18cfec533d36f4e6528000000010000002000000024cc45b715622fd0469327de4ebb722cc1e5c0bc8faf0907ca4b7ef10847d7b428000000010000002000000090007a7b1fb64c9c4f18b6f4c2970128d69989415b49774a487955c45c329f730400000002000000' }
       let(:tx) do
+        {
+          type: 4097,
+          # version: -1744830462,
+          signer: '1d157e5c784d04c2f778e5fc44c01f1b30a63d52e865fee4aefde81cc47f9c51',
+          timeStamp: 93104878,
+          deadline: 93108478,
+          fee: 500000,
+          modifications: [
+            {
+              modificationType: 1,
+              cosignatoryAccount: '7cefca63978d86361a9a75000dd770b2bbe1a60eea3f50e18cfec533d36f4e65'
+            },
+            {
+              modificationType: 1,
+              cosignatoryAccount: '24cc45b715622fd0469327de4ebb722cc1e5c0bc8faf0907ca4b7ef10847d7b4'
+            },
+            {
+              modificationType: 1,
+              cosignatoryAccount: '90007a7b1fb64c9c4f18b6f4c2970128d69989415b49774a487955c45c329f73'
+            }
+          ],
+          minCosignatories: {
+            relativeChange: 2
+          }
+        }
       end
 
-      xit { expect(subject).to match a_hash_including(tx) }
+      it { expect(subject).to match a_hash_including(tx) }
+
+      context 'without relative change' do
+        let(:data) { '0110000002000098eeaa8c05200000001d157e5c784d04c2f778e5fc44c01f1b30a63d52e865fee4aefde81cc47f9c5120a1070000000000feb88c05030000002800000001000000200000007cefca63978d86361a9a75000dd770b2bbe1a60eea3f50e18cfec533d36f4e6528000000010000002000000024cc45b715622fd0469327de4ebb722cc1e5c0bc8faf0907ca4b7ef10847d7b428000000010000002000000090007a7b1fb64c9c4f18b6f4c2970128d69989415b49774a487955c45c329f73' }
+
+        let(:tx) do
+          {
+            type: 4097,
+            # version: -1744830462,
+            signer: '1d157e5c784d04c2f778e5fc44c01f1b30a63d52e865fee4aefde81cc47f9c51',
+            timeStamp: 93104878,
+            deadline: 93108478,
+            fee: 500000,
+            modifications: [
+              {
+                modificationType: 1,
+                cosignatoryAccount: '7cefca63978d86361a9a75000dd770b2bbe1a60eea3f50e18cfec533d36f4e65'
+              },
+              {
+                modificationType: 1,
+                cosignatoryAccount: '24cc45b715622fd0469327de4ebb722cc1e5c0bc8faf0907ca4b7ef10847d7b4'
+              },
+              {
+                modificationType: 1,
+                cosignatoryAccount: '90007a7b1fb64c9c4f18b6f4c2970128d69989415b49774a487955c45c329f73'
+              }
+            ],
+            minCosignatories: {
+              relativeChange: 2
+            }
+          }
+        end
+      end
 
       context 'and multisig' do
-        let(:data) { '' }
+        let(:data) { '04100000010000980fb38c052000000024cc45b715622fd0469327de4ebb722cc1e5c0bc8faf0907ca4b7ef10847d7b4f0490200000000001fc18c05a000000001100000020000980fb38c0520000000cef39fa2fe892cad144fe36ae8874f56c3682a3fbd920e6d9be0f8a412b3fc0a20a10700000000001fc18c050200000028000000010000002000000090007a7b1fb64c9c4f18b6f4c2970128d69989415b49774a487955c45c329f73280000000100000020000000617dab52d5f5c2792a77dbe897270d86bc1ed059a2c50a85fdcb06ecc450f0730400000001000000' }
         let(:tx) do
+          {
+            type: 4100,
+            # version: -1744830463,
+            signer: '24cc45b715622fd0469327de4ebb722cc1e5c0bc8faf0907ca4b7ef10847d7b4',
+            timeStamp: 93106959,
+            deadline: 93110559,
+            fee: 150000,
+            otherTrans: {
+              type: 4097,
+              # version: -1744830462,
+              signer: 'cef39fa2fe892cad144fe36ae8874f56c3682a3fbd920e6d9be0f8a412b3fc0a',
+              timeStamp: 93106959,
+              deadline: 93110559,
+              fee: 500000,
+              modifications: [
+                {
+                  modificationType: 1,
+                  cosignatoryAccount: '90007a7b1fb64c9c4f18b6f4c2970128d69989415b49774a487955c45c329f73'
+                },
+                {
+                  modificationType: 1,
+                  cosignatoryAccount: '617dab52d5f5c2792a77dbe897270d86bc1ed059a2c50a85fdcb06ecc450f073'
+                }
+              ],
+              minCosignatories: {
+                relativeChange: 1
+              }
+            }
+          }
         end
 
         xit { expect(subject).to match a_hash_including(tx) }
