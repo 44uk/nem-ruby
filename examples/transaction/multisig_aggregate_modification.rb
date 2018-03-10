@@ -17,7 +17,10 @@ msig_cosignatories = [
   Nem::Transaction::MultisigCosignatoryModification.new(:add, A_PUBLIC_KEY)
 ]
 relative_change = 1
-tx = Nem::Transaction::MultisigAggregateModification.new(msig_cosignatories, relative_change)
+tx = Nem::Transaction::MultisigAggregateModification.new(
+  msig_cosignatories,
+  relative_change
+)
 pp "Fee: #{tx.fee.to_i}"
 
 req = Nem::Request::Announce.new(tx, kp)

@@ -20,9 +20,11 @@ msig_cosigratories = [
   Nem::Transaction::MultisigCosignatoryModification.new(:add, B_PUBLIC_KEY)
 ]
 relative_change = 1
-mtx = Nem::Transaction::MultisigAggregateModification.new(msig_cosigratories, relative_change)
+mtx = Nem::Transaction::MultisigAggregateModification.new(
+  msig_cosigratories,
+  relative_change
+)
 tx = Nem::Transaction::Multisig.new(mtx, M_PUBLIC_KEY)
-tx_endpoint = Nem::Endpoint::Transaction.new(node)
 
 req = Nem::Request::Announce.new(tx, kp)
 res = tx_endpoint.announce(req)
