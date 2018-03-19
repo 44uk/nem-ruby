@@ -150,8 +150,8 @@ module Nem
         newpart_len = deserialize_int(s[52, 4])
         tx[:newPart] = deserialize_a(s[56, newpart_len])
         parent_len = deserialize_int(s[56 + newpart_len, 4])
-        parent = s[56 + newpart_len, parent_len]
-        unless parent.all? { |val| val == 0xff }
+        unless parent_len == -1
+          parent = s[56 + newpart_len, parent_len]
           tx[:parent] = deserialize_a(parent)
         end
         tx
@@ -197,7 +197,7 @@ module Nem
       end
 
       def self.deserialize_int(ua)
-        Nem::Util::Convert.ua2hex(ua.reverse).to_i(16)
+        [Nem::Util::Convert.ua2hex(ua.reverse).to_i(16)].pack("i").unpack("i").first
       end
 
       def self.deserialize_hex(ua)

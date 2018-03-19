@@ -15,7 +15,7 @@ describe Nem::Util::Deserializer do
           message: { type: 1, payload: 'Good luck!' },
           timeStamp: 76083262,
           deadline: 76086862,
-          # version: -1744830463,
+          version: -1744830463,
           signer: 'cc63b4dcdec745417043c3fa0992ec3a1695461a26d90264744648abbd5caa0d'
         }
       end
@@ -36,7 +36,7 @@ describe Nem::Util::Deserializer do
       let(:tx) do
         {
           type: 2049,
-          # version: -1744830463,
+          version: -1744830463,
           timeStamp: 77258058,
           signer: '9e7ab2924cd1a3482df784db190614cfc8a33671f5d80a5b15a9c9e8b4d13933',
           fee: 150_000,
@@ -62,7 +62,7 @@ describe Nem::Util::Deserializer do
       let(:tx) do
         {
           type: 4097,
-          # version: -1744830462,
+          version: -1744830462,
           signer: '1d157e5c784d04c2f778e5fc44c01f1b30a63d52e865fee4aefde81cc47f9c51',
           timeStamp: 93104878,
           deadline: 93108478,
@@ -95,7 +95,7 @@ describe Nem::Util::Deserializer do
         let(:tx) do
           {
             type: 4097,
-            # version: -1744830462,
+            version: -1744830462,
             signer: '1d157e5c784d04c2f778e5fc44c01f1b30a63d52e865fee4aefde81cc47f9c51',
             timeStamp: 93104878,
             deadline: 93108478,
@@ -126,14 +126,14 @@ describe Nem::Util::Deserializer do
         let(:tx) do
           {
             type: 4100,
-            # version: -1744830463,
+            version: -1744830463,
             signer: '24cc45b715622fd0469327de4ebb722cc1e5c0bc8faf0907ca4b7ef10847d7b4',
             timeStamp: 93106959,
             deadline: 93110559,
             fee: 150000,
             otherTrans: {
               type: 4097,
-              # version: -1744830462,
+              version: -1744830462,
               signer: 'cef39fa2fe892cad144fe36ae8874f56c3682a3fbd920e6d9be0f8a412b3fc0a',
               timeStamp: 93106959,
               deadline: 93110559,
@@ -164,7 +164,7 @@ describe Nem::Util::Deserializer do
       let(:tx) do
         {
           type: 4098,
-          # version: -1744830463,
+          version: -1744830463,
           timeStamp: 77906101,
           signer: '9e7ab2924cd1a3482df784db190614cfc8a33671f5d80a5b15a9c9e8b4d13933',
           fee: 150_000,
@@ -184,7 +184,7 @@ describe Nem::Util::Deserializer do
       let(:tx) do
         {
           type: 8193,
-          # version: -1744830463,
+          version: -1744830463,
           timeStamp: 77290458,
           signer: 'be2ba9cb15a547110d511a4d43c0482fbb584d78781abac01fb053d18f4a0033',
           fee: 150000,
@@ -257,7 +257,7 @@ describe Nem::Util::Deserializer do
       let(:tx) do
         {
           type: 16386,
-          # version: -1744830463,
+          version: -1744830463,
           timeStamp: 77266167,
           signer: 'cc63b4dcdec745417043c3fa0992ec3a1695461a26d90264744648abbd5caa0d',
           fee: 150_000,
