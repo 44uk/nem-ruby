@@ -60,7 +60,7 @@ module Nem
                 namespaceId: moa.mosaic_id.namespace_id,
                 name: moa.mosaic_id.name,
               },
-              quantity: moa.amount
+              quantity: moa.amount.to_i
             }
           end
         end
