@@ -26,7 +26,7 @@ module Nem
       end
 
       def amount
-        return quantity * (10**properties.divisibility)
+        (quantity * (10**properties.divisibility)).to_i
       end
 
       def self.included(base)

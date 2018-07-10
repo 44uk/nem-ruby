@@ -5,71 +5,92 @@ module Nem
       # @param [String] serialized
       # @return [Hash]
       def self.deserialize(serialized)
-        s = Nem::Util::Convert.hex2ua(serialized)
-        deserialize_transaction(s)
+        s = serialized.scan(/../)
+        transaction(s)
       end
 
       private
 
+      def self.transaction(s)
+        comm = s[0, 60]
+        spec = s[60, s.size]
+        type = hexa2int(comm[0, 4])
+        method = switch_method(type)
+        common(comm).merge(method.call(spec))
+      end
+
+      def self.hexa2int(hexa)
+        [hexa.join].pack('H*').unpack('i*').first
+      end
+
+      def self.hexa2ascii(hexa)
+        hexa.inject('') { |memo, el| memo << el.hex.chr }
+      end
+
+      def self.hexa2utf8(hexa)
+        [hexa.join].pack('H*').force_encoding('UTF-8')
+      end
+
       def self.switch_method(type)
         case type
-        when 0x0101 then method(:deserialize_transfer)
-        when 0x0801 then method(:deserialize_importance_transfer)
-        when 0x1001 then method(:deserialize_multisig_aggregate_modification)
-        when 0x1002 then method(:deserialize_multisig_signature)
-        when 0x1004 then method(:deserialize_multisig)
-        when 0x2001 then method(:deserialize_provision_namespace)
-        when 0x4001 then method(:deserialize_mosaic_definition_creation)
-        when 0x4002 then method(:deserialize_mosaic_supply_change)
+        when 0x0101 then method(:transfer)
+        when 0x0801 then method(:importance_transfer)
+        when 0x1001 then method(:multisig_aggregate_modification)
+        when 0x1002 then method(:multisig_signature)
+        when 0x1004 then method(:multisig)
+        when 0x2001 then method(:provision_namespace)
+        when 0x4001 then method(:mosaic_definition_creation)
+        when 0x4002 then method(:mosaic_supply_change)
           else raise "Not implemented entity type: #{type}"
         end
       end
 
-      # Deserialize a transaction object
+      # Deserialize transaction common part
       # @param [String] serialized
       # @return [Hash]
-      def self.deserialize_transaction(s)
-        common = s[0, 60]
-        specific = s[60, s.size]
-        type = deserialize_int(common[0, 4])
-        method = switch_method(type)
-        # require 'pry'; binding.pry
-        deserialize_common(common).merge(method.call(specific))
+      def self.common(s)
+        {
+          type: hexa2int(s[0, 4]),
+          version: hexa2int(s[4, 4]),
+          timeStamp: hexa2int(s[8, 4]),
+          signer: s[16, 32].join,
+          fee: hexa2int(s[48, 8]),
+          deadline: hexa2int(s[56, 4])
+        }
       end
 
       # Deserialize a transfer transaction object
       # @param [String] serialized
       # @return [Hash]
-      def self.deserialize_transfer(s)
+      def self.transfer(s)
         tx = {}
-        tx[:recipient] = deserialize_a(s[4, 40])
-        tx[:amount] = deserialize_int(s[44, 8])
+        tx[:recipient] = hexa2ascii(s[4, 40])
+        tx[:amount] = hexa2int(s[44, 8])
         tx[:message] = {}
-        msg_len = deserialize_int(s[52, 4])
+        msg_len = hexa2int(s[52, 4])
         if msg_len > 0
-          payload_len = deserialize_int(s[60, 4])
+          payload_len = hexa2int(s[60, 4])
           tx[:message] = {
-            type: deserialize_int(s[56, 4]),
-            payload: Nem::Util::Convert.hex_to_utf8(deserialize_hex(s[64, payload_len]))
+            type: hexa2int(s[56, 4]),
+            payload: hexa2utf8(s[64, payload_len])
           }
         else
           tx[:message] = { type: 1, payload: '' }
         end
 
-        mosaic_cnt = deserialize_int(s[56 + msg_len, 4])
+        mosaic_cnt = hexa2int(s[56 + msg_len, 4])
         return tx unless mosaic_cnt
 
         # mosaic section
         tx[:mosaics] = []
         offset = 0
         mosaic_cnt.times do |i|
-          mo_len = deserialize_int(s[offset + 60 + msg_len, 4])
-          # ns_len = deserialize_int(s[offset+64+msg_len, 4])
-          ns_name_len = deserialize_int(s[offset + 68 + msg_len, 4])
-          mo_name_len = deserialize_int(s[offset + 72 + msg_len + ns_name_len, 4])
-          ns = Nem::Util::Convert.hex_to_utf8 deserialize_hex(s[offset + 72 + msg_len, ns_name_len])
-          name = Nem::Util::Convert.hex_to_utf8 deserialize_hex(s[offset + 76 + msg_len + ns_name_len, mo_name_len])
-          quantity = deserialize_int(s[offset + 76 + msg_len + ns_name_len + mo_name_len, 8])
+          mo_len = hexa2int(s[offset + 60 + msg_len, 4])
+          ns_name_len = hexa2int(s[offset + 68 + msg_len, 4])
+          mo_name_len = hexa2int(s[offset + 72 + msg_len + ns_name_len, 4])
+          ns = hex2ascii(s[offset + 72 + msg_len, ns_name_len])
+          name = hex2ascii(s[offset + 76 + msg_len + ns_name_len, mo_name_len])
+          quantity = hexa2int(s[offset + 76 + msg_len + ns_name_len + mo_name_len, 8])
           attachment = {
             mosaicId: { namespaceId: ns, name: name },
             quantity: quantity
@@ -83,25 +104,25 @@ module Nem
       # Deserialize a importance transaction object
       # @param [String] serialized
       # @return [Hash]
-      def self.deserialize_importance_transfer(s)
+      def self.importance_transfer(s)
         {
-          mode: deserialize_int(s[0, 4]),
-          remoteAccount: deserialize_hex(s[8, 32])
+          mode: hexa2int(s[0, 4]),
+          remoteAccount: s[8, 32].join
         }
       end
 
       # Deserialize a multisig aggregate modification transaction object
       # @param [String] serialized
       # @return [Hash]
-      def self.deserialize_multisig_aggregate_modification(s)
+      def self.multisig_aggregate_modification(s)
         mods = []
-        mod_count = deserialize_int(s[0, 4])
+        mod_count = hexa2int(s[0, 4])
         offset = 4
         mod_count.times do |i|
-          mod_len = deserialize_int(s[offset, 4])
+          mod_len = hexa2int(s[offset, 4])
           mods << {
-            modificationType: deserialize_int(s[offset + 4, 4]),
-            cosignatoryAccount: deserialize_hex(s[offset + 12, 32])
+            modificationType: hexa2int(s[offset + 4, 4]),
+            cosignatoryAccount: s[offset + 12, 32].join
           }
           offset += 4 + mod_len
         end
@@ -112,7 +133,7 @@ module Nem
         if s[offset + 4, 4]
           tx.merge(
             minCosignatories: {
-              relativeChange: deserialize_int(s[offset + 4, 4])
+              relativeChange: hexa2int(s[offset + 4, 4])
             }
           )
         else
@@ -123,36 +144,36 @@ module Nem
       # Deserialize a multisig signature transaction object
       # @param [String] serialized
       # @return [Hash]
-      def self.deserialize_multisig_signature(s)
+      def self.multisig_signature(s)
         {
-          otherHash: { data: deserialize_hex(s[8, 32]) },
-          otherAccount: deserialize_a(s[44, 40])
+          otherHash: { data: s[8, 32].join },
+          otherAccount: hexa2ascii(s[44, 40])
         }
       end
 
       # Deserialize a multisig transfer transaction object
       # @param [String] serialized
       # @return [Hash]
-      def self.deserialize_multisig(s)
-        msig_len = deserialize_int(s[0, 4])
+      def self.multisig(s)
+        msig_len = hexa2int(s[0, 4])
         inner = s[4, msig_len]
-        inner_tx = deserialize_transaction(inner)
+        inner_tx = transaction(inner)
         { otherTrans: inner_tx }
       end
 
       # Deserialize a provision namespace transaction object
       # @param [String] serialized
       # @return [Hash]
-      def self.deserialize_provision_namespace(s)
+      def self.provision_namespace(s)
         tx = {}
-        tx[:rentalFeeSink] = deserialize_a(s[4, 40])
-        tx[:rentalFee] = deserialize_int(s[44, 8])
-        newpart_len = deserialize_int(s[52, 4])
-        tx[:newPart] = deserialize_a(s[56, newpart_len])
-        parent_len = deserialize_int(s[56 + newpart_len, 4])
-        parent = s[56 + newpart_len, parent_len]
-        unless parent.all? { |val| val == 0xff }
-          tx[:parent] = deserialize_a(parent)
+        tx[:rentalFeeSink] = hexa2ascii(s[4, 40])
+        tx[:rentalFee] = hexa2int(s[44, 8])
+        newpart_len = hexa2int(s[52, 4])
+        tx[:newPart] = hexa2ascii(s[56, newpart_len])
+        parent_len = hexa2int(s[56 + newpart_len, 4])
+        unless parent_len == -1
+          parent = s[56 + newpart_len, parent_len]
+          tx[:parent] = hexa2ascii(parent)
         end
         tx
       end
@@ -160,7 +181,7 @@ module Nem
       # Deserialize a mosaic definition creation transaction object
       # @param [String] serialized
       # @return [Hash]
-      def self.deserialize_mosaic_definition_creation(s)
+      def self.mosaic_definition_creation(s)
         raise 'Not yet implimented.'
         # TODO: deserializing
         tx = {}
@@ -170,42 +191,18 @@ module Nem
       # Deserialize a mosaic supply change transaction object
       # @param [String] serialized
       # @return [Hash]
-      def self.deserialize_mosaic_supply_change(s)
+      def self.mosaic_supply_change(s)
         tx = {}
         # s[0, 4] # Length of mosaic id structure
-        ns_len = deserialize_int(s[4, 4])
-        mo_len = deserialize_int(s[8 + ns_len, 4])
+        ns_len = hexa2int(s[4, 4])
+        mo_len = hexa2int(s[8 + ns_len, 4])
         tx[:mosaicId] = {
-          namespaceId: deserialize_a(s[8, ns_len]),
-          name: deserialize_a(s[8 + ns_len + mo_len, mo_len])
+          namespaceId: hexa2ascii(s[8, ns_len]),
+          name: hexa2ascii(s[8 + ns_len + mo_len, mo_len])
         }
-        tx[:supplyType] = deserialize_int(s[8 + ns_len + 4 + mo_len, 4])
-        tx[:delta] = deserialize_int(s[8 + ns_len + 4 + mo_len + 4, 8])
+        tx[:supplyType] = hexa2int(s[8 + ns_len + 4 + mo_len, 4])
+        tx[:delta] = hexa2int(s[8 + ns_len + 4 + mo_len + 4, 8])
         tx
-      end
-
-      def self.deserialize_common(s)
-        {
-          type: deserialize_int(s[0, 4]),
-          version: deserialize_int(s[4, 4]),
-          timeStamp: deserialize_int(s[8, 4]),
-          # s[12,4] # length of public key,
-          signer: deserialize_hex(s[16, 32]),
-          fee: deserialize_int(s[48, 8]),
-          deadline: deserialize_int(s[56, 4])
-        }
-      end
-
-      def self.deserialize_int(ua)
-        Nem::Util::Convert.ua2hex(ua.reverse).to_i(16)
-      end
-
-      def self.deserialize_hex(ua)
-        Nem::Util::Convert.ua2hex(ua)
-      end
-
-      def self.deserialize_a(ua)
-        Nem::Util::Convert.hex2a(deserialize_hex(ua))
       end
     end
   end
