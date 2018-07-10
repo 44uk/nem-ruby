@@ -47,7 +47,7 @@ module Nem
       # Mosaics need to be sorted by fqn. if not it will occur FAILURE_SIGNATURE_NOT_VERIFIABLE
       def to_hash
         tmp = {
-          amount: amount * 1_000_000,
+          amount: (amount * 1_000_000).to_i,
           recipient: recipient,
           message: message.to_hash
         }
@@ -60,7 +60,7 @@ module Nem
                 namespaceId: moa.mosaic_id.namespace_id,
                 name: moa.mosaic_id.name,
               },
-              quantity: moa.amount.to_i
+              quantity: moa.amount
             }
           end
         end
