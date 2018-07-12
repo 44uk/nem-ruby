@@ -15,7 +15,7 @@ module Nem
       attr_reader :mosaic_id, :quantity, :properties
 
       def amount
-        return quantity * (10**properties.divisibility)
+        (quantity * (10**properties.divisibility)).to_i
       end
     end
   end
