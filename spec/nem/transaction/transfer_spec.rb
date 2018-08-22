@@ -61,6 +61,16 @@ describe Nem::Transaction::Transfer do
       it { expect(subject.to_hash[:amount]).to be_a(Integer) }
     end
 
+    context 'has amount with fractions' do
+      let(:amount) { 123.456789 }
+
+      it { expect(subject.to_hash).to match a_hash_including(
+        amount: 123_456_789
+      ) }
+
+      it { expect(subject.to_hash[:amount]).to be_a(Integer) }
+    end
+
     context 'has decimal quantity mosaics' do
       let(:mosaics) { [
         Nem::Mosaic::DimToken.new(0.001)
