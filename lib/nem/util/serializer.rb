@@ -83,6 +83,9 @@ module Nem
              when 0x0101 then serialize_transfer(trans)
              when 0x0801 then serialize_importance_transfer(trans)
              when 0x1001 then serialize_multisig_aggregate_modification(trans)
+             when 0x2001 then serialize_provision_namespace(trans)
+             when 0x4001 then serialize_mosaic_definition_creation(entity)
+             when 0x4002 then serialize_mosaic_supply_change(entity)
           else raise "Unexpected type #{trans[:type]}"
         end
         tx = serialize_common(trans) + tx

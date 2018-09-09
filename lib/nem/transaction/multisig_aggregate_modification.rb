@@ -29,13 +29,18 @@ module Nem
 
       # attributes must be CAMEL CASE for NIS params
       # @return [Hash]
+      # Modifications need to be sorted by address.
+      # if not it will occur FAILURE_SIGNATURE_NOT_VERIFIABLE
       def to_hash
-        {
-          modifications: modifications.map(&:to_hash),
+        tmp = {
           minCosignatories: {
             relativeChange: relative_change
           }
         }
+        tmp[:modifications] = modifications
+          .sort_by { |mo| Nem::Unit::Address.from_public_key(mo.cosignatory_account) }
+          .map(&:to_hash)
+        tmp
       end
     end
   end

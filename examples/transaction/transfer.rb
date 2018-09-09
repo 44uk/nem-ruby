@@ -14,7 +14,7 @@ node = Nem::Node.new(host: 'bigalice2.nem.ninja')
 tx_endpoint = Nem::Endpoint::Transaction.new(node)
 
 # with plain message
-tx = Nem::Transaction::Transfer.new(B_ADDRESS, 1, 'Good luck!')
+tx = Nem::Transaction::Transfer.new(B_ADDRESS, 9.85, 'Good luck!')
 pp "Fee: #{tx.fee.to_i}"
 
 req = Nem::Request::Announce.new(tx, kp)
