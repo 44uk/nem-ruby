@@ -83,6 +83,7 @@ module Nem
              when 0x0101 then serialize_transfer(trans)
              when 0x0801 then serialize_importance_transfer(trans)
              when 0x1001 then serialize_multisig_aggregate_modification(trans)
+             when 0x2001 then serialize_provision_namespace(trans)
           else raise "Unexpected type #{trans[:type]}"
         end
         tx = serialize_common(trans) + tx
