@@ -10,8 +10,7 @@ module Nem
           Modification.new(mod[:modificationType], mod[:cosignatoryAccount])
         end
         attrs = common_part_meta_data_pair(hash).merge(
-          # TODO: check
-          # relative_change: transaction[:minCosignatories][:relativeChange],
+          min_cosignatories: transaction[:minCosignatories],
           modifications: modifications
         )
         new(attrs)
