@@ -165,12 +165,7 @@ module Nem
       # @param [Integer] value
       # @return [Array]
       def self.serialize_long(value)
-        a = [0, 0, 0, 0, 0, 0, 0, 0]
-        bin = sprintf('%040b', value)
-        0.upto(bin.size / 8 - 1) do |i|
-          a[i] = 0xFF & (value >> 8 * i)
-        end
-        a
+        [value].pack("Q").unpack("C8").map{ |n| n < 0 ? 256 + n : n }
       end
 
       # @param [Nem::Struct::Mosaic] mosaic
