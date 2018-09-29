@@ -6,6 +6,12 @@ endpoint = Nem::Endpoint::Transaction.new(node)
 kp = Nem::Keypair.new(A_PRIVATE_KEY)
 ```
 
+## Get Transaction
+
+```ruby
+pp endpoint.find('a7131c0836da45e72f61ac6e76259d7200a85f0d2cf38f79f223b2c366673b08')
+```
+
 ## Transfer
 
 ### Version1(XEM transfer)
