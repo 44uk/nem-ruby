@@ -20,4 +20,4 @@ before_install:
   - gem install bundler
   - gem install rubocop
 
-script: rubocop --fail-level=W
+before_script: rubocop --fail-level=W
