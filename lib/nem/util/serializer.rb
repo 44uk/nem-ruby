@@ -165,7 +165,7 @@ module Nem
       # @param [Integer] value
       # @return [Array]
       def self.serialize_long(value)
-        [value].pack("Q").unpack("C8").map{ |n| n < 0 ? 256 + n : n }
+        [value].pack('Q').unpack('C8').map { |n| n < 0 ? 256 + n : n }
       end
 
       # @param [Nem::Struct::Mosaic] mosaic

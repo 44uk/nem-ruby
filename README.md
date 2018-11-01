@@ -27,7 +27,7 @@ $ gem install nem-ruby
 Or add this line to your application's Gemfile:
 
 ```ruby
-gem 'nem-ruby'
+gem 'nem-ruby', require: 'nem'
 ```
 
 ## Usage
@@ -68,6 +68,7 @@ For further development of nem with ruby, feel free to send me your feedback!
 
 ## For More Information
 
+* [nem\-ruby](https://44uk.github.io/nem-ruby/)
 * [Documentation for nem-ruby - rubydoc.info](http://www.rubydoc.info/gems/nem-ruby)
 
 ## Contributing
