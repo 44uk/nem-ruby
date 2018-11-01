@@ -20,7 +20,7 @@ $ gem install nem-ruby
 or add this line to your application's Gemfile.
 
 ```ruby
-gem 'nem-ruby'
+gem 'nem-ruby', require: 'nem'
 ```
 
 ## Connection
