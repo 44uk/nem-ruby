@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.homepage    = 'https://github.com/44uk/nem-ruby'
   spec.license     = 'MIT'
 
-  spec.required_ruby_version = '>= 2.2.6'
+  spec.required_ruby_version = '>= 2.3.0'
   spec.metadata['yard.run'] = 'yri'
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
