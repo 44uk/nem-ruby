@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'webmock', '~> 2.3'
   spec.add_development_dependency 'pry-byebug', '~> 3'
 
-  spec.add_dependency 'digest-sha3', '~> 1.1'
+  spec.add_dependency 'digest-sha3-patched', '~> 1.1.1'
   spec.add_dependency 'base32', '~> 0.3'
   spec.add_dependency 'faraday', '~> 0.11'
   spec.add_dependency 'faraday_middleware', '~> 0.11'
